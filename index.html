@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Material & Status Produksi</title>
+  <title>Daftar Material — Status Produksi</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:Segoe UI, Roboto, sans-serif; }
     body { background:#f5f7fa; padding:20px; max-width:1400px; margin:0 auto; }
@@ -48,7 +48,6 @@
     <button id="btnCard">🃏 Tampilan Kartu</button>
   </div>
 
-  <!-- Tabel -->
   <div id="tableView">
     <table id="dataTable">
       <thead>
@@ -65,8 +64,7 @@
     </table>
   </div>
 
-  <!-- Kartu -->
-  <div id="cardView" class="card-mode" id="cardContainer"></div>
+  <div id="cardView" class="card-mode"></div>
 
   <p class="updated">Terakhir diperbarui: <span id="lastUpdate">—</span></p>
 
@@ -74,7 +72,6 @@
     let allData = [];
     let suppliers = new Set();
 
-    // Baca data.csv
     async function loadData(){
       try {
         const res = await fetch('data.csv');
@@ -104,7 +101,6 @@
         if(rec.supplier) suppliers.add(rec.supplier);
       }
 
-      // Isi daftar pemasok
       const sel = document.getElementById('filterSupplier');
       sel.innerHTML = '<option value="">Semua Pemasok</option>';
       [...suppliers].sort().forEach(s=> sel.innerHTML += `<option value="${s}">${s}</option>`);
@@ -134,7 +130,6 @@
         return matchQ && matchSup && matchSt;
       });
 
-      // Render Tabel
       const tbody = document.getElementById('tableBody');
       tbody.innerHTML = filtered.map(d=>{
         const cls = getStatusClass(d.status);
@@ -148,7 +143,6 @@
         </tr>`;
       }).join('');
 
-      // Render Kartu
       const cardDiv = document.getElementById('cardView');
       cardDiv.innerHTML = filtered.map(d=>{
         const cls = getStatusClass(d.status);
@@ -163,7 +157,6 @@
       }).join('');
     }
 
-    // Tampilan
     document.getElementById('btnTable').onclick = ()=>{
       document.getElementById('tableView').style.display='block';
       document.getElementById('cardView').style.display='none';
@@ -177,7 +170,6 @@
       document.getElementById('btnTable').classList.remove('active');
     };
 
-    // Filter
     ['search','filterSupplier','filterStatus'].forEach(id=>{
       document.getElementById(id).addEventListener('input', render);
     });
