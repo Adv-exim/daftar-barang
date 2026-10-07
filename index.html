@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Material — Status Produksi</title>
+  <title>Advance Digitals — Product and status</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:Segoe UI, Roboto, sans-serif; }
     body { background:#f5f7fa; padding:20px; max-width:1400px; margin:0 auto; }
@@ -82,7 +82,7 @@
     <div></div>
   </div>
 
-  <h1>📦 Daftar Material — Status Produksi</h1>
+  <h1>Advance Digitals — Product and status</h1>
 
   <div class="search-bar">
     <div class="search-top">
@@ -369,7 +369,7 @@
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "Daftar_Material_" + new Date().toLocaleDateString('id-ID').replace(/\//g,'-') + ".csv";
+      link.download = "Daftar_Product advance_" + new Date().toLocaleDateString('id-ID').replace(/\//g,'-') + ".csv";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
