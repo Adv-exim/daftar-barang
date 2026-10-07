@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Material & Status Produksi</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Segoe UI, Roboto, sans-serif; }
+    body { background:#f5f7fa; padding:20px; max-width:1400px; margin:0 auto; }
+    h1 { text-align:center; color:#1e3a8a; margin-bottom:25px; }
+    .search-bar { background:white; padding:20px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.08); margin-bottom:20px; }
+    input, select { padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:15px; margin:5px; }
+    input { width:60%; min-width:280px; }
+    table { width:100%; border-collapse:separate; border-spacing:0; background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+    th { background:#1e3a8a; color:white; padding:14px 12px; text-align:left; font-weight:600; }
+    td { padding:12px; border-bottom:1px solid #eee; }
+    tr:last-child td { border-bottom:none; }
+    .status-disc { background:#fee2e2; color:#991b1b; font-weight:600; }
+    .status-cont { background:#dbeafe; color:#1e40af; font-weight:600; }
+    .status-other { background:#fef3c7; color:#92400e; font-weight:600; }
+    .card-mode { display:none; gap:15px; flex-wrap:wrap; margin-top:15px; }
+    .card { background:white; border-radius:12px; padding:18px; box-shadow:0 2px 8px rgba(0,0,0,.08); width:calc(33% - 10px); min-width:280px; }
+    .card.disc { border-left:5px solid #ef4444; }
+    .card.cont { border-left:5px solid #3b82f6; }
+    .card h3 { font-size:14px; color:#666; margin-bottom:8px; }
+    .card h4 { font-size:16px; margin-bottom:10px; word-break:break-all; }
+    .card .tag { display:inline-block; padding:4px 10px; border-radius:20px; font-size:13px; margin-bottom:8px; }
+    .tag.disc { background:#fee2e2; color:#991b1b; }
+    .tag.cont { background:#dbeafe; color:#1e40af; }
+    .view-toggle { text-align:right; margin-bottom:10px; }
+    button { padding:8px 16px; border:none; border-radius:8px; cursor:pointer; font-size:14px; }
+    button.active { background:#1e3a8a; color:white; }
+    .updated { text-align:right; color:#666; font-size:13px; margin-top:15px; }
+    @media(max-width:768px){ .card { width:100%; } }
+  </style>
+</head>
+<body>
+  <h1>📦 Daftar Material — Status Produksi</h1>
+
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="🔍 Cari kode, nama, atau pemasok...">
+    <select id="filterSupplier"><option value="">Semua Pemasok</option></select>
+    <select id="filterStatus"><option value="">Semua Status</option><option value="continue">Lanjut Produksi</option><option value="discontinue">Dihentikan</option></select>
+  </div>
+
+  <div class="view-toggle">
+    <button id="btnTable" class="active">📋 Tampilan Tabel</button>
+    <button id="btnCard">🃏 Tampilan Kartu</button>
+  </div>
+
+  <!-- Tabel -->
+  <div id="tableView">
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Kode Material</th>
+          <th>Nama Barang</th>
+          <th>Pemasok</th>
+          <th>Asal</th>
+          <th>Status</th>
+          <th>Catatan</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Kartu -->
+  <div id="cardView" class="card-mode" id="cardContainer"></div>
+
+  <p class="updated">Terakhir diperbarui: <span id="lastUpdate">—</span></p>
+
+  <script>
+    let allData = [];
+    let suppliers = new Set();
+
+    // Baca data.csv
+    async function loadData(){
+      try {
+        const res = await fetch('data.csv');
+        const text = await res.text();
+        parseCSV(text);
+      } catch(e){
+        document.getElementById('tableBody').innerHTML = `<tr><td colspan="6" style="color:red;text-align:center">Gagal memuat data. Pastikan file data.csv sudah diunggah.</td></tr>`;
+      }
+    }
+
+    function parseCSV(text){
+      const lines = text.trim().split('\n');
+      const headers = lines[0].split(',').map(h=>h.trim().replace(/"/g,''));
+      allData = []; suppliers.clear();
+
+      for(let i=1; i<lines.length; i++){
+        const row = lines[i].split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/);
+        const rec = {
+          code: row[0]?.trim().replace(/"/g,'') || '',
+          name: row[1]?.trim().replace(/"/g,'') || '',
+          supplier: row[2]?.trim().replace(/"/g,'') || '',
+          origin: row[3]?.trim().replace(/"/g,'') || '',
+          status: row[4]?.trim().replace(/"/g,'') || '',
+          note: row[5]?.trim().replace(/"/g,'') || ''
+        };
+        allData.push(rec);
+        if(rec.supplier) suppliers.add(rec.supplier);
+      }
+
+      // Isi daftar pemasok
+      const sel = document.getElementById('filterSupplier');
+      sel.innerHTML = '<option value="">Semua Pemasok</option>';
+      [...suppliers].sort().forEach(s=> sel.innerHTML += `<option value="${s}">${s}</option>`);
+
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+      render();
+    }
+
+    function getStatusClass(status){
+      const s = status.toLowerCase();
+      if(s.includes('discontinue') || s.includes('dihentikan')) return 'disc';
+      if(s.includes('continue') || s.includes('lanjut')) return 'cont';
+      return 'other';
+    }
+
+    function render(){
+      const q = document.getElementById('search').value.toLowerCase();
+      const sup = document.getElementById('filterSupplier').value;
+      const st = document.getElementById('filterStatus').value;
+
+      let filtered = allData.filter(d=>{
+        const matchQ = !q || [d.code,d.name,d.supplier,d.note].some(x=>x.toLowerCase().includes(q));
+        const matchSup = !sup || d.supplier === sup;
+        const matchSt = !st || 
+          (st==='continue' && d.status.toLowerCase().includes('continue')) ||
+          (st==='discontinue' && d.status.toLowerCase().includes('discontinue'));
+        return matchQ && matchSup && matchSt;
+      });
+
+      // Render Tabel
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = filtered.map(d=>{
+        const cls = getStatusClass(d.status);
+        return `<tr>
+          <td><strong>${d.code}</strong></td>
+          <td>${d.name}</td>
+          <td>${d.supplier}</td>
+          <td>${d.origin}</td>
+          <td class="status-${cls}">${d.status}</td>
+          <td>${d.note}</td>
+        </tr>`;
+      }).join('');
+
+      // Render Kartu
+      const cardDiv = document.getElementById('cardView');
+      cardDiv.innerHTML = filtered.map(d=>{
+        const cls = getStatusClass(d.status);
+        return `<div class="card ${cls}">
+          <h3>${d.code}</h3>
+          <h4>${d.name}</h4>
+          <span class="tag ${cls}">${d.status}</span>
+          <p><strong>Pemasok:</strong> ${d.supplier}</p>
+          <p><strong>Asal:</strong> ${d.origin}</p>
+          <p style="margin-top:8px; font-size:13px; color:#555;">${d.note || '-'}</p>
+        </div>`;
+      }).join('');
+    }
+
+    // Tampilan
+    document.getElementById('btnTable').onclick = ()=>{
+      document.getElementById('tableView').style.display='block';
+      document.getElementById('cardView').style.display='none';
+      document.getElementById('btnTable').classList.add('active');
+      document.getElementById('btnCard').classList.remove('active');
+    };
+    document.getElementById('btnCard').onclick = ()=>{
+      document.getElementById('tableView').style.display='none';
+      document.getElementById('cardView').style.display='flex';
+      document.getElementById('btnCard').classList.add('active');
+      document.getElementById('btnTable').classList.remove('active');
+    };
+
+    // Filter
+    ['search','filterSupplier','filterStatus'].forEach(id=>{
+      document.getElementById(id).addEventListener('input', render);
+    });
+
+    loadData();
+  </script>
+</body>
+</html>
