@@ -42,7 +42,7 @@
 
     body { 
       background: var(--bg); 
-      padding: 24px; 
+      padding: 18px; 
       max-width: 1440px; 
       margin: 0 auto;
       color: var(--text);
@@ -54,7 +54,7 @@
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
-      margin-bottom: 20px; 
+      margin-bottom: 14px; 
       flex-wrap: wrap; 
       gap: 12px; 
     }
@@ -68,7 +68,7 @@
     h1 { 
       text-align: center; 
       color: var(--primary); 
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       font-size: 26px;
       font-weight: 600;
       letter-spacing: -0.02em;
@@ -76,10 +76,10 @@
     
     .search-bar { 
       background: var(--card-bg); 
-      padding: 20px; 
+      padding: 14px 16px; 
       border-radius: var(--radius); 
       box-shadow: var(--shadow-md); 
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       border: 1px solid var(--border);
     }
     
@@ -88,17 +88,19 @@
       gap: 12px; 
       flex-wrap: wrap; 
       align-items: flex-start; 
-      margin-bottom: 16px; 
+      margin-bottom: 12px; 
+      position: relative;
     }
     
     .search-input { 
       flex: 1; 
       min-width: 280px; 
+      position: relative;
     }
     
     .search-input input { 
       width: 100%; 
-      padding: 11px 14px; 
+      padding: 10px 42px 10px 14px; 
       border: 1px solid var(--border); 
       border-radius: var(--radius-sm); 
       font-size: 14px;
@@ -117,21 +119,36 @@
       color: var(--text-muted);
     }
     
+    .search-icon-indicator {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+    
+    .search-icon-indicator.active {
+      opacity: 1;
+    }
+    
     .filter-group { 
       display: flex; 
-      gap: 16px; 
+      gap: 14px; 
       flex-wrap: wrap; 
     }
     
     .filter-box { 
-      min-width: 220px; 
+      min-width: 200px; 
       flex: 1;
     }
     
     .filter-label { 
       font-weight: 600; 
       color: var(--text); 
-      margin-bottom: 8px; 
+      margin-bottom: 6px; 
       display: block; 
       font-size: 13px;
       letter-spacing: 0.02em;
@@ -139,7 +156,7 @@
     
     .dropdown-toggle {
       width: 100%; 
-      padding: 10px 14px; 
+      padding: 9px 12px; 
       border: 1px solid var(--border); 
       border-radius: var(--radius-sm);
       background: #fafafa; 
@@ -169,10 +186,10 @@
       border: 1px solid var(--border); 
       border-radius: var(--radius-sm);
       box-shadow: var(--shadow-lg); 
-      max-height: 280px; 
+      max-height: 260px; 
       overflow-y: auto;
       z-index: 100; 
-      min-width: 240px; 
+      min-width: 220px; 
       margin-top: 6px;
       display: none;
       padding: 6px 0;
@@ -189,7 +206,7 @@
     }
     
     .dropdown-item { 
-      padding: 9px 14px; 
+      padding: 8px 14px; 
       cursor: pointer; 
       display: flex; 
       align-items: center; 
@@ -209,6 +226,19 @@
       accent-color: var(--primary);
     }
     
+    .select-all-item {
+      border-bottom: 1px solid var(--border);
+      background: #f8fafc;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    
+    .select-all-item:hover {
+      background: #f1f5f9;
+    }
+    
     .selected-count { 
       font-size: 12px; 
       color: var(--text-muted); 
@@ -220,7 +250,7 @@
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
-      margin-bottom: 20px; 
+      margin-bottom: 14px; 
       flex-wrap: wrap; 
       gap: 12px; 
     }
@@ -234,7 +264,7 @@
       background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
       color: white; 
       border: none; 
-      padding: 11px 26px; 
+      padding: 10px 24px; 
       border-radius: var(--radius-sm); 
       font-size: 14px; 
       cursor: pointer; 
@@ -254,7 +284,7 @@
     }
     
     button { 
-      padding: 10px 18px; 
+      padding: 9px 16px; 
       border: 1px solid var(--border); 
       border-radius: var(--radius-sm); 
       cursor: pointer; 
@@ -280,7 +310,7 @@
       overflow-x: auto; 
       border-radius: var(--radius); 
       box-shadow: var(--shadow-md); 
-      max-height: 65vh;
+      max-height: 72vh;
       background: var(--card-bg);
       border: 1px solid var(--border);
       contain: layout style;
@@ -296,7 +326,7 @@
     th { 
       background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
       color: white; 
-      padding: 13px 14px; 
+      padding: 12px 14px; 
       text-align: left; 
       font-weight: 600;
       position: sticky; 
@@ -308,7 +338,7 @@
     }
     
     td { 
-      padding: 12px 14px; 
+      padding: 11px 14px; 
       border-bottom: 1px solid var(--border); 
       background: var(--card-bg);
       font-size: 14px;
@@ -366,7 +396,7 @@
     .card { 
       background: var(--card-bg); 
       border-radius: var(--radius); 
-      padding: 18px; 
+      padding: 16px; 
       box-shadow: var(--shadow-md); 
       width: calc(33.333% - 11px); 
       min-width: 290px;
@@ -499,7 +529,7 @@
     
     @media(max-width: 768px) { 
       body {
-        padding: 16px;
+        padding: 14px;
         font-size: 13px;
       }
       
@@ -559,6 +589,7 @@
     <div class="search-top">
       <div class="search-input">
         <input type="text" id="search" placeholder="🔍 Cari kode, nama produk, atau kata kunci..." autocomplete="off">
+        <span class="search-icon-indicator" id="searchIcon">🔍</span>
       </div>
     </div>
     
@@ -588,6 +619,10 @@
           <span style="font-size: 10px; opacity: 0.6;">▼</span>
         </button>
         <div class="dropdown-menu" id="statusMenu" role="menu">
+          <label class="dropdown-item select-all-item" role="menuitemcheckbox">
+            <input type="checkbox" id="statusSelectAll" aria-checked="false"> 
+            <span><strong>✓ Pilih Semua</strong></span>
+          </label>
           <label class="dropdown-item" role="menuitemcheckbox">
             <input type="checkbox" value="continue" aria-checked="false"> 
             <span>Lanjut Produksi</span>
@@ -649,9 +684,12 @@
       domCache.lastUpdate = document.getElementById('lastUpdate');
       domCache.supplierMenu = document.getElementById('supplierMenu');
       domCache.originMenu = document.getElementById('originMenu');
+      domCache.statusMenu = document.getElementById('statusMenu');
       domCache.supplierText = document.getElementById('supplierText');
       domCache.originText = document.getElementById('originText');
       domCache.statusText = document.getElementById('statusText');
+      domCache.searchIcon = document.getElementById('searchIcon');
+      domCache.statusSelectAll = document.getElementById('statusSelectAll');
     }
 
     async function loadData() {
@@ -777,6 +815,15 @@
     function renderSupplierMenu() {
       const fragment = document.createDocumentFragment();
       
+      const selectAllLabel = document.createElement('label');
+      selectAllLabel.className = 'dropdown-item select-all-item';
+      selectAllLabel.setAttribute('role', 'menuitemcheckbox');
+      selectAllLabel.innerHTML = `
+        <input type="checkbox" id="supplierSelectAll" aria-checked="false">
+        <span><strong>✓ Pilih Semua</strong></span>
+      `;
+      fragment.appendChild(selectAllLabel);
+      
       suppliers.forEach(s => {
         const label = document.createElement('label');
         label.className = 'dropdown-item';
@@ -792,10 +839,25 @@
       domCache.supplierMenu.appendChild(fragment);
       
       domCache.supplierMenu.addEventListener('change', (e) => {
-        if (e.target.classList.contains('supplier-check')) {
+        if (e.target.id === 'supplierSelectAll') {
+          const checkboxes = domCache.supplierMenu.querySelectorAll('.supplier-check');
+          const allChecked = e.target.checked;
+          checkboxes.forEach(cb => {
+            cb.checked = allChecked;
+            if (allChecked) selected.supplier.add(cb.value);
+            else selected.supplier.delete(cb.value);
+          });
+          updateToggleText('supplier');
+          render();
+        } else if (e.target.classList.contains('supplier-check')) {
           const cb = e.target;
           if (cb.checked) selected.supplier.add(cb.value);
           else selected.supplier.delete(cb.value);
+          
+          const checkboxes = domCache.supplierMenu.querySelectorAll('.supplier-check');
+          const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+          domCache.supplierMenu.querySelector('#supplierSelectAll').checked = allChecked;
+          
           updateToggleText('supplier');
           render();
         }
@@ -804,6 +866,15 @@
 
     function renderOriginMenu() {
       const fragment = document.createDocumentFragment();
+      
+      const selectAllLabel = document.createElement('label');
+      selectAllLabel.className = 'dropdown-item select-all-item';
+      selectAllLabel.setAttribute('role', 'menuitemcheckbox');
+      selectAllLabel.innerHTML = `
+        <input type="checkbox" id="originSelectAll" aria-checked="false">
+        <span><strong>✓ Pilih Semua</strong></span>
+      `;
+      fragment.appendChild(selectAllLabel);
       
       origins.forEach(o => {
         const label = document.createElement('label');
@@ -820,10 +891,25 @@
       domCache.originMenu.appendChild(fragment);
       
       domCache.originMenu.addEventListener('change', (e) => {
-        if (e.target.classList.contains('origin-check')) {
+        if (e.target.id === 'originSelectAll') {
+          const checkboxes = domCache.originMenu.querySelectorAll('.origin-check');
+          const allChecked = e.target.checked;
+          checkboxes.forEach(cb => {
+            cb.checked = allChecked;
+            if (allChecked) selected.origin.add(cb.value);
+            else selected.origin.delete(cb.value);
+          });
+          updateToggleText('origin');
+          render();
+        } else if (e.target.classList.contains('origin-check')) {
           const cb = e.target;
           if (cb.checked) selected.origin.add(cb.value);
           else selected.origin.delete(cb.value);
+          
+          const checkboxes = domCache.originMenu.querySelectorAll('.origin-check');
+          const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+          domCache.originMenu.querySelector('#originSelectAll').checked = allChecked;
+          
           updateToggleText('origin');
           render();
         }
@@ -896,10 +982,26 @@
       renderTable(filtered);
       renderCards(filtered);
       
+      updateSearchIcon();
+      
       if (filtered.length === 0 && allData.length > 0) {
         showNoResults();
       }
     }, 150);
+
+    function updateSearchIcon() {
+      const hasActiveFilters = 
+        selected.supplier.size > 0 || 
+        selected.origin.size > 0 || 
+        selected.status.size > 0 ||
+        domCache.search.value.trim() !== '';
+      
+      if (hasActiveFilters) {
+        domCache.searchIcon.classList.add('active');
+      } else {
+        domCache.searchIcon.classList.remove('active');
+      }
+    }
 
     function renderTable(filtered) {
       const fragment = document.createDocumentFragment();
@@ -1079,10 +1181,27 @@
         render();
       });
 
-      document.querySelectorAll('#statusMenu input[type="checkbox"]').forEach(cb => {
+      domCache.statusSelectAll.addEventListener('change', (e) => {
+        const checkboxes = domCache.statusMenu.querySelectorAll('input[type="checkbox"][value]');
+        const allChecked = e.target.checked;
+        checkboxes.forEach(cb => {
+          cb.checked = allChecked;
+          if (allChecked) selected.status.add(cb.value);
+          else selected.status.delete(cb.value);
+        });
+        updateToggleText('status');
+        render();
+      });
+
+      document.querySelectorAll('#statusMenu input[type="checkbox"][value]').forEach(cb => {
         cb.addEventListener('change', () => {
           if (cb.checked) selected.status.add(cb.value);
           else selected.status.delete(cb.value);
+          
+          const checkboxes = domCache.statusMenu.querySelectorAll('input[type="checkbox"][value]');
+          const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+          domCache.statusSelectAll.checked = allChecked;
+          
           updateToggleText('status');
           render();
         });
