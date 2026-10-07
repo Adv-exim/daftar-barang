@@ -26,7 +26,7 @@
     button { padding:8px 16px; border:none; border-radius:8px; cursor:pointer; font-size:14px; }
     button.active { background:#1e3a8a; color:white; }
     
-    .table-container { overflow-x:auto; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+    .table-container { overflow-x:auto; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.08); max-height:70vh; }
     table { width:100%; border-collapse:separate; border-spacing:0; background:white; }
     th { 
       background:#1e3a8a; color:white; padding:14px 12px; text-align:left; font-weight:600;
@@ -56,7 +56,6 @@
 </head>
 <body>
 
-  <!-- Keterangan diperbarui di kiri paling atas -->
   <div class="top-bar">
     <p class="updated">Terakhir diperbarui: <span id="lastUpdate">—</span></p>
     <div></div>
@@ -71,7 +70,6 @@
     <select id="filterStatus"><option value="">Semua Status</option><option value="continue">Lanjut Produksi</option><option value="discontinue">Dihentikan</option></select>
   </div>
 
-  <!-- Tombol tampilan + ekspor dalam 1 baris -->
   <div class="action-bar">
     <div class="view-buttons">
       <button id="btnTable" class="active">📋 Tampilan Tabel</button>
@@ -132,12 +130,10 @@
         if(rec.origin) origins.add(rec.origin);
       }
 
-      // Isi filter Pemasok
       const selSup = document.getElementById('filterSupplier');
       selSup.innerHTML = '<option value="">Semua Pemasok</option>';
       [...suppliers].sort().forEach(s=> selSup.innerHTML += `<option value="${s}">${s}</option>`);
 
-      // Isi filter Asal
       const selOrigin = document.getElementById('filterOrigin');
       selOrigin.innerHTML = '<option value="">Semua Asal</option>';
       [...origins].sort().forEach(o=> selOrigin.innerHTML += `<option value="${o}">${o}</option>`);
@@ -212,10 +208,12 @@
         return matchQ && matchSup && matchOrg && matchSt;
       });
 
+      // PAKAI TITIK KOMA ; = langsung terbaca Excel Indonesia tanpa setting manual
       const escape = (val) => `"${String(val||'').replace(/"/g,'""')}"`;
+      const sep = ';'; // Kunci utamanya di sini!
 
-      let csv = "\uFEFF";
-      csv += ["Kode Material","Nama Barang","Pemasok","Asal","Status","Catatan"].map(escape).join(',') + "\n";
+      let csv = "\uFEFF"; // BOM = huruf tampil benar
+      csv += ["Kode Material","Nama Barang","Pemasok","Asal","Status","Catatan"].map(escape).join(sep) + "\n";
       
       filtered.forEach(d=>{
         csv += [
@@ -225,7 +223,7 @@
           escape(d.origin),
           escape(d.status),
           escape(d.note)
-        ].join(',') + "\n";
+        ].join(sep) + "\n";
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
