@@ -10,7 +10,7 @@
     h1 { text-align:center; color:#1e3a8a; margin-bottom:25px; }
     .search-bar { background:white; padding:20px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.08); margin-bottom:20px; }
     .export-bar { text-align:right; margin-bottom:15px; }
-    .btn-export { background:#10b981; color:white; border:none; padding:10px 20px; border-radius:8px; font-size:14px; cursor:pointer; font-weight:600; }
+    .btn-export { background:#10b981; color:white; border:none; padding:10px 24px; border-radius:8px; font-size:15px; cursor:pointer; font-weight:600; }
     .btn-export:hover { background:#059669; }
     input, select { padding:10px 14px; border:1px solid #ddd; border-radius:8px; font-size:15px; margin:5px; }
     input { width:60%; min-width:280px; }
@@ -178,27 +178,32 @@
         return matchQ && matchSup && matchSt;
       });
 
-      let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
-      csvContent += "Kode Material,Nama Barang,Pemasok,Asal,Status,Catatan\n";
+      // Format kompatibel SEMUA Excel: BOM UTF-8 + pemisah koma + tanda kutip
+      const escape = (val) => `"${String(val||'').replace(/"/g,'""')}"`;
+
+      let csv = "\uFEFF"; // Tanda BOM — dikenali otomatis oleh semua Excel
+      csv += ["Kode Material","Nama Barang","Pemasok","Asal","Status","Catatan"].map(escape).join(',') + "\n";
+      
       filtered.forEach(d=>{
-        const row = [
-          `"${d.code}"`,
-          `"${d.name}"`,
-          `"${d.supplier}"`,
-          `"${d.origin}"`,
-          `"${d.status}"`,
-          `"${d.note}"`
-        ].join(',');
-        csvContent += row + "\n";
+        csv += [
+          escape(d.code),
+          escape(d.name),
+          escape(d.supplier),
+          escape(d.origin),
+          escape(d.status),
+          escape(d.note)
+        ].join(',') + "\n";
       });
 
-      const encodedUri = encodeURI(csvContent);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "Daftar_Material_" + new Date().toLocaleDateString('id-ID').replace(/\//g,'-') + ".csv");
+      link.href = url;
+      link.download = "Daftar_Material_" + new Date().toLocaleDateString('id-ID').replace(/\//g,'-') + ".csv";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     }
 
     document.getElementById('btnTable').onclick = ()=>{
