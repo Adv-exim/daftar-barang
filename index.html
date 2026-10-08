@@ -92,10 +92,11 @@
     }
 
     body {
+      margin: 0;
       min-height: 100vh;
-      max-width: 1450px;
-      margin: 0 auto;
       padding: 20px;
+      max-width: 1450px;
+      margin-inline: auto;
       background: var(--bg-gradient);
       color: var(--text);
       font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
@@ -1056,6 +1057,11 @@
       return String(value || "").trim().toLowerCase();
     }
 
+    /*
+      Penting:
+      Kata "DISCONTINUE" mengandung "CONTINUE".
+      Karena itu, status discontinue harus diperiksa lebih dahulu.
+    */
     function isDiscontinued(status) {
       const s = normalize(status);
 
@@ -1645,12 +1651,10 @@
       dom.btnCard.setAttribute("aria-pressed", String(!tableMode));
     }
 
-    /*
-      Tema selalu dimulai dari LIGHT MODE.
-      Tidak mengambil preferensi browser dan tidak memakai localStorage.
-    */
     function initTheme() {
-      const theme = "light";
+      const storedTheme = localStorage.getItem("advance-digitals-theme");
+      const preferredDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+      const theme = storedTheme || (preferredDark ? "dark" : "light");
 
       document.documentElement.setAttribute("data-theme", theme);
       updateThemeButton(theme);
@@ -1669,6 +1673,8 @@
       const nextTheme = currentTheme === "dark" ? "light" : "dark";
 
       document.documentElement.setAttribute("data-theme", nextTheme);
+      localStorage.setItem("advance-digitals-theme", nextTheme);
+
       updateThemeButton(nextTheme);
     }
 
@@ -1740,7 +1746,7 @@
         const response = await fetch("data.csv", { cache: "no-store" });
 
         if (!response.ok) {
-          throw new Error(\`HTTP \${response.status}\`);
+          throw new Error(`HTTP ${response.status}`);
         }
 
         const text = await response.text();
