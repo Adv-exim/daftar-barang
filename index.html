@@ -94,7 +94,7 @@
     body {
       margin: 0;
       min-height: 100vh;
-      padding: 20px;
+      padding: 20px 20px 68px;
       max-width: 1450px;
       margin-inline: auto;
       background: var(--bg-gradient);
@@ -737,6 +737,45 @@
       border-top: 1px solid var(--border);
     }
 
+    /* Disclaimer yang selalu terlihat */
+    .disclaimer-bar {
+      position: fixed;
+      right: 18px;
+      bottom: 14px;
+      left: 18px;
+      z-index: 3000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 32px;
+      padding: 7px 14px;
+
+      color: #c92a2a;
+      border: 1px solid rgba(201, 42, 42, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 250, 250, 0.95);
+      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.10);
+
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.35;
+      text-align: center;
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      pointer-events: none;
+    }
+
+    [data-theme="dark"] .disclaimer-bar {
+      color: #fca5a5;
+      border-color: rgba(252, 165, 165, 0.28);
+      background: rgba(57, 25, 31, 0.94);
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.32);
+    }
+
     @media (max-width: 1050px) {
       .card {
         max-width: calc(50% - 7px);
@@ -745,7 +784,7 @@
 
     @media (max-width: 760px) {
       body {
-        padding: 14px;
+        padding: 14px 14px 86px;
       }
 
       .header-section {
@@ -796,6 +835,18 @@
 
       .card {
         max-width: 100%;
+      }
+
+      .disclaimer-bar {
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
+
+        min-height: 42px;
+        padding: 7px 10px;
+
+        font-size: 10px;
+        line-height: 1.35;
       }
     }
 
@@ -999,6 +1050,10 @@
 
   <section id="cardView" class="card-mode"></section>
 
+  <div class="disclaimer-bar" role="note" aria-label="Disclaimer informasi">
+    Disclaimer: Tidak ada jaminan isinya 100% benar dan akurat, jangan menjadikan acuan dan tolak ukur pasti, semua informasi didalam hanya hipotesis.
+  </div>
+
   <script>
     const allData = [];
     let suppliers = [];
@@ -1030,8 +1085,6 @@
       dom.originToggle = document.getElementById("originToggle");
       dom.statusToggle = document.getElementById("statusToggle");
 
-      dom.statusSelectAll = document.getElementById("statusSelectAll");
-
       dom.tableBody = document.getElementById("tableBody");
       dom.tableView = document.getElementById("tableView");
       dom.cardView = document.getElementById("cardView");
@@ -1057,11 +1110,6 @@
       return String(value || "").trim().toLowerCase();
     }
 
-    /*
-      Penting:
-      Kata "DISCONTINUE" mengandung "CONTINUE".
-      Karena itu, status discontinue harus diperiksa lebih dahulu.
-    */
     function isDiscontinued(status) {
       const s = normalize(status);
 
@@ -1261,27 +1309,15 @@
     }
 
     function syncSupplierSelectAll() {
-      syncSelectAll(
-        dom.supplierMenu,
-        ".supplier-check",
-        "#supplierSelectAll"
-      );
+      syncSelectAll(dom.supplierMenu, ".supplier-check", "#supplierSelectAll");
     }
 
     function syncOriginSelectAll() {
-      syncSelectAll(
-        dom.originMenu,
-        ".origin-check",
-        "#originSelectAll"
-      );
+      syncSelectAll(dom.originMenu, ".origin-check", "#originSelectAll");
     }
 
     function syncStatusSelectAll() {
-      syncSelectAll(
-        dom.statusMenu,
-        ".status-check",
-        "#statusSelectAll"
-      );
+      syncSelectAll(dom.statusMenu, ".status-check", "#statusSelectAll");
     }
 
     function updateToggleText(type) {
@@ -1746,7 +1782,7 @@
         const response = await fetch("data.csv", { cache: "no-store" });
 
         if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
+          throw new Error(\`HTTP \${response.status}\`);
         }
 
         const text = await response.text();
