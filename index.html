@@ -92,11 +92,10 @@
     }
 
     body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 20px;
       max-width: 1450px;
-      margin-inline: auto;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 20px;
       background: var(--bg-gradient);
       color: var(--text);
       font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
@@ -317,10 +316,10 @@
 
     .btn-search,
     .btn-export {
+      color: #ffffff !important;
       border: none;
       border-radius: var(--radius-sm);
       background: var(--accent-gradient);
-      color: #ffffff !important;
       box-shadow: 0 2px 6px rgba(15, 118, 122, 0.25);
       font-size: 13px;
       font-weight: 650;
@@ -415,20 +414,20 @@
       position: absolute;
       top: calc(100% + 6px);
       left: 0;
+      z-index: 1000;
       display: none;
       width: max-content;
       min-width: 100%;
       max-width: min(390px, calc(100vw - 48px));
       max-height: 300px;
+      padding: 5px 0;
       overflow-x: hidden;
       overflow-y: auto;
-      padding: 5px 0;
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       background: var(--card-bg);
       box-shadow: var(--shadow-lg);
-      z-index: 1000;
     }
 
     .dropdown-menu.open {
@@ -867,9 +866,9 @@
         class="theme-toggle"
         id="themeToggle"
         type="button"
-        aria-label="Ubah tema terang atau gelap"
+        aria-label="Ubah mode terang atau gelap"
         aria-pressed="false"
-        title="Ubah mode terang/gelap"
+        title="Ubah mode terang atau gelap"
       >
         <span class="theme-toggle-slider" id="themeIcon">☀️</span>
       </button>
@@ -1000,6 +999,16 @@
   <section id="cardView" class="card-mode"></section>
 
   <script>
+    /*
+      Jika data.csv sejajar dengan index.html di GitHub Pages:
+      repository/
+      ├── index.html
+      └── data.csv
+
+      biarkan nilainya "./data.csv".
+    */
+    const CSV_PATH = "./data.csv";
+
     const allData = [];
     let suppliers = [];
     let origins = [];
@@ -1030,8 +1039,6 @@
       dom.originToggle = document.getElementById("originToggle");
       dom.statusToggle = document.getElementById("statusToggle");
 
-      dom.statusSelectAll = document.getElementById("statusSelectAll");
-
       dom.tableBody = document.getElementById("tableBody");
       dom.tableView = document.getElementById("tableView");
       dom.cardView = document.getElementById("cardView");
@@ -1058,9 +1065,9 @@
     }
 
     /*
-      Penting:
-      Kata "DISCONTINUE" mengandung "CONTINUE".
-      Karena itu, status discontinue harus diperiksa lebih dahulu.
+      Catatan penting:
+      "DISCONTINUE" mengandung teks "CONTINUE".
+      Maka status berhenti diperiksa lebih dahulu agar statistik benar.
     */
     function isDiscontinued(status) {
       const s = normalize(status);
@@ -1097,44 +1104,66 @@
       return "other";
     }
 
-    function parseCSVLine(line) {
-      const values = [];
-      let current = "";
+    /*
+      Parser CSV:
+      - Mendukung koma dalam kolom jika dibungkus tanda kutip
+      - Mendukung tanda kutip ganda ("")
+      - Mendukung line break di dalam kolom yang diapit tanda kutip
+    */
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let field = "";
       let inQuotes = false;
 
-      for (let i = 0; i < line.length; i++) {
-        const character = line[i];
+      const cleanText = text.replace(/^\uFEFF/, "");
 
-        if (character === '"') {
-          if (inQuotes && line[i + 1] === '"') {
-            current += '"';
+      for (let i = 0; i < cleanText.length; i++) {
+        const char = cleanText[i];
+        const nextChar = cleanText[i + 1];
+
+        if (char === '"') {
+          if (inQuotes && nextChar === '"') {
+            field += '"';
             i++;
           } else {
             inQuotes = !inQuotes;
           }
-        } else if (character === "," && !inQuotes) {
-          values.push(current.trim());
-          current = "";
-        } else {
-          current += character;
+          continue;
         }
+
+        if (char === "," && !inQuotes) {
+          row.push(field.trim());
+          field = "";
+          continue;
+        }
+
+        if ((char === "\n" || char === "\r") && !inQuotes) {
+          if (char === "\r" && nextChar === "\n") {
+            i++;
+          }
+
+          row.push(field.trim());
+          field = "";
+
+          if (row.some((value) => value !== "")) {
+            rows.push(row);
+          }
+
+          row = [];
+          continue;
+        }
+
+        field += char;
       }
 
-      values.push(current.trim());
-      return values;
-    }
+      row.push(field.trim());
 
-    function parseCSV(text) {
-      const cleanText = text.replace(/^\uFEFF/, "").trim();
-
-      if (!cleanText) {
-        showEmptyState("File CSV kosong.");
-        return;
+      if (row.some((value) => value !== "")) {
+        rows.push(row);
       }
 
-      const lines = cleanText.split(/\r?\n/);
-
-      if (lines.length < 2) {
+      if (rows.length < 2) {
         showEmptyState("CSV hanya memiliki header atau tidak memiliki data.");
         return;
       }
@@ -1144,24 +1173,41 @@
 
       allData.length = 0;
 
-      for (let i = 1; i < lines.length; i++) {
-        if (!lines[i].trim()) continue;
-
-        const row = parseCSVLine(lines[i]);
+      /*
+        Script memakai urutan kolom:
+        Kode Material, Nama Barang, Pemasok, Asal, Status, Catatan
+      */
+      for (let i = 1; i < rows.length; i++) {
+        const rowData = rows[i];
 
         const record = {
-          code: (row[0] || "").trim(),
-          name: (row[1] || "").trim(),
-          supplier: (row[2] || "").trim(),
-          origin: (row[3] || "").trim(),
-          status: (row[4] || "").trim(),
-          note: (row[5] || "").trim()
+          code: (rowData[0] || "").trim(),
+          name: (rowData[1] || "").trim(),
+          supplier: (rowData[2] || "").trim(),
+          origin: (rowData[3] || "").trim(),
+          status: (rowData[4] || "").trim(),
+          note: (rowData[5] || "").trim()
         };
+
+        /*
+          Abaikan baris yang benar-benar kosong,
+          tetapi tetap terima data jika hanya beberapa kolom kosong.
+        */
+        const hasContent = Object.values(record).some((value) => value !== "");
+
+        if (!hasContent) {
+          continue;
+        }
 
         allData.push(record);
 
         if (record.supplier) supplierSet.add(record.supplier);
         if (record.origin) originSet.add(record.origin);
+      }
+
+      if (allData.length === 0) {
+        showEmptyState("Data produk tidak ditemukan dalam CSV.");
+        return;
       }
 
       suppliers = [...supplierSet].sort((a, b) => a.localeCompare(b));
@@ -1254,10 +1300,15 @@
 
       if (!selectAll) return;
 
-      const countChecked = itemCheckboxes.filter((checkbox) => checkbox.checked).length;
+      const checkedCount = itemCheckboxes.filter((checkbox) => checkbox.checked).length;
 
-      selectAll.checked = itemCheckboxes.length > 0 && countChecked === itemCheckboxes.length;
-      selectAll.indeterminate = countChecked > 0 && countChecked < itemCheckboxes.length;
+      selectAll.checked =
+        itemCheckboxes.length > 0 &&
+        checkedCount === itemCheckboxes.length;
+
+      selectAll.indeterminate =
+        checkedCount > 0 &&
+        checkedCount < itemCheckboxes.length;
     }
 
     function syncSupplierSelectAll() {
@@ -1651,13 +1702,16 @@
       dom.btnCard.setAttribute("aria-pressed", String(!tableMode));
     }
 
+    /*
+      Halaman selalu mulai dalam Light Mode.
+      Tidak menggunakan localStorage atau pengaturan Dark Mode browser
+      saat halaman/link pertama kali dibuka.
+    */
     function initTheme() {
-      const storedTheme = localStorage.getItem("advance-digitals-theme");
-      const preferredDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-      const theme = storedTheme || (preferredDark ? "dark" : "light");
+      const initialTheme = "light";
 
-      document.documentElement.setAttribute("data-theme", theme);
-      updateThemeButton(theme);
+      document.documentElement.setAttribute("data-theme", initialTheme);
+      updateThemeButton(initialTheme);
     }
 
     function updateThemeButton(theme) {
@@ -1673,8 +1727,6 @@
       const nextTheme = currentTheme === "dark" ? "light" : "dark";
 
       document.documentElement.setAttribute("data-theme", nextTheme);
-      localStorage.setItem("advance-digitals-theme", nextTheme);
-
       updateThemeButton(nextTheme);
     }
 
@@ -1686,7 +1738,6 @@
       };
 
       const separator = ";";
-
       let csv = "\uFEFF";
 
       csv += [
@@ -1743,22 +1794,37 @@
       `;
 
       try {
-        const response = await fetch("data.csv", { cache: "no-store" });
+        /*
+          cache: "no-store" membantu GitHub Pages mengambil CSV terbaru,
+          bukan isi cache browser yang lama.
+        */
+        const response = await fetch(CSV_PATH, {
+          cache: "no-store"
+        });
 
         if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
+          throw new Error(`CSV tidak ditemukan. HTTP ${response.status}`);
         }
 
         const text = await response.text();
+
+        if (!text || !text.trim()) {
+          throw new Error("Isi file data.csv kosong.");
+        }
+
+        console.log(`CSV berhasil dimuat dari: ${CSV_PATH}`);
         parseCSV(text);
+
       } catch (error) {
+        console.error("Gagal memuat CSV:", error);
+
         dom.tableBody.innerHTML = `
           <tr>
             <td class="empty-cell" colspan="6">
               <div class="error-state">
                 <strong>Gagal memuat data.csv</strong>
                 <div style="margin-top: 7px; font-size: 12px;">
-                  Pastikan file data.csv berada pada folder yang sama dengan index.html.
+                  Periksa nama file, huruf besar/kecil, folder file CSV, dan pengaturan GitHub Pages.
                 </div>
                 <div style="margin-top: 5px; font-size: 11px; opacity: 0.8;">
                   ${escapeHtml(error.message)}
