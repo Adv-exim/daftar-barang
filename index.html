@@ -4,1044 +4,1736 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Advance Digitals — Product and Status</title>
+
   <style>
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-      font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
-      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    
     :root {
-      --primary: #0f766e;
-      --primary-dark: #0d5f58;
-      --primary-light: #14b8a6;
-      --primary-glow: rgba(20, 184, 166, 0.15);
-      --secondary: #64748b;
-      --accent: #06b6d4;
-      --accent-gradient: linear-gradient(135deg, #06b6d4, #0f766e);
-      --bg: #f8fafc;
-      --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      --primary: #0f8b93;
+      --primary-dark: #0b7077;
+      --primary-light: #27b9c1;
+      --accent-gradient: linear-gradient(135deg, #12b7c5, #087f83);
+
+      --bg: #f2f7f8;
+      --bg-gradient: linear-gradient(135deg, #f7fbfc 0%, #edf4f6 100%);
       --card-bg: #ffffff;
-      --card-bg-hover: #fafafa;
-      --border: #e2e8f0;
+      --card-bg-hover: #f7fbfc;
+      --border: #dfe8eb;
+
       --text: #334155;
       --text-light: #64748b;
       --text-muted: #94a3b8;
-      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-      --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
-      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
-      --shadow-glow: 0 0 20px rgba(20, 184, 166, 0.1);
+
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 3px 9px rgba(15, 23, 42, 0.10);
+      --shadow-lg: 0 12px 24px rgba(15, 23, 42, 0.14);
+      --shadow-glow: 0 0 18px rgba(18, 183, 197, 0.17);
+
       --radius: 12px;
       --radius-sm: 8px;
-      --status-disc-bg: #fef2f2;
-      --status-disc-text: #991b1b;
-      --status-disc-border: #fca5a5;
-      --status-cont-bg: #f0f9ff;
-      --status-cont-text: #0369a1;
-      --status-cont-border: #7dd3fc;
-      --status-other-bg: #fef9c3;
-      --status-other-text: #854d0e;
-      --status-other-border: #fde047;
-      --glass-bg: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.3);
-      --blur: blur(12px);
+
+      --status-disc-bg: #fff4f4;
+      --status-disc-text: #a82929;
+      --status-disc-border: #f3b4b4;
+
+      --status-cont-bg: #ecfdf6;
+      --status-cont-text: #08784f;
+      --status-cont-border: #92dfbd;
+
+      --status-other-bg: #fff9e7;
+      --status-other-text: #95630e;
+      --status-other-border: #f6d87c;
+
+      --glass-bg: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.55);
     }
 
     [data-theme="dark"] {
-      --primary: #2dd4bf;
-      --primary-dark: #14b8a6;
-      --primary-light: #5eead4;
-      --primary-glow: rgba(45, 212, 191, 0.2);
-      --secondary: #94a3b8;
-      --accent: #22d3ee;
-      --accent-gradient: linear-gradient(135deg, #22d3ee, #2dd4bf);
-      --bg: #0f172a;
-      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      --card-bg: #1e293b;
-      --card-bg-hover: #334155;
-      --border: #334155;
-      --text: #e2e8f0;
-      --text-light: #94a3b8;
-      --text-muted: #64748b;
-      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
-      --shadow-md: 0 4px 6px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
-      --shadow-lg: 0 10px 15px rgba(0,0,0,0.5), 0 4px 6px rgba(0,0,0,0.3);
-      --shadow-glow: 0 0 25px rgba(45, 212, 191, 0.15);
-      --status-disc-bg: rgba(254, 242, 242, 0.1);
+      --primary: #22c5cb;
+      --primary-dark: #11979e;
+      --primary-light: #5ee7e9;
+      --accent-gradient: linear-gradient(135deg, #20c8d2, #149b9e);
+
+      --bg: #111c2a;
+      --bg-gradient: linear-gradient(135deg, #101b29 0%, #1b2a3b 100%);
+      --card-bg: #1c2b3d;
+      --card-bg-hover: #263a50;
+      --border: #35495e;
+
+      --text: #e6edf5;
+      --text-light: #b2c0d0;
+      --text-muted: #8ea0b5;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.30);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.34);
+      --shadow-lg: 0 12px 26px rgba(0, 0, 0, 0.44);
+      --shadow-glow: 0 0 18px rgba(34, 197, 203, 0.16);
+
+      --status-disc-bg: rgba(239, 68, 68, 0.13);
       --status-disc-text: #fca5a5;
-      --status-disc-border: rgba(252, 165, 165, 0.3);
-      --status-cont-bg: rgba(240, 249, 255, 0.1);
-      --status-cont-text: #7dd3fc;
-      --status-cont-border: rgba(125, 211, 252, 0.3);
-      --status-other-bg: rgba(254, 249, 195, 0.1);
-      --status-other-text: #fde047;
-      --status-other-border: rgba(253, 224, 71, 0.3);
-      --glass-bg: rgba(30, 41, 59, 0.85);
-      --glass-border: rgba(255, 255, 255, 0.1);
+      --status-disc-border: rgba(252, 165, 165, 0.42);
+
+      --status-cont-bg: rgba(16, 185, 129, 0.13);
+      --status-cont-text: #86efac;
+      --status-cont-border: rgba(134, 239, 172, 0.36);
+
+      --status-other-bg: rgba(234, 179, 8, 0.13);
+      --status-other-text: #fde68a;
+      --status-other-border: rgba(253, 230, 138, 0.35);
+
+      --glass-bg: rgba(28, 43, 61, 0.89);
+      --glass-border: rgba(255, 255, 255, 0.10);
     }
 
-    body { 
-      background: var(--bg-gradient);
-      padding: 20px; 
-      max-width: 1440px; 
-      margin: 0 auto;
-      color: var(--text);
-      font-size: 14px;
-      line-height: 1.6;
-      min-height: 100vh;
+    * {
+      box-sizing: border-box;
     }
-    
+
+    html {
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 20px;
+      max-width: 1450px;
+      margin-inline: auto;
+      background: var(--bg-gradient);
+      color: var(--text);
+      font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
     .header-section {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
       padding: 16px 20px;
+      margin-bottom: 16px;
       background: var(--glass-bg);
-      backdrop-filter: var(--blur);
-      border-radius: var(--radius);
       border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
       box-shadow: var(--shadow-md);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    
+
     .header-title h1 {
-      text-align: center; 
-      color: var(--text);
-      font-size: 26px;
+      margin: 0 0 3px;
+      font-size: 25px;
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 4px;
+      -webkit-text-fill-color: transparent;
     }
-    
+
     .header-title p {
-      text-align: center;
+      margin: 0;
       color: var(--text-muted);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
     }
-    
+
     .header-right {
       display: flex;
       align-items: center;
-      gap: 20px;
+      justify-content: flex-end;
       flex-wrap: wrap;
+      gap: 14px;
     }
-    
+
     .stats-bar {
       display: flex;
-      gap: 16px;
       align-items: center;
+      gap: 10px;
     }
-    
+
     .stat-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 6px 14px;
-      background: var(--card-bg-hover);
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
       min-width: 70px;
-      transition: all 0.2s ease;
+      padding: 6px 12px;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg-hover);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    
+
     .stat-item:hover {
       border-color: var(--primary-light);
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-sm);
     }
-    
+
     .stat-value {
+      color: var(--text);
       font-size: 16px;
       font-weight: 700;
-      color: var(--text);
+      line-height: 1.15;
     }
-    
+
     .stat-label {
-      font-size: 11px;
+      margin-top: 2px;
       color: var(--text-muted);
-      font-weight: 500;
-      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
       white-space: nowrap;
     }
-    
+
     .theme-toggle {
       position: relative;
       width: 64px;
       height: 32px;
-      background: var(--border);
-      border-radius: 32px;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      padding: 0;
       border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      padding: 0 4px;
+      border-radius: 999px;
+      background: #dfe7ee;
+      box-shadow: none;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
-    
+
     .theme-toggle:hover {
       border-color: var(--primary-light);
       box-shadow: var(--shadow-glow);
+      transform: none;
     }
-    
+
     .theme-toggle.active {
-      background: var(--accent-gradient);
       border-color: transparent;
+      background: var(--accent-gradient);
     }
-    
+
     .theme-toggle-slider {
       position: absolute;
       top: 3px;
       left: 3px;
-      width: 24px;
-      height: 24px;
-      background: white;
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+      font-size: 14px;
+      line-height: 1;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    
+
     .theme-toggle.active .theme-toggle-slider {
       transform: translateX(32px);
     }
-    
-    .search-bar { 
-      background: var(--card-bg); 
-      padding: 16px 18px; 
-      border-radius: var(--radius); 
-      box-shadow: var(--shadow-md); 
-      margin-bottom: 16px;
-      border: 1px solid var(--border);
+
+    .search-bar {
       position: relative;
+      z-index: 20;
       overflow: visible;
+      padding: 15px 18px;
+      margin-bottom: 15px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      transition: background 0.25s ease, border-color 0.25s ease;
     }
-    
+
     .search-bar::before {
-      content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: -1px;
+      right: -1px;
+      left: -1px;
       height: 3px;
+      content: "";
+      border-radius: 12px 12px 0 0;
       background: var(--accent-gradient);
     }
-    
-    .search-top { 
-      display: flex; 
-      gap: 12px; 
-      flex-wrap: wrap; 
-      align-items: flex-start; 
-      margin-bottom: 14px; 
-      position: relative;
-    }
-    
-    .search-input-wrapper {
-      flex: 1; 
-      min-width: 280px; 
+
+    .search-top {
       display: flex;
-      gap: 10px;
+      margin-bottom: 12px;
     }
-    
-    .search-input { 
+
+    .search-input-wrapper {
+      display: flex;
       flex: 1;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .search-input {
       position: relative;
+      flex: 1;
+      min-width: 180px;
     }
-    
-    .search-input input { 
-      width: 100%; 
-      padding: 11px 44px 11px 16px; 
-      border: 1px solid var(--border); 
-      border-radius: var(--radius-sm); 
-      font-size: 14px;
-      transition: all 0.25s ease;
-      background: var(--card-bg-hover);
+
+    .search-input input {
+      width: 100%;
+      height: 44px;
+      padding: 10px 44px 10px 14px;
       color: var(--text);
-    }
-    
-    .search-input input:focus {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
       outline: none;
-      border-color: var(--primary-light);
-      box-shadow: 0 0 0 3px var(--primary-glow), var(--shadow-glow);
-      background: var(--card-bg);
+      background: var(--card-bg-hover);
+      font-size: 13px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
-    
+
     .search-input input::placeholder {
       color: var(--text-muted);
     }
-    
-    .search-icon-indicator {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 17px;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
-    }
-    
-    .search-icon-indicator.active {
-      opacity: 1;
-      animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: translateY(-50%) scale(1); }
-      50% { transform: translateY(-50%) scale(1.1); }
-    }
-    
-    .btn-search {
-      background: var(--accent-gradient);
-      color: white;
-      border: none;
-      padding: 11px 22px;
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-      white-space: nowrap;
-      letter-spacing: 0.02em;
-    }
-    
-    .btn-search:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 12px rgba(0,0,0,0.25), var(--shadow-glow);
-      color: white !important;
-    }
-    
-    .btn-search:active {
-      transform: translateY(0);
-    }
-    
-    .filter-group { 
-      display: flex; 
-      gap: 16px; 
-      flex-wrap: wrap; 
-      position: relative;
-      z-index: 50;
-    }
-    
-    .filter-box { 
-      min-width: 200px; 
-      flex: 1;
-      position: relative;
-    }
-    
-    .filter-label { 
-      font-weight: 600; 
-      color: var(--text); 
-      margin-bottom: 7px; 
-      display: block; 
-      font-size: 13px;
-      letter-spacing: 0.02em;
-    }
-    
-    .dropdown-toggle {
-      width: 100%; 
-      padding: 10px 14px; 
-      border: 1px solid var(--border); 
-      border-radius: var(--radius-sm);
-      background: var(--card-bg-hover); 
-      text-align: left; 
-      cursor: pointer; 
-      font-size: 14px;
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center;
-      transition: all 0.25s ease;
-      color: var(--text);
-      font-weight: 500;
-    }
-    
-    .dropdown-toggle:hover { 
+
+    .search-input input:focus {
       border-color: var(--primary-light);
       background: var(--card-bg);
-      box-shadow: var(--shadow-glow);
-      color: var(--text);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.13);
     }
-    
-    .dropdown-toggle.active {
-      border-color: var(--primary);
-      background: var(--card-bg);
-      box-shadow: var(--shadow-glow);
-      color: var(--text);
+
+    .search-icon-indicator {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: opacity 0.2s ease;
+      font-size: 16px;
     }
-    
-    .dropdown-menu {
-      position: absolute; 
-      background: var(--card-bg); 
-      border: 1px solid var(--border); 
+
+    .search-icon-indicator.active {
+      opacity: 1;
+    }
+
+    .btn-search,
+    .btn-export {
+      border: none;
       border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-lg); 
-      max-height: 300px; 
-      overflow-y: auto;
-      z-index: 150; 
-      min-width: 230px; 
-      margin-top: 6px;
-      display: none;
-      padding: 6px 0;
-      backdrop-filter: var(--blur);
+      background: var(--accent-gradient);
+      color: #ffffff !important;
+      box-shadow: 0 2px 6px rgba(15, 118, 122, 0.25);
+      font-size: 13px;
+      font-weight: 650;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
     }
-    
-    .dropdown-menu.open { 
-      display: block; 
-      animation: slideDown 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    .btn-search {
+      height: 44px;
+      padding: 0 20px;
+      white-space: nowrap;
     }
-    
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-10px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+
+    .btn-export {
+      padding: 10px 20px;
+      white-space: nowrap;
     }
-    
-    .dropdown-item { 
-      padding: 9px 14px; 
-      cursor: pointer; 
-      display: flex; 
-      align-items: center; 
-      gap: 10px;
-      transition: background 0.2s ease, transform 0.15s ease;
-      font-size: 14px;
-      color: var(--text);
+
+    .btn-search:hover,
+    .btn-export:hover {
+      color: #ffffff !important;
+      filter: brightness(1.04);
+      box-shadow: 0 6px 14px rgba(15, 118, 122, 0.30);
+      transform: translateY(-1px);
     }
-    
-    .dropdown-item:hover { 
-      background: var(--card-bg-hover);
-      transform: translateX(2px);
-      color: var(--text);
-    }
-    
-    .dropdown-item input[type="checkbox"] { 
-      width: 18px; 
-      height: 18px; 
-      cursor: pointer;
-      accent-color: var(--primary);
-      transition: transform 0.15s ease;
-    }
-    
-    .dropdown-item input[type="checkbox"]:hover {
-      transform: scale(1.1);
-    }
-    
-    .select-all-item {
-      border-bottom: 2px solid var(--border);
-      background: var(--card-bg-hover);
-      font-weight: 600;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      color: var(--text);
-    }
-    
-    .select-all-item:hover {
-      background: var(--border);
-      color: var(--text);
-    }
-    
-    .selected-count { 
-      font-size: 12px; 
-      color: var(--text-muted); 
-      margin-left: 8px;
-      font-weight: 500;
-    }
-    
-    .action-bar { 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      margin-bottom: 16px; 
-      flex-wrap: wrap; 
-      gap: 12px; 
-    }
-    
-    .view-buttons { 
-      display: flex; 
-      gap: 8px; 
-    }
-    
-    .btn-export { 
-      background: var(--accent-gradient); 
-      color: white; 
-      border: none; 
-      padding: 11px 26px; 
-      border-radius: var(--radius-sm); 
-      font-size: 14px; 
-      cursor: pointer; 
-      font-weight: 600;
-      transition: all 0.25s ease;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-      letter-spacing: 0.02em;
-    }
-    
-    .btn-export:hover { 
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.25), var(--shadow-glow);
-      color: white !important;
-    }
-    
+
+    .btn-search:active,
     .btn-export:active {
       transform: translateY(0);
     }
-    
-    button { 
-      padding: 10px 18px; 
-      border: 1px solid var(--border); 
-      border-radius: var(--radius-sm); 
-      cursor: pointer; 
-      font-size: 14px;
-      background: var(--card-bg-hover);
+
+    .filter-group {
+      position: relative;
+      z-index: 30;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .filter-box {
+      position: relative;
+      flex: 1;
+      min-width: 205px;
+    }
+
+    .filter-label {
+      display: block;
+      margin-bottom: 5px;
       color: var(--text);
-      transition: all 0.25s ease;
-      font-weight: 500;
+      font-size: 12px;
+      font-weight: 650;
     }
-    
-    button:hover {
-      background: var(--card-bg);
-      border-color: var(--primary-light);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 12px;
       color: var(--text);
-    }
-    
-    button.active { 
-      background: var(--accent-gradient); 
-      color: white !important;
-      border-color: transparent;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    }
-    
-    .table-container { 
-      overflow-x: auto; 
-      border-radius: var(--radius); 
-      box-shadow: var(--shadow-md); 
-      max-height: 72vh;
-      background: var(--card-bg);
       border: 1px solid var(--border);
-      contain: layout style;
-      transition: all 0.3s ease;
-    }
-    
-    .table-container:hover {
-      box-shadow: var(--shadow-lg);
-    }
-    
-    table { 
-      width: 100%; 
-      border-collapse: separate; 
-      border-spacing: 0; 
-      background: var(--card-bg);
-    }
-    
-    th { 
-      background: var(--accent-gradient); 
-      color: white !important; 
-      padding: 13px 14px; 
-      text-align: left; 
-      font-weight: 600;
-      position: sticky; 
-      top: 0; 
-      z-index: 10;
+      border-radius: var(--radius-sm);
+      background: var(--card-bg-hover);
       font-size: 13px;
-      letter-spacing: 0.02em;
-      border-bottom: 2px solid rgba(255,255,255,0.2);
+      font-weight: 600;
+      text-align: left;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
-    
-    td { 
-      padding: 12px 14px; 
-      border-bottom: 1px solid var(--border); 
-      background: var(--card-bg);
-      font-size: 14px;
-      transition: background 0.2s ease, transform 0.15s ease;
+
+    .dropdown-toggle:hover,
+    .dropdown-toggle.active {
       color: var(--text);
+      border-color: var(--primary-light);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-glow);
+      transform: none;
     }
-    
+
+    .dropdown-arrow {
+      flex: 0 0 auto;
+      margin-left: 10px;
+      color: var(--text-muted);
+      font-size: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .dropdown-toggle.active .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      display: none;
+      width: max-content;
+      min-width: 100%;
+      max-width: min(390px, calc(100vw - 48px));
+      max-height: 300px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 5px 0;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-lg);
+      z-index: 1000;
+    }
+
+    .dropdown-menu.open {
+      display: block;
+      animation: slideDown 0.16s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: max-content;
+      padding: 8px 14px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1.35;
+      transition: background 0.15s ease;
+    }
+
+    .dropdown-item:hover {
+      color: var(--text);
+      background: var(--card-bg-hover);
+    }
+
+    .dropdown-item span {
+      overflow-wrap: anywhere;
+    }
+
+    .dropdown-item input[type="checkbox"] {
+      flex: 0 0 auto;
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .select-all-item {
+      position: sticky;
+      top: -5px;
+      z-index: 2;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      background: var(--card-bg-hover);
+    }
+
+    .select-all-item:hover {
+      background: var(--card-bg-hover);
+    }
+
+    .action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .view-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .view-buttons button {
+      padding: 9px 16px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
+      font-size: 13px;
+      font-weight: 650;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .view-buttons button:hover {
+      color: var(--text);
+      border-color: var(--primary-light);
+      background: var(--card-bg-hover);
+      box-shadow: var(--shadow-sm);
+      transform: none;
+    }
+
+    .view-buttons button.active {
+      color: #ffffff !important;
+      border-color: transparent;
+      background: var(--accent-gradient);
+      box-shadow: 0 3px 8px rgba(15, 118, 122, 0.22);
+    }
+
+    .table-container {
+      max-height: 72vh;
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-md);
+    }
+
+    table {
+      width: 100%;
+      min-width: 920px;
+      border-spacing: 0;
+      border-collapse: separate;
+      background: var(--card-bg);
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 13px 14px;
+      color: #ffffff;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.18);
+      background: var(--accent-gradient);
+      font-size: 12px;
+      font-weight: 700;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 14px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      background: var(--card-bg);
+      font-size: 13px;
+      vertical-align: middle;
+      transition: background 0.16s ease;
+    }
+
     tbody tr:hover td {
       background: var(--card-bg-hover);
-      transform: scale(1.005);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .material-code {
       color: var(--text);
+      font-weight: 700;
+      white-space: nowrap;
     }
-    
-    tr:last-child td { 
-      border-bottom: none; 
-    }
-    
+
     .status-badge {
       display: inline-block;
-      padding: 5px 11px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
+      padding: 5px 10px;
       border: 1px solid;
-      transition: all 0.2s ease;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .status-disc {
       color: var(--status-disc-text);
-    }
-    
-    .status-badge:hover {
-      transform: scale(1.05);
-    }
-    
-    .status-disc { 
-      background: var(--status-disc-bg); 
       border-color: var(--status-disc-border);
+      background: var(--status-disc-bg);
     }
-    
-    .status-cont { 
-      background: var(--status-cont-bg); 
-      border-color: var(--status-cont-border);
-    }
-    
-    .status-other { 
-      background: var(--status-other-bg); 
-      border-color: var(--status-other-border);
-    }
-    
-    .card-mode { 
-      display: none; 
-      gap: 18px; 
-      flex-wrap: wrap; 
-      margin-top: 18px; 
-    }
-    
-    .card { 
-      background: var(--card-bg); 
-      border-radius: var(--radius); 
-      padding: 18px; 
-      box-shadow: var(--shadow-md); 
-      width: calc(33.333% - 12px); 
-      min-width: 300px;
-      border: 1px solid var(--border);
-      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--accent-gradient);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
-    }
-    
-    .card:hover::after {
-      opacity: 0.03;
-    }
-    
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 100%;
-      transition: width 0.3s ease;
-    }
-    
-    .card:hover::before {
-      width: 6px;
-    }
-    
-    .card.disc::before { 
-      background: linear-gradient(180deg, #ef4444, #dc2626); 
-    }
-    
-    .card.cont::before { 
-      background: linear-gradient(180deg, #0ea5e9, #0284c7); 
-    }
-    
-    .card.other::before {
-      background: linear-gradient(180deg, #f59e0b, #d97706);
-    }
-    
-    .card-content {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .card h3 { 
-      font-size: 12px; 
-      color: var(--text-muted); 
-      margin-bottom: 7px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    
-    .card h4 { 
-      font-size: 15px; 
-      margin-bottom: 13px; 
-      word-break: break-all;
-      color: var(--text);
-      font-weight: 600;
-      line-height: 1.45;
-    }
-    
-    .card .tag { 
-      display: inline-block; 
-      padding: 6px 13px; 
-      border-radius: 20px; 
-      font-size: 12px; 
-      margin-bottom: 13px;
-      font-weight: 600;
-      border: 1px solid;
-      transition: all 0.2s ease;
-    }
-    
-    .card .tag.disc {
-      color: var(--status-disc-text);
-    }
-    
-    .card .tag.cont {
+
+    .status-cont {
       color: var(--status-cont-text);
-    }
-    
-    .card .tag.other {
-      color: var(--status-other-text);
-    }
-    
-    .tag:hover {
-      transform: scale(1.05);
-    }
-    
-    .tag.disc { 
-      background: var(--status-disc-bg); 
-      border-color: var(--status-disc-border);
-    }
-    
-    .tag.cont { 
-      background: var(--status-cont-bg); 
       border-color: var(--status-cont-border);
+      background: var(--status-cont-bg);
     }
-    
-    .card p {
-      font-size: 13px;
-      color: var(--text-light);
-      margin-bottom: 7px;
-      line-height: 1.5;
+
+    .status-other {
+      color: var(--status-other-text);
+      border-color: var(--status-other-border);
+      background: var(--status-other-bg);
     }
-    
-    .card p strong {
-      color: var(--text);
-      font-weight: 600;
+
+    .empty-cell {
+      padding: 0 !important;
     }
-    
-    .loading {
-      text-align: center;
-      padding: 70px 20px;
+
+    .empty-state,
+    .loading,
+    .error-state {
+      padding: 54px 20px;
       color: var(--text-muted);
-      font-size: 15px;
+      text-align: center;
     }
-    
+
+    .empty-state strong,
+    .error-state strong {
+      color: var(--text);
+    }
+
+    .error-state {
+      color: #dc2626;
+    }
+
     .loading-spinner {
       display: inline-block;
-      width: 28px;
-      height: 28px;
+      width: 24px;
+      height: 24px;
+      margin-bottom: 10px;
       border: 3px solid var(--border);
       border-top-color: var(--primary);
       border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin-bottom: 14px;
+      animation: spin 0.75s linear infinite;
     }
-    
+
     @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    .empty-state {
-      text-align: center;
-      padding: 70px 20px;
-      color: var(--text-muted);
-    }
-    
-    .empty-state-icon {
-      font-size: 52px;
-      margin-bottom: 18px;
-      opacity: 0.5;
-      filter: grayscale(0.3);
-    }
-    
-    .error-state {
-      text-align: center;
-      padding: 70px 20px;
-      color: #ef4444;
-      background: rgba(239, 68, 68, 0.05);
-      border-radius: var(--radius);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-    }
-    
-    @media(max-width: 1024px) { 
-      .card { 
-        width: calc(50% - 9px); 
+      to {
+        transform: rotate(360deg);
       }
     }
-    
-    @media(max-width: 768px) { 
+
+    .card-mode {
+      display: none;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .card {
+      position: relative;
+      flex: 1 1 290px;
+      min-width: 280px;
+      max-width: calc(33.333% - 10px);
+      overflow: hidden;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-md);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .card::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      content: "";
+    }
+
+    .card.disc::before {
+      background: #ef4444;
+    }
+
+    .card.cont::before {
+      background: #10b981;
+    }
+
+    .card.other::before {
+      background: #f59e0b;
+    }
+
+    .card-code {
+      margin-bottom: 4px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .card-name {
+      margin: 0 0 10px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .card .status-badge {
+      margin-bottom: 11px;
+    }
+
+    .card p {
+      margin: 5px 0;
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    .card p strong {
+      color: var(--text);
+    }
+
+    .card-note {
+      margin-top: 10px !important;
+      padding-top: 9px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 1050px) {
+      .card {
+        max-width: calc(50% - 7px);
+      }
+    }
+
+    @media (max-width: 760px) {
       body {
         padding: 14px;
-        font-size: 13px;
       }
-      
+
       .header-section {
+        align-items: flex-start;
         flex-direction: column;
-        text-align: center;
         padding: 14px 16px;
       }
-      
+
       .header-right {
-        flex-direction: column;
-        gap: 14px;
+        justify-content: space-between;
         width: 100%;
       }
-      
-      .stats-bar {
-        justify-content: center;
-        width: 100%;
-      }
-      
+
       .header-title h1 {
-        font-size: 24px;
+        font-size: 23px;
       }
-      
+
       .search-input-wrapper {
         flex-direction: column;
       }
-      
+
       .btn-search {
         width: 100%;
       }
-      
-      .card { 
-        width: 100%; 
+
+      .filter-group {
+        flex-direction: column;
       }
-      
-      .filter-group { 
-        flex-direction: column; 
-      }
-      
+
       .filter-box {
+        width: 100%;
         min-width: 100%;
       }
-      
-      .table-container {
-        font-size: 13px;
+
+      .dropdown-menu {
+        width: 100%;
+        max-width: 100%;
       }
-      
-      th, td {
-        padding: 11px 12px;
+
+      .action-bar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .btn-export {
+        width: 100%;
+      }
+
+      .card {
+        max-width: 100%;
       }
     }
-    
-    .dropdown-menu::-webkit-scrollbar {
+
+    @media (max-width: 460px) {
+      .header-right {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .stats-bar {
+        width: 100%;
+      }
+
+      .stat-item {
+        flex: 1;
+      }
+    }
+
+    .dropdown-menu::-webkit-scrollbar,
+    .table-container::-webkit-scrollbar {
       width: 7px;
+      height: 7px;
     }
-    
-    .dropdown-menu::-webkit-scrollbar-track {
+
+    .dropdown-menu::-webkit-scrollbar-track,
+    .table-container::-webkit-scrollbar-track {
       background: var(--card-bg-hover);
-      border-radius: 4px;
     }
-    
-    .dropdown-menu::-webkit-scrollbar-thumb {
+
+    .dropdown-menu::-webkit-scrollbar-thumb,
+    .table-container::-webkit-scrollbar-thumb {
+      border-radius: 10px;
       background: var(--border);
-      border-radius: 4px;
     }
-    
-    .dropdown-menu::-webkit-scrollbar-thumb:hover {
+
+    .dropdown-menu::-webkit-scrollbar-thumb:hover,
+    .table-container::-webkit-scrollbar-thumb:hover {
       background: var(--primary-light);
     }
   </style>
 </head>
-<body>
 
-  <div class="header-section">
+<body>
+  <header class="header-section">
     <div class="header-title">
       <h1>Advance Digitals</h1>
       <p>Product and Status Dashboard</p>
     </div>
-    
+
     <div class="header-right">
-      <div class="stats-bar">
+      <div class="stats-bar" aria-label="Ringkasan produk">
         <div class="stat-item">
           <div class="stat-value" id="totalCount">0</div>
           <div class="stat-label">Total</div>
         </div>
+
         <div class="stat-item">
           <div class="stat-value" id="continueCount">0</div>
           <div class="stat-label">Lanjut</div>
         </div>
+
         <div class="stat-item">
           <div class="stat-value" id="discontinueCount">0</div>
           <div class="stat-label">Stop</div>
         </div>
       </div>
-      
-      <div class="theme-toggle" id="themeToggle" role="button" aria-label="Toggle theme" tabindex="0">
-        <div class="theme-toggle-slider">🌙</div>
-      </div>
-    </div>
-  </div>
 
-  <div class="search-bar">
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Ubah tema terang atau gelap"
+        aria-pressed="false"
+        title="Ubah mode terang/gelap"
+      >
+        <span class="theme-toggle-slider" id="themeIcon">☀️</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="search-bar">
     <div class="search-top">
       <div class="search-input-wrapper">
         <div class="search-input">
-          <input type="text" id="search" placeholder="Cari kode, nama produk, atau kata kunci..." autocomplete="off">
+          <input
+            id="search"
+            type="search"
+            placeholder="Cari kode, nama produk, pemasok, asal, atau catatan..."
+            autocomplete="off"
+          >
           <span class="search-icon-indicator" id="searchIcon">🔍</span>
         </div>
-        <button class="btn-search" id="btnSearchAction">🔍 Cari</button>
+
+        <button class="btn-search" id="btnSearchAction" type="button">
+          🔍 Cari
+        </button>
       </div>
     </div>
-    
+
     <div class="filter-group">
       <div class="filter-box">
         <label class="filter-label">Pemasok</label>
-        <button class="dropdown-toggle" id="supplierToggle" type="button" aria-haspopup="true" aria-expanded="false">
+
+        <button
+          class="dropdown-toggle"
+          id="supplierToggle"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           <span id="supplierText">Semua Pemasok</span>
-          <span style="font-size: 10px; opacity: 0.6;">▼</span>
+          <span class="dropdown-arrow">▼</span>
         </button>
+
         <div class="dropdown-menu" id="supplierMenu" role="menu"></div>
       </div>
-      
+
       <div class="filter-box">
         <label class="filter-label">Asal</label>
-        <button class="dropdown-toggle" id="originToggle" type="button" aria-haspopup="true" aria-expanded="false">
+
+        <button
+          class="dropdown-toggle"
+          id="originToggle"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           <span id="originText">Semua Asal</span>
-          <span style="font-size: 10px; opacity: 0.6;">▼</span>
+          <span class="dropdown-arrow">▼</span>
         </button>
+
         <div class="dropdown-menu" id="originMenu" role="menu"></div>
       </div>
-      
+
       <div class="filter-box">
         <label class="filter-label">Status</label>
-        <button class="dropdown-toggle" id="statusToggle" type="button" aria-haspopup="true" aria-expanded="false">
+
+        <button
+          class="dropdown-toggle"
+          id="statusToggle"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           <span id="statusText">Semua Status</span>
-          <span style="font-size: 10px; opacity: 0.6;">▼</span>
+          <span class="dropdown-arrow">▼</span>
         </button>
+
         <div class="dropdown-menu" id="statusMenu" role="menu">
-          <label class="dropdown-item select-all-item" role="menuitemcheckbox">
-            <input type="checkbox" id="statusSelectAll" aria-checked="false"> 
-            <span><strong>✓ Pilih Semua</strong></span>
+          <label class="dropdown-item select-all-item">
+            <input type="checkbox" id="statusSelectAll">
+            <span>Pilih Semua</span>
           </label>
-          <label class="dropdown-item" role="menuitemcheckbox">
-            <input type="checkbox" value="continue" aria-checked="false"> 
+
+          <label class="dropdown-item">
+            <input type="checkbox" class="status-check" value="continue">
             <span>Lanjut Produksi</span>
           </label>
-          <label class="dropdown-item" role="menuitemcheckbox">
-            <input type="checkbox" value="discontinue" aria-checked="false"> 
+
+          <label class="dropdown-item">
+            <input type="checkbox" class="status-check" value="discontinue">
             <span>Dihentikan</span>
           </label>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="action-bar">
+  <section class="action-bar">
     <div class="view-buttons">
-      <button id="btnTable" class="active" aria-pressed="true">📋 Tabel</button>
-      <button id="btnCard" aria-pressed="false">🃏 Kartu</button>
-    </div>
-    <button class="btn-export" onclick="exportToExcel()">📊 Ekspor Excel</button>
-  </div>
+      <button id="btnTable" class="active" type="button" aria-pressed="true">
+        📋 Tabel
+      </button>
 
-  <div id="tableView" class="table-container">
+      <button id="btnCard" type="button" aria-pressed="false">
+        🃏 Kartu
+      </button>
+    </div>
+
+    <button class="btn-export" id="btnExport" type="button">
+      📊 Ekspor Excel
+    </button>
+  </section>
+
+  <section id="tableView" class="table-container">
     <table id="dataTable">
       <thead>
         <tr>
-          <th scope="col">Kode Material</th>
-          <th scope="col">Nama Barang</th>
-          <th scope="col">Pemasok</th>
-          <th scope="col">Asal</th>
-          <th scope="col">Status</th>
-          <th scope="col">Catatan</th>
+          <th>Kode Material</th>
+          <th>Nama Barang</th>
+          <th>Pemasok</th>
+          <th>Asal</th>
+          <th>Status</th>
+          <th>Catatan</th>
         </tr>
       </thead>
+
       <tbody id="tableBody"></tbody>
     </table>
-  </div>
+  </section>
 
-  <div id="cardView" class="card-mode"></div>
+  <section id="cardView" class="card-mode"></section>
 
   <script>
-    let allData = [];
+    const allData = [];
     let suppliers = [];
     let origins = [];
-    
+
     const selected = {
       supplier: new Set(),
       origin: new Set(),
       status: new Set()
     };
 
-    const domCache = {};
-    
+    const dom = {};
+
     function initDomCache() {
-      domCache.search = document.getElementById('search');
-      domCache.tableBody = document.getElementById('tableBody');
-      domCache.cardView = document.getElementById('cardView');
-      domCache.tableView = document.getElementById('tableView');
-      domCache.supplierMenu = document.getElementById('supplierMenu');
-      domCache.originMenu = document.getElementById('originMenu');
-      domCache.statusMenu = document.getElementById('statusMenu');
-      domCache.supplierText = document.getElementById('supplierText');
-      domCache.originText = document.getElementById('originText');
-      domCache.statusText = document.getElementById('statusText');
-      domCache.searchIcon = document.getElementById('searchIcon');
-      domCache.statusSelectAll = document.getElementById('statusSelectAll');
-      domCache.btnSearchAction = document.getElementById('btnSearchAction');
-      domCache.themeToggle = document.getElementById('themeToggle');
-      domCache.totalCount = document.getElementById('totalCount');
-      domCache.continueCount = document.getElementById('continueCount');
-      domCache.discontinueCount = document.getElementById('discontinueCount');
+      dom.search = document.getElementById("search");
+      dom.searchIcon = document.getElementById("searchIcon");
+      dom.btnSearch = document.getElementById("btnSearchAction");
+      dom.btnExport = document.getElementById("btnExport");
+
+      dom.supplierMenu = document.getElementById("supplierMenu");
+      dom.originMenu = document.getElementById("originMenu");
+      dom.statusMenu = document.getElementById("statusMenu");
+
+      dom.supplierText = document.getElementById("supplierText");
+      dom.originText = document.getElementById("originText");
+      dom.statusText = document.getElementById("statusText");
+
+      dom.supplierToggle = document.getElementById("supplierToggle");
+      dom.originToggle = document.getElementById("originToggle");
+      dom.statusToggle = document.getElementById("statusToggle");
+
+      dom.statusSelectAll = document.getElementById("statusSelectAll");
+
+      dom.tableBody = document.getElementById("tableBody");
+      dom.tableView = document.getElementById("tableView");
+      dom.cardView = document.getElementById("cardView");
+
+      dom.btnTable = document.getElementById("btnTable");
+      dom.btnCard = document.getElementById("btnCard");
+
+      dom.totalCount = document.getElementById("totalCount");
+      dom.continueCount = document.getElementById("continueCount");
+      dom.discontinueCount = document.getElementById("discontinueCount");
+
+      dom.themeToggle = document.getElementById("themeToggle");
+      dom.themeIcon = document.getElementById("themeIcon");
     }
 
-    function initTheme() {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateThemeToggle(savedTheme);
+    function escapeHtml(value) {
+      const element = document.createElement("div");
+      element.textContent = String(value ?? "");
+      return element.innerHTML;
     }
 
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeToggle(newTheme);
+    function normalize(value) {
+      return String(value || "").trim().toLowerCase();
     }
 
-    function updateThemeToggle(theme) {
-      if (theme === 'dark') {
-        domCache.themeToggle.classList.add('active');
-      } else {
-        domCache.themeToggle.classList.remove('active');
+    /*
+      Penting:
+      Kata "DISCONTINUE" mengandung "CONTINUE".
+      Karena itu, status discontinue harus diperiksa lebih dahulu.
+    */
+    function isDiscontinued(status) {
+      const s = normalize(status);
+
+      return (
+        s.includes("discontinue") ||
+        s.includes("dihentikan") ||
+        s.includes("stop") ||
+        s.includes("停产") ||
+        s.includes("停止生产")
+      );
+    }
+
+    function isContinuing(status) {
+      const s = normalize(status);
+
+      if (isDiscontinued(s)) {
+        return false;
+      }
+
+      return (
+        s === "continue" ||
+        s.includes("continue produksi") ||
+        s.includes("lanjut produksi") ||
+        s.includes("lanjut") ||
+        s.includes("继续") ||
+        s.includes("生产继续")
+      );
+    }
+
+    function getStatusClass(status) {
+      if (isDiscontinued(status)) return "disc";
+      if (isContinuing(status)) return "cont";
+      return "other";
+    }
+
+    function parseCSVLine(line) {
+      const values = [];
+      let current = "";
+      let inQuotes = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const character = line[i];
+
+        if (character === '"') {
+          if (inQuotes && line[i + 1] === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (character === "," && !inQuotes) {
+          values.push(current.trim());
+          current = "";
+        } else {
+          current += character;
+        }
+      }
+
+      values.push(current.trim());
+      return values;
+    }
+
+    function parseCSV(text) {
+      const cleanText = text.replace(/^\uFEFF/, "").trim();
+
+      if (!cleanText) {
+        showEmptyState("File CSV kosong.");
+        return;
+      }
+
+      const lines = cleanText.split(/\r?\n/);
+
+      if (lines.length < 2) {
+        showEmptyState("CSV hanya memiliki header atau tidak memiliki data.");
+        return;
+      }
+
+      const supplierSet = new Set();
+      const originSet = new Set();
+
+      allData.length = 0;
+
+      for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+
+        const row = parseCSVLine(lines[i]);
+
+        const record = {
+          code: (row[0] || "").trim(),
+          name: (row[1] || "").trim(),
+          supplier: (row[2] || "").trim(),
+          origin: (row[3] || "").trim(),
+          status: (row[4] || "").trim(),
+          note: (row[5] || "").trim()
+        };
+
+        allData.push(record);
+
+        if (record.supplier) supplierSet.add(record.supplier);
+        if (record.origin) originSet.add(record.origin);
+      }
+
+      suppliers = [...supplierSet].sort((a, b) => a.localeCompare(b));
+      origins = [...originSet].sort((a, b) => a.localeCompare(b));
+
+      renderSupplierMenu();
+      renderOriginMenu();
+      syncStatusSelectAll();
+      applyFilters();
+    }
+
+    function createMenuItem({ labelText, className, value, id }) {
+      const label = document.createElement("label");
+      label.className = className;
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+
+      if (value !== undefined) checkbox.value = value;
+      if (id) checkbox.id = id;
+
+      const text = document.createElement("span");
+      text.textContent = labelText;
+
+      label.append(checkbox, text);
+      return label;
+    }
+
+    function renderSupplierMenu() {
+      const fragment = document.createDocumentFragment();
+
+      fragment.appendChild(
+        createMenuItem({
+          labelText: "Pilih Semua",
+          className: "dropdown-item select-all-item",
+          id: "supplierSelectAll"
+        })
+      );
+
+      suppliers.forEach((supplier) => {
+        const item = createMenuItem({
+          labelText: supplier,
+          className: "dropdown-item supplier-item",
+          value: supplier
+        });
+
+        const checkbox = item.querySelector("input");
+        checkbox.classList.add("supplier-check");
+        checkbox.checked = selected.supplier.has(supplier);
+
+        fragment.appendChild(item);
+      });
+
+      dom.supplierMenu.replaceChildren(fragment);
+      syncSupplierSelectAll();
+    }
+
+    function renderOriginMenu() {
+      const fragment = document.createDocumentFragment();
+
+      fragment.appendChild(
+        createMenuItem({
+          labelText: "Pilih Semua",
+          className: "dropdown-item select-all-item",
+          id: "originSelectAll"
+        })
+      );
+
+      origins.forEach((origin) => {
+        const item = createMenuItem({
+          labelText: origin,
+          className: "dropdown-item origin-item",
+          value: origin
+        });
+
+        const checkbox = item.querySelector("input");
+        checkbox.classList.add("origin-check");
+        checkbox.checked = selected.origin.has(origin);
+
+        fragment.appendChild(item);
+      });
+
+      dom.originMenu.replaceChildren(fragment);
+      syncOriginSelectAll();
+    }
+
+    function syncSelectAll(menu, itemSelector, selectAllSelector) {
+      const itemCheckboxes = [...menu.querySelectorAll(itemSelector)];
+      const selectAll = menu.querySelector(selectAllSelector);
+
+      if (!selectAll) return;
+
+      const countChecked = itemCheckboxes.filter((checkbox) => checkbox.checked).length;
+
+      selectAll.checked = itemCheckboxes.length > 0 && countChecked === itemCheckboxes.length;
+      selectAll.indeterminate = countChecked > 0 && countChecked < itemCheckboxes.length;
+    }
+
+    function syncSupplierSelectAll() {
+      syncSelectAll(
+        dom.supplierMenu,
+        ".supplier-check",
+        "#supplierSelectAll"
+      );
+    }
+
+    function syncOriginSelectAll() {
+      syncSelectAll(
+        dom.originMenu,
+        ".origin-check",
+        "#originSelectAll"
+      );
+    }
+
+    function syncStatusSelectAll() {
+      syncSelectAll(
+        dom.statusMenu,
+        ".status-check",
+        "#statusSelectAll"
+      );
+    }
+
+    function updateToggleText(type) {
+      const selectedSet = selected[type];
+      const target = dom[`${type}Text`];
+
+      const labels = {
+        supplier: "Semua Pemasok",
+        origin: "Semua Asal",
+        status: "Semua Status"
+      };
+
+      if (selectedSet.size === 0) {
+        target.textContent = labels[type];
+        return;
+      }
+
+      if (selectedSet.size === 1) {
+        if (type === "status") {
+          target.textContent = selectedSet.has("continue")
+            ? "Lanjut Produksi"
+            : "Dihentikan";
+        } else {
+          target.textContent = [...selectedSet][0];
+        }
+        return;
+      }
+
+      target.textContent = `${selectedSet.size} dipilih`;
+    }
+
+    function getFilteredData() {
+      const keyword = normalize(dom.search.value);
+
+      return allData.filter((item) => {
+        const matchKeyword =
+          !keyword ||
+          [
+            item.code,
+            item.name,
+            item.supplier,
+            item.origin,
+            item.status,
+            item.note
+          ].some((value) => normalize(value).includes(keyword));
+
+        const matchSupplier =
+          selected.supplier.size === 0 ||
+          selected.supplier.has(item.supplier);
+
+        const matchOrigin =
+          selected.origin.size === 0 ||
+          selected.origin.has(item.origin);
+
+        let matchStatus = true;
+
+        if (selected.status.size > 0) {
+          const matchesContinue =
+            selected.status.has("continue") &&
+            isContinuing(item.status);
+
+          const matchesDiscontinue =
+            selected.status.has("discontinue") &&
+            isDiscontinued(item.status);
+
+          matchStatus = matchesContinue || matchesDiscontinue;
+        }
+
+        return matchKeyword && matchSupplier && matchOrigin && matchStatus;
+      });
+    }
+
+    function updateStats(filteredData) {
+      const total = filteredData.length;
+
+      const continueCount = filteredData.filter((item) => {
+        return isContinuing(item.status);
+      }).length;
+
+      const discontinueCount = filteredData.filter((item) => {
+        return isDiscontinued(item.status);
+      }).length;
+
+      dom.totalCount.textContent = total;
+      dom.continueCount.textContent = continueCount;
+      dom.discontinueCount.textContent = discontinueCount;
+    }
+
+    function updateSearchIndicator() {
+      const hasActiveSearch =
+        dom.search.value.trim() !== "" ||
+        selected.supplier.size > 0 ||
+        selected.origin.size > 0 ||
+        selected.status.size > 0;
+
+      dom.searchIcon.classList.toggle("active", hasActiveSearch);
+    }
+
+    function renderTable(data) {
+      if (data.length === 0) {
+        dom.tableBody.innerHTML = "";
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      data.forEach((item) => {
+        const row = document.createElement("tr");
+        const statusClass = getStatusClass(item.status);
+
+        row.innerHTML = `
+          <td><span class="material-code">${escapeHtml(item.code)}</span></td>
+          <td>${escapeHtml(item.name)}</td>
+          <td>${escapeHtml(item.supplier)}</td>
+          <td>${escapeHtml(item.origin)}</td>
+          <td>
+            <span class="status-badge status-${statusClass}">
+              ${escapeHtml(item.status || "-")}
+            </span>
+          </td>
+          <td>${escapeHtml(item.note) || '<span style="color: var(--text-muted)">-</span>'}</td>
+        `;
+
+        fragment.appendChild(row);
+      });
+
+      dom.tableBody.replaceChildren(fragment);
+    }
+
+    function renderCards(data) {
+      if (data.length === 0) {
+        dom.cardView.innerHTML = "";
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      data.forEach((item) => {
+        const statusClass = getStatusClass(item.status);
+        const card = document.createElement("article");
+
+        card.className = `card ${statusClass}`;
+
+        card.innerHTML = `
+          <div class="card-code">${escapeHtml(item.code)}</div>
+          <h3 class="card-name">${escapeHtml(item.name)}</h3>
+
+          <span class="status-badge status-${statusClass}">
+            ${escapeHtml(item.status || "-")}
+          </span>
+
+          <p><strong>Pemasok:</strong> ${escapeHtml(item.supplier || "-")}</p>
+          <p><strong>Asal:</strong> ${escapeHtml(item.origin || "-")}</p>
+          <p class="card-note">${escapeHtml(item.note) || "Tidak ada catatan"}</p>
+        `;
+
+        fragment.appendChild(card);
+      });
+
+      dom.cardView.replaceChildren(fragment);
+    }
+
+    function showEmptyState(message) {
+      dom.tableBody.innerHTML = `
+        <tr>
+          <td class="empty-cell" colspan="6">
+            <div class="empty-state">
+              <strong>${escapeHtml(message)}</strong>
+            </div>
+          </td>
+        </tr>
+      `;
+
+      dom.cardView.innerHTML = `
+        <div class="empty-state" style="width: 100%;">
+          <strong>${escapeHtml(message)}</strong>
+        </div>
+      `;
+
+      updateStats([]);
+    }
+
+    function showNoResult() {
+      dom.tableBody.innerHTML = `
+        <tr>
+          <td class="empty-cell" colspan="6">
+            <div class="empty-state">
+              <strong>Tidak ada hasil ditemukan.</strong>
+              <div style="margin-top: 6px;">Ubah kata kunci atau pilihan filter Anda.</div>
+            </div>
+          </td>
+        </tr>
+      `;
+
+      dom.cardView.innerHTML = `
+        <div class="empty-state" style="width: 100%;">
+          <strong>Tidak ada hasil ditemukan.</strong>
+          <div style="margin-top: 6px;">Ubah kata kunci atau pilihan filter Anda.</div>
+        </div>
+      `;
+    }
+
+    function applyFilters() {
+      const filteredData = getFilteredData();
+
+      updateStats(filteredData);
+      updateSearchIndicator();
+
+      if (filteredData.length === 0 && allData.length > 0) {
+        showNoResult();
+        return;
+      }
+
+      renderTable(filteredData);
+      renderCards(filteredData);
+    }
+
+    function closeAllDropdowns() {
+      document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+        menu.classList.remove("open");
+      });
+
+      document.querySelectorAll(".dropdown-toggle").forEach((toggle) => {
+        toggle.classList.remove("active");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    function setupDropdown(toggle, menu) {
+      toggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        const isOpen = menu.classList.contains("open");
+
+        closeAllDropdowns();
+
+        if (!isOpen) {
+          menu.classList.add("open");
+          toggle.classList.add("active");
+          toggle.setAttribute("aria-expanded", "true");
+        }
+      });
+
+      menu.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+    }
+
+    function handleSupplierFilter(event) {
+      const target = event.target;
+
+      if (target.id === "supplierSelectAll") {
+        const shouldCheckAll = target.checked;
+        const checkboxes = dom.supplierMenu.querySelectorAll(".supplier-check");
+
+        selected.supplier.clear();
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.supplier.add(checkbox.value);
+          }
+        });
+
+        syncSupplierSelectAll();
+        updateToggleText("supplier");
+        applyFilters();
+        return;
+      }
+
+      if (target.classList.contains("supplier-check")) {
+        if (target.checked) {
+          selected.supplier.add(target.value);
+        } else {
+          selected.supplier.delete(target.value);
+        }
+
+        syncSupplierSelectAll();
+        updateToggleText("supplier");
+        applyFilters();
       }
     }
 
+    function handleOriginFilter(event) {
+      const target = event.target;
+
+      if (target.id === "originSelectAll") {
+        const shouldCheckAll = target.checked;
+        const checkboxes = dom.originMenu.querySelectorAll(".origin-check");
+
+        selected.origin.clear();
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.origin.add(checkbox.value);
+          }
+        });
+
+        syncOriginSelectAll();
+        updateToggleText("origin");
+        applyFilters();
+        return;
+      }
+
+      if (target.classList.contains("origin-check")) {
+        if (target.checked) {
+          selected.origin.add(target.value);
+        } else {
+          selected.origin.delete(target.value);
+        }
+
+        syncOriginSelectAll();
+        updateToggleText("origin");
+        applyFilters();
+      }
+    }
+
+    function handleStatusFilter(event) {
+      const target = event.target;
+
+      if (target.id === "statusSelectAll") {
+        const shouldCheckAll = target.checked;
+        const checkboxes = dom.statusMenu.querySelectorAll(".status-check");
+
+        selected.status.clear();
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.status.add(checkbox.value);
+          }
+        });
+
+        syncStatusSelectAll();
+        updateToggleText("status");
+        applyFilters();
+        return;
+      }
+
+      if (target.classList.contains("status-check")) {
+        if (target.checked) {
+          selected.status.add(target.value);
+        } else {
+          selected.status.delete(target.value);
+        }
+
+        syncStatusSelectAll();
+        updateToggleText("status");
+        applyFilters();
+      }
+    }
+
+    function setView(view) {
+      const tableMode = view === "table";
+
+      dom.tableView.style.display = tableMode ? "block" : "none";
+      dom.cardView.style.display = tableMode ? "none" : "flex";
+
+      dom.btnTable.classList.toggle("active", tableMode);
+      dom.btnCard.classList.toggle("active", !tableMode);
+
+      dom.btnTable.setAttribute("aria-pressed", String(tableMode));
+      dom.btnCard.setAttribute("aria-pressed", String(!tableMode));
+    }
+
+    function initTheme() {
+      const storedTheme = localStorage.getItem("advance-digitals-theme");
+      const preferredDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+      const theme = storedTheme || (preferredDark ? "dark" : "light");
+
+      document.documentElement.setAttribute("data-theme", theme);
+      updateThemeButton(theme);
+    }
+
+    function updateThemeButton(theme) {
+      const isDark = theme === "dark";
+
+      dom.themeToggle.classList.toggle("active", isDark);
+      dom.themeToggle.setAttribute("aria-pressed", String(isDark));
+      dom.themeIcon.textContent = isDark ? "🌙" : "☀️";
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      localStorage.setItem("advance-digitals-theme", nextTheme);
+
+      updateThemeButton(nextTheme);
+    }
+
+    function exportToExcel() {
+      const filteredData = getFilteredData();
+
+      const escapeCSV = (value) => {
+        return `"${String(value || "").replace(/"/g, '""')}"`;
+      };
+
+      const separator = ";";
+
+      let csv = "\uFEFF";
+
+      csv += [
+        "Kode Material",
+        "Nama Barang",
+        "Pemasok",
+        "Asal",
+        "Status",
+        "Catatan"
+      ].map(escapeCSV).join(separator) + "\n";
+
+      filteredData.forEach((item) => {
+        csv += [
+          item.code,
+          item.name,
+          item.supplier,
+          item.origin,
+          item.status,
+          item.note
+        ].map(escapeCSV).join(separator) + "\n";
+      });
+
+      const blob = new Blob([csv], {
+        type: "text/csv;charset=utf-8;"
+      });
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      const today = new Date()
+        .toLocaleDateString("id-ID")
+        .replace(/\//g, "-");
+
+      link.href = url;
+      link.download = `Product_Advance_${today}.csv`;
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(url);
+    }
+
     async function loadData() {
-      domCache.tableBody.innerHTML = `
+      dom.tableBody.innerHTML = `
         <tr>
-          <td colspan="6">
+          <td class="empty-cell" colspan="6">
             <div class="loading">
               <div class="loading-spinner"></div>
               <div>Memuat data...</div>
@@ -1049,21 +1741,28 @@
           </td>
         </tr>
       `;
-      
+
       try {
-        const res = await fetch('data.csv');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const text = await res.text();
+        const response = await fetch("data.csv", { cache: "no-store" });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const text = await response.text();
         parseCSV(text);
-      } catch(e) {
-        domCache.tableBody.innerHTML = `
+      } catch (error) {
+        dom.tableBody.innerHTML = `
           <tr>
-            <td colspan="6">
+            <td class="empty-cell" colspan="6">
               <div class="error-state">
-                <div style="font-size: 48px; margin-bottom: 14px;">⚠️</div>
-                <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Gagal memuat data</div>
-                <div style="font-size: 13px;">Pastikan file <code>data.csv</code> tersedia di direktori yang sama.</div>
-                <div style="margin-top: 6px; font-size: 12px; opacity: 0.7;">Error: ${e.message}</div>
+                <strong>Gagal memuat data.csv</strong>
+                <div style="margin-top: 7px; font-size: 12px;">
+                  Pastikan file data.csv berada pada folder yang sama dengan index.html.
+                </div>
+                <div style="margin-top: 5px; font-size: 11px; opacity: 0.8;">
+                  ${escapeHtml(error.message)}
+                </div>
               </div>
             </td>
           </tr>
@@ -1071,551 +1770,47 @@
       }
     }
 
-    function parseCSV(text) {
-      text = text.replace(/^\uFEFF/, '').trim();
-      if (!text) {
-        showEmptyState('File CSV kosong');
-        return;
-      }
-      
-      const lines = text.split('\n');
-      if (lines.length < 2) {
-        showEmptyState('CSV hanya memiliki header');
-        return;
-      }
-      
-      allData = [];
-      const supplierSet = new Set();
-      const originSet = new Set();
+    function debounce(callback, delay = 120) {
+      let timer;
 
-      for (let i = 1; i < lines.length; i++) {
-        if (!lines[i].trim()) continue;
-        const row = parseCSVLine(lines[i]);
-        const rec = {
-          code: (row[0] || '').trim(),
-          name: (row[1] || '').trim(),
-          supplier: (row[2] || '').trim(),
-          origin: (row[3] || '').trim(),
-          status: (row[4] || '').trim(),
-          note: (row[5] || '').trim()
-        };
-        allData.push(rec);
-        if (rec.supplier) supplierSet.add(rec.supplier);
-        if (rec.origin) originSet.add(rec.origin);
-      }
-
-      suppliers = [...supplierSet].sort((a, b) => a.localeCompare(b));
-      origins = [...originSet].sort((a, b) => a.localeCompare(b));
-      
-      renderSupplierMenu();
-      renderOriginMenu();
-      
-      updateStats();
-      applyFilters();
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => callback(...args), delay);
+      };
     }
 
-    function showEmptyState(message) {
-      domCache.tableBody.innerHTML = `
-        <tr>
-          <td colspan="6">
-            <div class="empty-state">
-              <div class="empty-state-icon">📭</div>
-              <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">${message}</div>
-            </div>
-          </td>
-        </tr>
-      `;
-    }
-
-    function parseCSVLine(line) {
-      const result = [];
-      let current = '';
-      let inQuotes = false;
-      
-      for (let i = 0; i < line.length; i++) {
-        const c = line[i];
-        if (c === '"') {
-          if (inQuotes && line[i + 1] === '"') {
-            current += '"'; 
-            i++;
-          } else {
-            inQuotes = !inQuotes;
-          }
-        } else if (c === ',' && !inQuotes) {
-          result.push(current.trim());
-          current = '';
-        } else {
-          current += c;
-        }
-      }
-      result.push(current.trim());
-      return result;
-    }
-
-    function renderSupplierMenu() {
-      const fragment = document.createDocumentFragment();
-      
-      const selectAllLabel = document.createElement('label');
-      selectAllLabel.className = 'dropdown-item select-all-item';
-      selectAllLabel.setAttribute('role', 'menuitemcheckbox');
-      selectAllLabel.innerHTML = `
-        <input type="checkbox" id="supplierSelectAll" aria-checked="false">
-        <span><strong>✓ Pilih Semua</strong></span>
-      `;
-      fragment.appendChild(selectAllLabel);
-      
-      suppliers.forEach(s => {
-        const label = document.createElement('label');
-        label.className = 'dropdown-item';
-        label.setAttribute('role', 'menuitemcheckbox');
-        label.innerHTML = `
-          <input type="checkbox" class="supplier-check" value="${escapeHtml(s)}" aria-checked="false">
-          <span>${escapeHtml(s)}</span>
-        `;
-        fragment.appendChild(label);
-      });
-      
-      domCache.supplierMenu.innerHTML = '';
-      domCache.supplierMenu.appendChild(fragment);
-      
-      domCache.supplierMenu.addEventListener('change', handleSupplierChange);
-    }
-
-    function handleSupplierChange(e) {
-      if (e.target.id === 'supplierSelectAll') {
-        const checkboxes = domCache.supplierMenu.querySelectorAll('.supplier-check');
-        const allChecked = e.target.checked;
-        checkboxes.forEach(cb => {
-          cb.checked = allChecked;
-          if (allChecked) selected.supplier.add(cb.value);
-          else selected.supplier.delete(cb.value);
-        });
-        updateToggleText('supplier');
-        applyFilters();
-      } else if (e.target.classList.contains('supplier-check')) {
-        const cb = e.target;
-        if (cb.checked) {
-          selected.supplier.add(cb.value);
-        } else {
-          selected.supplier.delete(cb.value);
-        }
-        
-        const checkboxes = domCache.supplierMenu.querySelectorAll('.supplier-check');
-        const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
-        const selectAllCheckbox = domCache.supplierMenu.querySelector('#supplierSelectAll');
-        if (selectAllCheckbox) {
-          selectAllCheckbox.checked = allChecked;
-        }
-        
-        updateToggleText('supplier');
-        applyFilters();
-      }
-    }
-
-    function renderOriginMenu() {
-      const fragment = document.createDocumentFragment();
-      
-      const selectAllLabel = document.createElement('label');
-      selectAllLabel.className = 'dropdown-item select-all-item';
-      selectAllLabel.setAttribute('role', 'menuitemcheckbox');
-      selectAllLabel.innerHTML = `
-        <input type="checkbox" id="originSelectAll" aria-checked="false">
-        <span><strong>✓ Pilih Semua</strong></span>
-      `;
-      fragment.appendChild(selectAllLabel);
-      
-      origins.forEach(o => {
-        const label = document.createElement('label');
-        label.className = 'dropdown-item';
-        label.setAttribute('role', 'menuitemcheckbox');
-        label.innerHTML = `
-          <input type="checkbox" class="origin-check" value="${escapeHtml(o)}" aria-checked="false">
-          <span>${escapeHtml(o)}</span>
-        `;
-        fragment.appendChild(label);
-      });
-      
-      domCache.originMenu.innerHTML = '';
-      domCache.originMenu.appendChild(fragment);
-      
-      domCache.originMenu.addEventListener('change', handleOriginChange);
-    }
-
-    function handleOriginChange(e) {
-      if (e.target.id === 'originSelectAll') {
-        const checkboxes = domCache.originMenu.querySelectorAll('.origin-check');
-        const allChecked = e.target.checked;
-        checkboxes.forEach(cb => {
-          cb.checked = allChecked;
-          if (allChecked) selected.origin.add(cb.value);
-          else selected.origin.delete(cb.value);
-        });
-        updateToggleText('origin');
-        applyFilters();
-      } else if (e.target.classList.contains('origin-check')) {
-        const cb = e.target;
-        if (cb.checked) {
-          selected.origin.add(cb.value);
-        } else {
-          selected.origin.delete(cb.value);
-        }
-        
-        const checkboxes = domCache.originMenu.querySelectorAll('.origin-check');
-        const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
-        const selectAllCheckbox = domCache.originMenu.querySelector('#originSelectAll');
-        if (selectAllCheckbox) {
-          selectAllCheckbox.checked = allChecked;
-        }
-        
-        updateToggleText('origin');
-        applyFilters();
-      }
-    }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    function updateToggleText(type) {
-      const set = selected[type];
-      const textEl = domCache[`${type}Text`];
-      
-      if (set.size === 0) {
-        const labels = {
-          supplier: 'Semua Pemasok', 
-          origin: 'Semua Asal', 
-          status: 'Semua Status'
-        };
-        textEl.textContent = labels[type];
-      } else if (set.size === 1) {
-        textEl.textContent = [...set][0];
-      } else {
-        textEl.textContent = `${set.size} dipilih`;
-      }
-    }
-
-    function getStatusClass(status) {
-      const s = status.toLowerCase();
-      if (s.includes('discontinue') || s.includes('dihentikan') || s.includes('停产')) return 'disc';
-      if (s.includes('continue') || s.includes('lanjut') || s.includes('继续')) return 'cont';
-      return 'other';
-    }
-
-    function getFilteredData() {
-      const q = domCache.search.value.toLowerCase().trim();
-      
-      return allData.filter(d => {
-        const matchQ = !q || [d.code, d.name, d.supplier, d.origin, d.status, d.note]
-          .some(x => x.toLowerCase().includes(q));
-        const matchSup = selected.supplier.size === 0 || selected.supplier.has(d.supplier);
-        const matchOrg = selected.origin.size === 0 || selected.origin.has(d.origin);
-        
-        let matchSt = selected.status.size === 0;
-        if (!matchSt) {
-          const stLower = d.status.toLowerCase();
-          if (selected.status.has('continue') && 
-             (stLower.includes('continue') || stLower.includes('lanjut') || stLower.includes('继续'))) matchSt = true;
-          if (selected.status.has('discontinue') && 
-             (stLower.includes('discontinue') || stLower.includes('dihentikan') || stLower.includes('停产'))) matchSt = true;
-        }
-        return matchQ && matchSup && matchOrg && matchSt;
-      });
-    }
-
-    function updateStats() {
-      domCache.totalCount.textContent = allData.length;
-      
-      const continueCount = allData.filter(d => {
-        const s = d.status.toLowerCase();
-        return s.includes('continue') || s.includes('lanjut') || s.includes('继续');
-      }).length;
-      
-      const discontinueCount = allData.filter(d => {
-        const s = d.status.toLowerCase();
-        return s.includes('discontinue') || s.includes('dihentikan') || s.includes('停产');
-      }).length;
-      
-      domCache.continueCount.textContent = continueCount;
-      domCache.discontinueCount.textContent = discontinueCount;
-    }
-
-    function applyFilters() {
-      const filtered = getFilteredData();
-      renderTable(filtered);
-      renderCards(filtered);
-      updateSearchIcon();
-      updateStatsDisplay(filtered);
-      
-      if (filtered.length === 0 && allData.length > 0) {
-        showNoResults();
-      }
-    }
-
-    function updateStatsDisplay(filtered) {
-      domCache.totalCount.textContent = filtered.length;
-      
-      const continueCount = filtered.filter(d => {
-        const s = d.status.toLowerCase();
-        return s.includes('continue') || s.includes('lanjut') || s.includes('继续');
-      }).length;
-      
-      const discontinueCount = filtered.filter(d => {
-        const s = d.status.toLowerCase();
-        return s.includes('discontinue') || s.includes('dihentikan') || s.includes('停产');
-      }).length;
-      
-      domCache.continueCount.textContent = continueCount;
-      domCache.discontinueCount.textContent = discontinueCount;
-    }
-
-    function updateSearchIcon() {
-      const hasActiveFilters = 
-        selected.supplier.size > 0 || 
-        selected.origin.size > 0 || 
-        selected.status.size > 0 ||
-        domCache.search.value.trim() !== '';
-      
-      if (hasActiveFilters) {
-        domCache.searchIcon.classList.add('active');
-      } else {
-        domCache.searchIcon.classList.remove('active');
-      }
-    }
-
-    function renderTable(filtered) {
-      const fragment = document.createDocumentFragment();
-      
-      if (filtered.length === 0) {
-        domCache.tableBody.innerHTML = '';
-        return;
-      }
-      
-      filtered.forEach(d => {
-        const cls = getStatusClass(d.status);
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${escapeHtml(d.code)}</strong></td>
-          <td>${escapeHtml(d.name)}</td>
-          <td>${escapeHtml(d.supplier)}</td>
-          <td>${escapeHtml(d.origin)}</td>
-          <td><span class="status-badge status-${cls}">${escapeHtml(d.status)}</span></td>
-          <td>${escapeHtml(d.note) || '<span style="color: var(--text-muted);">-</span>'}</td>
-        `;
-        fragment.appendChild(tr);
-      });
-
-      domCache.tableBody.innerHTML = '';
-      domCache.tableBody.appendChild(fragment);
-    }
-
-    function renderCards(filtered) {
-      const fragment = document.createDocumentFragment();
-      
-      if (filtered.length === 0) {
-        domCache.cardView.innerHTML = '';
-        return;
-      }
-      
-      filtered.forEach(d => {
-        const cls = getStatusClass(d.status);
-        const card = document.createElement('div');
-        card.className = `card ${cls}`;
-        card.innerHTML = `
-          <div class="card-content">
-            <h3>${escapeHtml(d.code)}</h3>
-            <h4>${escapeHtml(d.name)}</h4>
-            <span class="tag ${cls}">${escapeHtml(d.status)}</span>
-            <p><strong>Pemasok:</strong> ${escapeHtml(d.supplier)}</p>
-            <p><strong>Asal:</strong> ${escapeHtml(d.origin)}</p>
-            <p style="margin-top: 11px; font-size: 13px; color: var(--text-light); line-height: 1.5;">
-              ${escapeHtml(d.note) || '<span style="opacity: 0.5;">Tidak ada catatan</span>'}
-            </p>
-          </div>
-        `;
-        fragment.appendChild(card);
-      });
-
-      domCache.cardView.innerHTML = '';
-      domCache.cardView.appendChild(fragment);
-    }
-
-    function showNoResults() {
-      domCache.tableBody.innerHTML = `
-        <tr>
-          <td colspan="6">
-            <div class="empty-state">
-              <div class="empty-state-icon">🔍</div>
-              <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Tidak ada hasil ditemukan</div>
-              <div style="font-size: 13px; opacity: 0.8;">
-                Coba ubah kata kunci atau filter pencarian
-              </div>
-            </div>
-          </td>
-        </tr>
-      `;
-      domCache.cardView.innerHTML = `
-        <div style="width: 100%;">
-          <div class="empty-state">
-            <div class="empty-state-icon">🔍</div>
-            <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Tidak ada hasil ditemukan</div>
-            <div style="font-size: 13px; opacity: 0.8;">
-              Coba ubah kata kunci atau filter pencarian
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function exportToExcel() {
-      const filtered = getFilteredData();
-
-      const escape = (val) => `"${String(val || '').replace(/"/g, '""')}"`;
-      const sep = ';';
-
-      let csv = "\uFEFF";
-      csv += ["Kode Material", "Nama Barang", "Pemasok", "Asal", "Status", "Catatan"]
-        .map(escape).join(sep) + "\n";
-      
-      filtered.forEach(d => {
-        csv += [
-          escape(d.code), 
-          escape(d.name), 
-          escape(d.supplier), 
-          escape(d.origin), 
-          escape(d.status), 
-          escape(d.note)
-        ].join(sep) + "\n";
-      });
-
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      
-      const dateStr = new Date().toLocaleDateString('id-ID').replace(/\//g, '-');
-      link.download = `Product_Advance_${dateStr}.csv`;
-      
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-
-    function setupToggle(toggleId, menuId) {
-      const toggle = document.getElementById(toggleId);
-      const menu = document.getElementById(menuId);
-      
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = menu.classList.contains('open');
-        
-        document.querySelectorAll('.dropdown-menu').forEach(m => {
-          m.classList.remove('open');
-          m.previousElementSibling?.classList.remove('active');
-          m.previousElementSibling?.setAttribute('aria-expanded', 'false');
-        });
-        
-        if (!isOpen) {
-          menu.classList.add('open');
-          toggle.classList.add('active');
-          toggle.setAttribute('aria-expanded', 'true');
-        }
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", () => {
       initDomCache();
       initTheme();
-      
-      domCache.themeToggle.addEventListener('click', toggleTheme);
-      domCache.themeToggle.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleTheme();
-        }
-      });
-      
-      setupToggle('supplierToggle', 'supplierMenu');
-      setupToggle('originToggle', 'originMenu');
-      setupToggle('statusToggle', 'statusMenu');
 
-      document.addEventListener('click', () => {
-        document.querySelectorAll('.dropdown-menu').forEach(m => {
-          m.classList.remove('open');
-          m.previousElementSibling?.classList.remove('active');
-          m.previousElementSibling?.setAttribute('aria-expanded', 'false');
-        });
-      });
-      
-      document.querySelectorAll('.dropdown-menu').forEach(m => {
-        m.addEventListener('click', e => e.stopPropagation());
-      });
+      setupDropdown(dom.supplierToggle, dom.supplierMenu);
+      setupDropdown(dom.originToggle, dom.originMenu);
+      setupDropdown(dom.statusToggle, dom.statusMenu);
 
-      domCache.search.addEventListener('input', () => {
-        applyFilters();
-      });
+      document.addEventListener("click", closeAllDropdowns);
 
-      domCache.search.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
+      dom.supplierMenu.addEventListener("change", handleSupplierFilter);
+      dom.originMenu.addEventListener("change", handleOriginFilter);
+      dom.statusMenu.addEventListener("change", handleStatusFilter);
+
+      const searchDebounced = debounce(applyFilters, 120);
+
+      dom.search.addEventListener("input", searchDebounced);
+
+      dom.search.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
           applyFilters();
         }
       });
 
-      domCache.btnSearchAction.addEventListener('click', () => {
-        applyFilters();
-      });
+      dom.btnSearch.addEventListener("click", applyFilters);
+      dom.btnExport.addEventListener("click", exportToExcel);
 
-      domCache.statusSelectAll.addEventListener('change', (e) => {
-        const checkboxes = domCache.statusMenu.querySelectorAll('input[type="checkbox"][value]');
-        const allChecked = e.target.checked;
-        checkboxes.forEach(cb => {
-          cb.checked = allChecked;
-          if (allChecked) {
-            selected.status.add(cb.value);
-          } else {
-            selected.status.delete(cb.value);
-          }
-        });
-        updateToggleText('status');
-        applyFilters();
-      });
+      dom.btnTable.addEventListener("click", () => setView("table"));
+      dom.btnCard.addEventListener("click", () => setView("card"));
 
-      document.querySelectorAll('#statusMenu input[type="checkbox"][value]').forEach(cb => {
-        cb.addEventListener('change', () => {
-          if (cb.checked) {
-            selected.status.add(cb.value);
-          } else {
-            selected.status.delete(cb.value);
-          }
-          
-          const checkboxes = domCache.statusMenu.querySelectorAll('input[type="checkbox"][value]');
-          const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
-          domCache.statusSelectAll.checked = allChecked;
-          
-          updateToggleText('status');
-          applyFilters();
-        });
-      });
-
-      document.getElementById('btnTable').onclick = () => {
-        domCache.tableView.style.display = 'block';
-        domCache.cardView.style.display = 'none';
-        document.getElementById('btnTable').classList.add('active');
-        document.getElementById('btnTable').setAttribute('aria-pressed', 'true');
-        document.getElementById('btnCard').classList.remove('active');
-        document.getElementById('btnCard').setAttribute('aria-pressed', 'false');
-      };
-      
-      document.getElementById('btnCard').onclick = () => {
-        domCache.tableView.style.display = 'none';
-        domCache.cardView.style.display = 'flex';
-        document.getElementById('btnCard').classList.add('active');
-        document.getElementById('btnCard').setAttribute('aria-pressed', 'true');
-        document.getElementById('btnTable').classList.remove('active');
-        document.getElementById('btnTable').setAttribute('aria-pressed', 'false');
-      };
+      dom.themeToggle.addEventListener("click", toggleTheme);
 
       loadData();
     });
