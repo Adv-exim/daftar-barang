@@ -92,9 +92,15 @@
       position: relative;
     }
     
-    .search-input { 
+    .search-input-wrapper {
       flex: 1; 
       min-width: 280px; 
+      display: flex;
+      gap: 8px;
+    }
+    
+    .search-input { 
+      flex: 1;
       position: relative;
     }
     
@@ -132,6 +138,30 @@
     
     .search-icon-indicator.active {
       opacity: 1;
+    }
+    
+    .btn-search {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(15, 118, 110, 0.2);
+      white-space: nowrap;
+    }
+    
+    .btn-search:hover {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(15, 118, 110, 0.25);
+    }
+    
+    .btn-search:active {
+      transform: translateY(0);
     }
     
     .filter-group { 
@@ -537,6 +567,14 @@
         font-size: 22px;
       }
       
+      .search-input-wrapper {
+        flex-direction: column;
+      }
+      
+      .btn-search {
+        width: 100%;
+      }
+      
       .card { 
         width: 100%; 
       }
@@ -587,9 +625,12 @@
 
   <div class="search-bar">
     <div class="search-top">
-      <div class="search-input">
-        <input type="text" id="search" placeholder="🔍 Cari kode, nama produk, atau kata kunci..." autocomplete="off">
-        <span class="search-icon-indicator" id="searchIcon">🔍</span>
+      <div class="search-input-wrapper">
+        <div class="search-input">
+          <input type="text" id="search" placeholder="🔍 Cari kode, nama produk, atau kata kunci..." autocomplete="off">
+          <span class="search-icon-indicator" id="searchIcon">🔍</span>
+        </div>
+        <button class="btn-search" id="btnSearchAction">🔍 Cari</button>
       </div>
     </div>
     
@@ -666,7 +707,6 @@
     let allData = [];
     let suppliers = [];
     let origins = [];
-    let renderTimer = null;
     
     const selected = {
       supplier: new Set(),
@@ -690,6 +730,7 @@
       domCache.statusText = document.getElementById('statusText');
       domCache.searchIcon = document.getElementById('searchIcon');
       domCache.statusSelectAll = document.getElementById('statusSelectAll');
+      domCache.btnSearchAction = document.getElementById('btnSearchAction');
     }
 
     async function loadData() {
@@ -771,7 +812,7 @@
           year: 'numeric'
         });
       
-      render();
+      applyFilters();
     }
 
     function showEmptyState(message) {
@@ -838,30 +879,38 @@
       domCache.supplierMenu.innerHTML = '';
       domCache.supplierMenu.appendChild(fragment);
       
-      domCache.supplierMenu.addEventListener('change', (e) => {
-        if (e.target.id === 'supplierSelectAll') {
-          const checkboxes = domCache.supplierMenu.querySelectorAll('.supplier-check');
-          const allChecked = e.target.checked;
-          checkboxes.forEach(cb => {
-            cb.checked = allChecked;
-            if (allChecked) selected.supplier.add(cb.value);
-            else selected.supplier.delete(cb.value);
-          });
-          updateToggleText('supplier');
-          render();
-        } else if (e.target.classList.contains('supplier-check')) {
-          const cb = e.target;
-          if (cb.checked) selected.supplier.add(cb.value);
+      domCache.supplierMenu.addEventListener('change', handleSupplierChange);
+    }
+
+    function handleSupplierChange(e) {
+      if (e.target.id === 'supplierSelectAll') {
+        const checkboxes = domCache.supplierMenu.querySelectorAll('.supplier-check');
+        const allChecked = e.target.checked;
+        checkboxes.forEach(cb => {
+          cb.checked = allChecked;
+          if (allChecked) selected.supplier.add(cb.value);
           else selected.supplier.delete(cb.value);
-          
-          const checkboxes = domCache.supplierMenu.querySelectorAll('.supplier-check');
-          const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
-          domCache.supplierMenu.querySelector('#supplierSelectAll').checked = allChecked;
-          
-          updateToggleText('supplier');
-          render();
+        });
+        updateToggleText('supplier');
+        applyFilters();
+      } else if (e.target.classList.contains('supplier-check')) {
+        const cb = e.target;
+        if (cb.checked) {
+          selected.supplier.add(cb.value);
+        } else {
+          selected.supplier.delete(cb.value);
         }
-      }, { once: true });
+        
+        const checkboxes = domCache.supplierMenu.querySelectorAll('.supplier-check');
+        const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+        const selectAllCheckbox = domCache.supplierMenu.querySelector('#supplierSelectAll');
+        if (selectAllCheckbox) {
+          selectAllCheckbox.checked = allChecked;
+        }
+        
+        updateToggleText('supplier');
+        applyFilters();
+      }
     }
 
     function renderOriginMenu() {
@@ -890,30 +939,38 @@
       domCache.originMenu.innerHTML = '';
       domCache.originMenu.appendChild(fragment);
       
-      domCache.originMenu.addEventListener('change', (e) => {
-        if (e.target.id === 'originSelectAll') {
-          const checkboxes = domCache.originMenu.querySelectorAll('.origin-check');
-          const allChecked = e.target.checked;
-          checkboxes.forEach(cb => {
-            cb.checked = allChecked;
-            if (allChecked) selected.origin.add(cb.value);
-            else selected.origin.delete(cb.value);
-          });
-          updateToggleText('origin');
-          render();
-        } else if (e.target.classList.contains('origin-check')) {
-          const cb = e.target;
-          if (cb.checked) selected.origin.add(cb.value);
+      domCache.originMenu.addEventListener('change', handleOriginChange);
+    }
+
+    function handleOriginChange(e) {
+      if (e.target.id === 'originSelectAll') {
+        const checkboxes = domCache.originMenu.querySelectorAll('.origin-check');
+        const allChecked = e.target.checked;
+        checkboxes.forEach(cb => {
+          cb.checked = allChecked;
+          if (allChecked) selected.origin.add(cb.value);
           else selected.origin.delete(cb.value);
-          
-          const checkboxes = domCache.originMenu.querySelectorAll('.origin-check');
-          const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
-          domCache.originMenu.querySelector('#originSelectAll').checked = allChecked;
-          
-          updateToggleText('origin');
-          render();
+        });
+        updateToggleText('origin');
+        applyFilters();
+      } else if (e.target.classList.contains('origin-check')) {
+        const cb = e.target;
+        if (cb.checked) {
+          selected.origin.add(cb.value);
+        } else {
+          selected.origin.delete(cb.value);
         }
-      }, { once: true });
+        
+        const checkboxes = domCache.originMenu.querySelectorAll('.origin-check');
+        const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+        const selectAllCheckbox = domCache.originMenu.querySelector('#originSelectAll');
+        if (selectAllCheckbox) {
+          selectAllCheckbox.checked = allChecked;
+        }
+        
+        updateToggleText('origin');
+        applyFilters();
+      }
     }
 
     function escapeHtml(text) {
@@ -947,22 +1004,10 @@
       return 'other';
     }
 
-    function debounce(func, wait) {
-      let timeout;
-      return function executedFunction(...args) {
-        const later = () => {
-          clearTimeout(timeout);
-          func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-      };
-    }
-
-    const render = debounce(function() {
+    function getFilteredData() {
       const q = domCache.search.value.toLowerCase().trim();
       
-      let filtered = allData.filter(d => {
+      return allData.filter(d => {
         const matchQ = !q || [d.code, d.name, d.supplier, d.origin, d.status, d.note]
           .some(x => x.toLowerCase().includes(q));
         const matchSup = selected.supplier.size === 0 || selected.supplier.has(d.supplier);
@@ -978,16 +1023,18 @@
         }
         return matchQ && matchSup && matchOrg && matchSt;
       });
+    }
 
+    function applyFilters() {
+      const filtered = getFilteredData();
       renderTable(filtered);
       renderCards(filtered);
-      
       updateSearchIcon();
       
       if (filtered.length === 0 && allData.length > 0) {
         showNoResults();
       }
-    }, 150);
+    }
 
     function updateSearchIcon() {
       const hasActiveFilters = 
@@ -1086,24 +1133,7 @@
     }
 
     function exportToExcel() {
-      const q = domCache.search.value.toLowerCase().trim();
-      
-      let filtered = allData.filter(d => {
-        const matchQ = !q || [d.code, d.name, d.supplier, d.origin, d.status, d.note]
-          .some(x => x.toLowerCase().includes(q));
-        const matchSup = selected.supplier.size === 0 || selected.supplier.has(d.supplier);
-        const matchOrg = selected.origin.size === 0 || selected.origin.has(d.origin);
-        
-        let matchSt = selected.status.size === 0;
-        if (!matchSt) {
-          const stLower = d.status.toLowerCase();
-          if (selected.status.has('continue') && 
-             (stLower.includes('continue') || stLower.includes('lanjut') || stLower.includes('继续'))) matchSt = true;
-          if (selected.status.has('discontinue') && 
-             (stLower.includes('discontinue') || stLower.includes('dihentikan') || stLower.includes('停产'))) matchSt = true;
-        }
-        return matchQ && matchSup && matchOrg && matchSt;
-      });
+      const filtered = getFilteredData();
 
       const escape = (val) => `"${String(val || '').replace(/"/g, '""')}"`;
       const sep = ';';
@@ -1178,7 +1208,17 @@
       });
 
       domCache.search.addEventListener('input', () => {
-        render();
+        applyFilters();
+      });
+
+      domCache.search.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          applyFilters();
+        }
+      });
+
+      domCache.btnSearchAction.addEventListener('click', () => {
+        applyFilters();
       });
 
       domCache.statusSelectAll.addEventListener('change', (e) => {
@@ -1186,24 +1226,30 @@
         const allChecked = e.target.checked;
         checkboxes.forEach(cb => {
           cb.checked = allChecked;
-          if (allChecked) selected.status.add(cb.value);
-          else selected.status.delete(cb.value);
+          if (allChecked) {
+            selected.status.add(cb.value);
+          } else {
+            selected.status.delete(cb.value);
+          }
         });
         updateToggleText('status');
-        render();
+        applyFilters();
       });
 
       document.querySelectorAll('#statusMenu input[type="checkbox"][value]').forEach(cb => {
         cb.addEventListener('change', () => {
-          if (cb.checked) selected.status.add(cb.value);
-          else selected.status.delete(cb.value);
+          if (cb.checked) {
+            selected.status.add(cb.value);
+          } else {
+            selected.status.delete(cb.value);
+          }
           
           const checkboxes = domCache.statusMenu.querySelectorAll('input[type="checkbox"][value]');
           const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
           domCache.statusSelectAll.checked = allChecked;
           
           updateToggleText('status');
-          render();
+          applyFilters();
         });
       });
 
