@@ -15,10 +15,6 @@
 
       --accent-gradient: linear-gradient(135deg, #5b7c8a, #43606c);
 
-      --table-header-bg: #f1f5f7;
-      --table-header-text: #334752;
-      --table-header-border: #d8e2e7;
-
       --bg: #f7f9fa;
       --bg-gradient: linear-gradient(180deg, #f9fbfc 0%, #f2f6f8 100%);
 
@@ -55,10 +51,6 @@
       --primary-dark: #a8c5d0;
 
       --accent-gradient: linear-gradient(135deg, #4a6472, #33474f);
-
-      --table-header-bg: #22303a;
-      --table-header-text: #dbe6ea;
-      --table-header-border: #31424d;
 
       --bg: #101820;
       --bg-gradient: linear-gradient(180deg, #101820 0%, #151f27 100%);
@@ -106,8 +98,6 @@
 
     button, input { font: inherit; }
     button { cursor: pointer; }
-
-    .hidden { display: none !important; }
 
     /* HEADER HALAMAN */
     .header-section {
@@ -313,19 +303,25 @@
       background: var(--card-bg);
     }
 
-    /* HEADER TABEL TETAP SAAT SCROLL */
+    /* HEADER TABEL — SATU WARNA SOFT */
     th {
       position: sticky;
       top: 0;
       z-index: 20;
       padding: 0;
-      color: var(--table-header-text);
-      background: var(--table-header-bg);
-      border-bottom: 1px solid var(--table-header-border);
+      color: #334752;
+      background: #e9eef2;
+      border-bottom: 1px solid #d8e2e7;
       font-size: 12px;
       font-weight: 800;
       text-align: left;
       white-space: nowrap;
+    }
+
+    [data-theme="dark"] th {
+      color: #dbe6ea;
+      background: #243440;
+      border-bottom: 1px solid #31424d;
     }
 
     th .th-inner {
@@ -341,25 +337,44 @@
       place-items: center;
       width: 27px;
       height: 27px;
-      color: var(--text-light);
-      border: 1px solid var(--border);
+      color: #5d6f78;
+      border: 1px solid #d8e2e7;
       border-radius: 7px;
-      background: var(--card-bg);
+      background: #ffffff;
       font-size: 12px;
       transition: all .18s ease;
     }
 
+    [data-theme="dark"] .column-filter-btn {
+      color: #b3c2ca;
+      border-color: #31424d;
+      background: #17222b;
+    }
+
     .column-filter-btn:hover,
     .column-filter-btn.active {
-      color: var(--primary-dark);
-      border-color: var(--primary);
-      background: var(--primary-soft);
+      color: #3d5762;
+      border-color: #4f6d7a;
+      background: #eef3f5;
+    }
+
+    [data-theme="dark"] .column-filter-btn:hover,
+    [data-theme="dark"] .column-filter-btn.active {
+      color: #a8c5d0;
+      border-color: #8fb0bd;
+      background: rgba(143, 176, 189, .12);
     }
 
     .column-filter-btn.has-filter {
-      color: #fff;
-      border-color: var(--primary);
-      background: var(--primary);
+      color: #ffffff;
+      border-color: #4f6d7a;
+      background: #4f6d7a;
+    }
+
+    [data-theme="dark"] .column-filter-btn.has-filter {
+      color: #101820;
+      border-color: #8fb0bd;
+      background: #8fb0bd;
     }
 
     td {
