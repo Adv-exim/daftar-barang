@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="id" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advance Digitals — Product & Status</title>
-
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advance Digitals — Product and Status</title>
 
   <style>
     :root {
@@ -13,28 +11,39 @@
       --primary-dark: #0b7077;
       --primary-light: #27b9c1;
       --accent-gradient: linear-gradient(135deg, #12b7c5, #087f83);
+
       --bg: #f2f7f8;
       --bg-gradient: linear-gradient(135deg, #f7fbfc 0%, #edf4f6 100%);
       --card-bg: #ffffff;
       --card-bg-hover: #f7fbfc;
       --border: #dfe8eb;
+
       --text: #334155;
       --text-light: #64748b;
       --text-muted: #94a3b8;
-      --shadow-sm: 0 1px 3px rgba(15, 23, 42, .08);
-      --shadow-md: 0 3px 9px rgba(15, 23, 42, .10);
-      --shadow-lg: 0 12px 24px rgba(15, 23, 42, .14);
-      --radius: 14px;
-      --radius-sm: 10px;
+
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 3px 9px rgba(15, 23, 42, 0.10);
+      --shadow-lg: 0 12px 24px rgba(15, 23, 42, 0.14);
+      --shadow-glow: 0 0 18px rgba(18, 183, 197, 0.17);
+
+      --radius: 12px;
+      --radius-sm: 8px;
+
       --status-disc-bg: #fff4f4;
       --status-disc-text: #a82929;
       --status-disc-border: #f3b4b4;
+
       --status-cont-bg: #ecfdf6;
       --status-cont-text: #08784f;
       --status-cont-border: #92dfbd;
+
       --status-other-bg: #fff9e7;
       --status-other-text: #95630e;
       --status-other-border: #f6d87c;
+
+      --glass-bg: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.55);
     }
 
     [data-theme="dark"] {
@@ -42,31 +51,45 @@
       --primary-dark: #11979e;
       --primary-light: #5ee7e9;
       --accent-gradient: linear-gradient(135deg, #20c8d2, #149b9e);
+
       --bg: #111c2a;
       --bg-gradient: linear-gradient(135deg, #101b29 0%, #1b2a3b 100%);
       --card-bg: #1c2b3d;
       --card-bg-hover: #263a50;
       --border: #35495e;
+
       --text: #e6edf5;
       --text-light: #b2c0d0;
       --text-muted: #8ea0b5;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, .30);
-      --shadow-md: 0 4px 10px rgba(0, 0, 0, .34);
-      --shadow-lg: 0 12px 26px rgba(0, 0, 0, .44);
-      --status-disc-bg: rgba(239, 68, 68, .13);
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.30);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.34);
+      --shadow-lg: 0 12px 26px rgba(0, 0, 0, 0.44);
+      --shadow-glow: 0 0 18px rgba(34, 197, 203, 0.16);
+
+      --status-disc-bg: rgba(239, 68, 68, 0.13);
       --status-disc-text: #fca5a5;
-      --status-disc-border: rgba(252, 165, 165, .42);
-      --status-cont-bg: rgba(16, 185, 129, .13);
+      --status-disc-border: rgba(252, 165, 165, 0.42);
+
+      --status-cont-bg: rgba(16, 185, 129, 0.13);
       --status-cont-text: #86efac;
-      --status-cont-border: rgba(134, 239, 172, .36);
-      --status-other-bg: rgba(234, 179, 8, .13);
+      --status-cont-border: rgba(134, 239, 172, 0.36);
+
+      --status-other-bg: rgba(234, 179, 8, 0.13);
       --status-other-text: #fde68a;
-      --status-other-border: rgba(253, 230, 138, .35);
+      --status-other-border: rgba(253, 230, 138, 0.35);
+
+      --glass-bg: rgba(28, 43, 61, 0.89);
+      --glass-border: rgba(255, 255, 255, 0.10);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { background: var(--bg); }
+    html {
+      background: var(--bg);
+    }
 
     body {
       max-width: 1450px;
@@ -78,34 +101,39 @@
       font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
       font-size: 14px;
       line-height: 1.5;
-      transition: background .25s ease, color .25s ease;
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
-    button, input { font: inherit; }
-    button { cursor: pointer; }
+    button,
+    input {
+      font: inherit;
+    }
 
-    .hidden { display: none !important; }
+    button {
+      cursor: pointer;
+    }
 
-    /* HEADER */
     .header-section {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      padding: 18px 22px;
+      padding: 16px 20px;
       margin-bottom: 16px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius);
       box-shadow: var(--shadow-md);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .header-title h1 {
-      margin: 0 0 4px;
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 800;
-      letter-spacing: -.03em;
+      margin: 0 0 3px;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       background-clip: text;
@@ -116,7 +144,7 @@
       margin: 0;
       color: var(--text-muted);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .header-right {
@@ -124,29 +152,34 @@
       align-items: center;
       justify-content: flex-end;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
     }
 
     .stats-bar {
       display: flex;
       align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
     .stat-item {
-      min-width: 76px;
-      padding: 8px 12px;
+      min-width: 70px;
+      padding: 6px 12px;
       text-align: center;
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       background: var(--card-bg-hover);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat-item:hover {
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow-sm);
     }
 
     .stat-value {
       color: var(--text);
-      font-size: 18px;
-      font-weight: 800;
+      font-size: 16px;
+      font-weight: 700;
       line-height: 1.15;
     }
 
@@ -154,7 +187,7 @@
       margin-top: 2px;
       color: var(--text-muted);
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 600;
       white-space: nowrap;
     }
 
@@ -166,10 +199,15 @@
       border: 2px solid var(--border);
       border-radius: 999px;
       background: #dfe7ee;
-      transition: all .25s ease;
+      box-shadow: none;
+      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
 
-    [data-theme="dark"] .theme-toggle { background: #33475d; }
+    .theme-toggle:hover {
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow-glow);
+      transform: none;
+    }
 
     .theme-toggle.active {
       border-color: transparent;
@@ -185,119 +223,43 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
-      transition: transform .28s cubic-bezier(.34, 1.56, .64, 1);
-    }
-
-    .theme-toggle.active .theme-toggle-slider { transform: translateX(32px); }
-
-    /* LANDING / DASHBOARD */
-    .landing {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .dashboard-card {
-      padding: 20px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .dashboard-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .dashboard-card h3 {
-      margin: 0 0 6px;
-      font-size: 15px;
-      font-weight: 800;
-    }
-
-    .dashboard-card p {
-      margin: 0;
-      color: var(--text-light);
-      font-size: 12px;
-    }
-
-    .dashboard-number {
-      margin-top: 14px;
-      font-size: 34px;
-      font-weight: 900;
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+      font-size: 14px;
       line-height: 1;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .dashboard-card.total .dashboard-number { color: var(--primary); }
-    .dashboard-card.continue .dashboard-number { color: #10b981; }
-    .dashboard-card.discontinue .dashboard-number { color: #ef4444; }
-
-    .quick-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 18px;
+    .theme-toggle.active .theme-toggle-slider {
+      transform: translateX(32px);
     }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 46px;
-      padding: 0 20px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--card-bg);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 700;
-      transition: all .2s ease;
-    }
-
-    .btn:hover {
-      border-color: var(--primary-light);
-      background: var(--card-bg-hover);
-      box-shadow: var(--shadow-sm);
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      color: #fff !important;
-      border-color: transparent;
-      background: var(--accent-gradient);
-      box-shadow: 0 3px 8px rgba(15, 118, 122, .25);
-    }
-
-    .btn-primary:hover {
-      color: #fff !important;
-      filter: brightness(1.05);
-      box-shadow: 0 6px 14px rgba(15, 118, 122, .30);
-    }
-
-    /* WORKSPACE */
-    .workspace { display: none; }
-    .workspace.active { display: block; }
 
     .search-bar {
       position: relative;
       z-index: 20;
-      padding: 16px 18px;
+      overflow: visible;
+      padding: 15px 18px;
       margin-bottom: 15px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow-md);
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .search-bar::before {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      left: -1px;
+      height: 3px;
+      content: "";
+      border-radius: 12px 12px 0 0;
+      background: var(--accent-gradient);
     }
 
     .search-top {
       display: flex;
-      gap: 10px;
       margin-bottom: 12px;
     }
 
@@ -308,7 +270,11 @@
       min-width: 0;
     }
 
-    .search-input { position: relative; flex: 1; min-width: 180px; }
+    .search-input {
+      position: relative;
+      flex: 1;
+      min-width: 180px;
+    }
 
     .search-input input {
       width: 100%;
@@ -319,16 +285,74 @@
       border-radius: var(--radius-sm);
       outline: none;
       background: var(--card-bg-hover);
-      transition: all .2s ease;
+      font-size: 13px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .search-input input::placeholder {
+      color: var(--text-muted);
     }
 
     .search-input input:focus {
       border-color: var(--primary-light);
       background: var(--card-bg);
-      box-shadow: 0 0 0 3px rgba(20, 184, 166, .13);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.13);
+    }
+
+    .search-icon-indicator {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%);
+      transition: opacity 0.2s ease;
+      font-size: 16px;
+    }
+
+    .search-icon-indicator.active {
+      opacity: 1;
+    }
+
+    .btn-search,
+    .btn-export {
+      color: #ffffff !important;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--accent-gradient);
+      box-shadow: 0 2px 6px rgba(15, 118, 122, 0.25);
+      font-size: 13px;
+      font-weight: 650;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn-search {
+      height: 44px;
+      padding: 0 20px;
+      white-space: nowrap;
+    }
+
+    .btn-export {
+      padding: 10px 20px;
+      white-space: nowrap;
+    }
+
+    .btn-search:hover,
+    .btn-export:hover {
+      color: #ffffff !important;
+      filter: brightness(1.04);
+      box-shadow: 0 6px 14px rgba(15, 118, 122, 0.30);
+      transform: translateY(-1px);
+    }
+
+    .btn-search:active,
+    .btn-export:active {
+      transform: translateY(0);
     }
 
     .filter-group {
+      position: relative;
+      z-index: 30;
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
@@ -337,14 +361,15 @@
     .filter-box {
       position: relative;
       flex: 1;
-      min-width: 210px;
+      min-width: 205px;
     }
 
     .filter-label {
       display: block;
       margin-bottom: 5px;
+      color: var(--text);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 650;
     }
 
     .dropdown-toggle {
@@ -359,17 +384,31 @@
       border-radius: var(--radius-sm);
       background: var(--card-bg-hover);
       font-size: 13px;
-      font-weight: 650;
+      font-weight: 600;
       text-align: left;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .dropdown-toggle:hover,
+    .dropdown-toggle.active {
+      color: var(--text);
+      border-color: var(--primary-light);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-glow);
+      transform: none;
     }
 
     .dropdown-arrow {
+      flex: 0 0 auto;
       margin-left: 10px;
       color: var(--text-muted);
-      transition: transform .2s ease;
+      font-size: 10px;
+      transition: transform 0.2s ease;
     }
 
-    .dropdown-toggle.active .dropdown-arrow { transform: rotate(180deg); }
+    .dropdown-toggle.active .dropdown-arrow {
+      transform: rotate(180deg);
+    }
 
     .dropdown-menu {
       position: absolute;
@@ -382,34 +421,60 @@
       max-width: min(390px, calc(100vw - 48px));
       max-height: 300px;
       padding: 5px 0;
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
+      color: var(--text);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       background: var(--card-bg);
       box-shadow: var(--shadow-lg);
     }
 
-    .dropdown-menu.open { display: block; }
+    .dropdown-menu.open {
+      display: block;
+      animation: slideDown 0.16s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     .dropdown-item {
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: max-content;
       padding: 8px 14px;
       color: var(--text);
       cursor: pointer;
       font-size: 13px;
+      line-height: 1.35;
+      transition: background 0.15s ease;
     }
 
-    .dropdown-item:hover { background: var(--card-bg-hover); }
+    .dropdown-item:hover {
+      color: var(--text);
+      background: var(--card-bg-hover);
+    }
 
-    .dropdown-item span { overflow-wrap: anywhere; }
+    .dropdown-item span {
+      overflow-wrap: anywhere;
+    }
 
     .dropdown-item input[type="checkbox"] {
       flex: 0 0 auto;
       width: 16px;
       height: 16px;
       margin: 0;
+      cursor: pointer;
       accent-color: var(--primary);
     }
 
@@ -422,6 +487,10 @@
       background: var(--card-bg-hover);
     }
 
+    .select-all-item:hover {
+      background: var(--card-bg-hover);
+    }
+
     .action-bar {
       display: flex;
       align-items: center;
@@ -431,27 +500,39 @@
       margin-bottom: 15px;
     }
 
-    .view-buttons { display: flex; gap: 8px; }
+    .view-buttons {
+      display: flex;
+      gap: 8px;
+    }
 
     .view-buttons button {
-      padding: 10px 16px;
+      padding: 9px 16px;
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       background: var(--card-bg);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 650;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .view-buttons button:hover {
+      color: var(--text);
+      border-color: var(--primary-light);
+      background: var(--card-bg-hover);
+      box-shadow: var(--shadow-sm);
+      transform: none;
     }
 
     .view-buttons button.active {
-      color: #fff !important;
+      color: #ffffff !important;
       border-color: transparent;
       background: var(--accent-gradient);
+      box-shadow: 0 3px 8px rgba(15, 118, 122, 0.22);
     }
 
-    /* TABLE */
     .table-container {
-      max-height: 70vh;
+      max-height: 72vh;
       overflow: auto;
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -461,7 +542,7 @@
 
     table {
       width: 100%;
-      min-width: 900px;
+      min-width: 920px;
       border-spacing: 0;
       border-collapse: separate;
       background: var(--card-bg);
@@ -472,11 +553,11 @@
       top: 0;
       z-index: 5;
       padding: 13px 14px;
-      color: #fff;
-      border-bottom: 2px solid rgba(255, 255, 255, .18);
+      color: #ffffff;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.18);
       background: var(--accent-gradient);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       text-align: left;
       white-space: nowrap;
     }
@@ -488,15 +569,20 @@
       background: var(--card-bg);
       font-size: 13px;
       vertical-align: middle;
-      overflow-wrap: anywhere;
+      transition: background 0.16s ease;
     }
 
-    tbody tr:hover td { background: var(--card-bg-hover); }
-    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td {
+      background: var(--card-bg-hover);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
 
     .material-code {
       color: var(--text);
-      font-weight: 800;
+      font-weight: 700;
       white-space: nowrap;
     }
 
@@ -506,7 +592,8 @@
       border: 1px solid;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 700;
+      line-height: 1.2;
       white-space: nowrap;
     }
 
@@ -528,16 +615,26 @@
       background: var(--status-other-bg);
     }
 
-    .empty-cell { padding: 0 !important; }
+    .empty-cell {
+      padding: 0 !important;
+    }
 
-    .empty-state, .loading, .error-state {
+    .empty-state,
+    .loading,
+    .error-state {
       padding: 54px 20px;
       color: var(--text-muted);
       text-align: center;
     }
 
-    .empty-state strong, .error-state strong { color: var(--text); }
-    .error-state { color: #dc2626; }
+    .empty-state strong,
+    .error-state strong {
+      color: var(--text);
+    }
+
+    .error-state {
+      color: #dc2626;
+    }
 
     .loading-spinner {
       display: inline-block;
@@ -547,30 +644,38 @@
       border: 3px solid var(--border);
       border-top-color: var(--primary);
       border-radius: 50%;
-      animation: spin .75s linear infinite;
+      animation: spin 0.75s linear infinite;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-    /* CARDS */
     .card-mode {
       display: none;
       flex-wrap: wrap;
       gap: 14px;
     }
 
-    .card-mode.active { display: flex; }
-
     .card {
       position: relative;
-      flex: 1 1 300px;
+      flex: 1 1 290px;
       min-width: 280px;
       max-width: calc(33.333% - 10px);
+      overflow: hidden;
       padding: 16px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--card-bg);
       box-shadow: var(--shadow-md);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
     }
 
     .card::before {
@@ -582,26 +687,48 @@
       content: "";
     }
 
-    .card.disc::before { background: #ef4444; }
-    .card.cont::before { background: #10b981; }
-    .card.other::before { background: #f59e0b; }
+    .card.disc::before {
+      background: #ef4444;
+    }
+
+    .card.cont::before {
+      background: #10b981;
+    }
+
+    .card.other::before {
+      background: #f59e0b;
+    }
 
     .card-code {
       margin-bottom: 4px;
       color: var(--text-muted);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 700;
+      letter-spacing: 0.04em;
     }
 
     .card-name {
       margin: 0 0 10px;
+      color: var(--text);
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 700;
+      line-height: 1.4;
       word-break: break-word;
     }
 
-    .card p { margin: 5px 0; color: var(--text-light); font-size: 12px; }
-    .card p strong { color: var(--text); }
+    .card .status-badge {
+      margin-bottom: 11px;
+    }
+
+    .card p {
+      margin: 5px 0;
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    .card p strong {
+      color: var(--text);
+    }
 
     .card-note {
       margin-top: 10px !important;
@@ -610,31 +737,460 @@
     }
 
     @media (max-width: 1050px) {
-      .card { max-width: calc(50% - 7px); }
+      .card {
+        max-width: calc(50% - 7px);
+      }
     }
 
     @media (max-width: 760px) {
-      body { padding: 14px; }
+      body {
+        padding: 14px;
+      }
 
-      .header-section,
-      .search-top,
-      .filter-group,
+      .header-section {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 16px;
+      }
+
+      .header-right {
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .header-title h1 {
+        font-size: 23px;
+      }
+
+      .search-input-wrapper {
+        flex-direction: column;
+      }
+
+      .btn-search {
+        width: 100%;
+      }
+
+      .filter-group {
+        flex-direction: column;
+      }
+
+      .filter-box {
+        width: 100%;
+        min-width: 100%;
+      }
+
+      .dropdown-menu {
+        width: 100%;
+        max-width: 100%;
+      }
+
       .action-bar {
         align-items: stretch;
         flex-direction: column;
       }
 
-      .header-right { justify-content: flex-start; }
-      .btn, .btn-search, .btn-export { width: 100%; }
-      .dropdown-menu { width: 100%; max-width: 100%; }
-      .card { max-width: 100%; }
-      .quick-actions .btn { width: 100%; }
+      .btn-export {
+        width: 100%;
+      }
+
+      .card {
+        max-width: 100%;
+      }
     }
 
     @media (max-width: 460px) {
-      .stats-bar { width: 100%; }
-      .stat-item { flex: 1; }
+      .header-right {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .stats-bar {
+        width: 100%;
+      }
+
+      .stat-item {
+        flex: 1;
+      }
     }
+
+
+    .dashboard-toggle {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 13px;
+      background: var(--card-bg);
+      color: var(--text);
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .dashboard-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--primary);
+      background: var(--card-bg-hover);
+    }
+    .stats-bar[hidden] { display: none !important; }
+    .header-right { gap: 12px; }
+    @media (max-width: 600px) {
+      .header-right { width: 100%; flex-wrap: wrap; }
+      .dashboard-toggle { flex: 1 1 auto; }
+    }
+
+    .dropdown-menu::-webkit-scrollbar,
+    .table-container::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-track,
+    .table-container::-webkit-scrollbar-track {
+      background: var(--card-bg-hover);
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb,
+    .table-container::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: var(--border);
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb:hover,
+    .table-container::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-light);
+    }
+
+  /* =========================================================
+     MODERN UI REFRESH — visual layer only
+     Seluruh struktur HTML, ID, dan JavaScript lama dipertahankan.
+     ========================================================= */
+  :root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #60a5fa;
+    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    --bg: #f4f6fb;
+    --bg-gradient: linear-gradient(180deg, #f7f9fd 0%, #f1f4fa 100%);
+    --card-bg: #ffffff;
+    --card-bg-hover: #f8faff;
+    --border: #e5eaf3;
+    --text: #172033;
+    --text-light: #65718a;
+    --text-muted: #8d98ad;
+    --shadow-sm: 0 1px 2px rgba(20, 34, 66, .04), 0 2px 8px rgba(20, 34, 66, .04);
+    --shadow-md: 0 8px 24px rgba(20, 34, 66, .07);
+    --shadow-lg: 0 18px 44px rgba(20, 34, 66, .12);
+    --shadow-glow: 0 8px 22px rgba(37, 99, 235, .20);
+    --radius: 18px;
+    --radius-sm: 12px;
+    --status-disc-bg: #fff1f2;
+    --status-disc-text: #be123c;
+    --status-disc-border: #fecdd3;
+    --status-cont-bg: #ecfdf5;
+    --status-cont-text: #047857;
+    --status-cont-border: #a7f3d0;
+    --status-other-bg: #fffbeb;
+    --status-other-text: #a16207;
+    --status-other-border: #fde68a;
+    --glass-bg: rgba(255,255,255,.92);
+    --glass-border: rgba(255,255,255,.55);
+  }
+
+  [data-theme="dark"] {
+    --primary: #7aa7ff;
+    --primary-dark: #4f83ed;
+    --primary-light: #a8c5ff;
+    --accent-gradient: linear-gradient(135deg, #376ed8 0%, #6558d9 100%);
+    --bg: #0c1220;
+    --bg-gradient: linear-gradient(180deg, #0c1220 0%, #111a2b 100%);
+    --card-bg: #151f31;
+    --card-bg-hover: #1b2940;
+    --border: #29364c;
+    --text: #edf2fb;
+    --text-light: #b4c0d4;
+    --text-muted: #8492aa;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.20);
+    --shadow-md: 0 8px 24px rgba(0,0,0,.20);
+    --shadow-lg: 0 18px 44px rgba(0,0,0,.28);
+    --shadow-glow: 0 8px 22px rgba(55,110,216,.18);
+    --status-disc-bg: rgba(244,63,94,.13);
+    --status-disc-text: #fda4af;
+    --status-disc-border: rgba(253,164,175,.25);
+    --status-cont-bg: rgba(16,185,129,.13);
+    --status-cont-text: #6ee7b7;
+    --status-cont-border: rgba(110,231,183,.25);
+    --status-other-bg: rgba(234,179,8,.13);
+    --status-other-text: #fde68a;
+    --status-other-border: rgba(253,230,138,.25);
+    --glass-bg: rgba(21,31,49,.94);
+    --glass-border: rgba(255,255,255,.07);
+  }
+
+  * { box-sizing: border-box; }
+  html { background: var(--bg); scroll-behavior: smooth; }
+  body {
+    width: min(100% - 40px, 1540px);
+    max-width: 1540px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 28px 0 42px;
+    background: var(--bg-gradient);
+    color: var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    letter-spacing: -.01em;
+  }
+  button, input, select { font: inherit; }
+  button { -webkit-tap-highlight-color: transparent; }
+  button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 3px solid rgba(37,99,235,.22);
+    outline-offset: 2px;
+  }
+  [hidden] { display: none !important; }
+
+  .header-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 146px;
+    margin: 0 0 22px;
+    padding: 30px 34px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px;
+    background: linear-gradient(115deg, #172554 0%, #1e40af 52%, #4338ca 100%);
+    color: #fff;
+    box-shadow: 0 18px 40px rgba(30,64,175,.18);
+  }
+  .header-section::after {
+    content: "";
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    right: 8%;
+    top: -220px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 36px rgba(255,255,255,.035), 0 0 0 72px rgba(255,255,255,.025);
+    pointer-events: none;
+  }
+  .header-title, .header-right { position: relative; z-index: 1; }
+  .header-title h1 {
+    margin: 0 0 5px;
+    color: #fff;
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 780;
+    line-height: 1.15;
+    letter-spacing: -.045em;
+  }
+  .header-title p {
+    margin: 0;
+    color: rgba(235,242,255,.78);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .025em;
+  }
+  .header-right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+  .dashboard-toggle, .theme-toggle {
+    min-height: 42px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 12px;
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    backdrop-filter: blur(12px);
+    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+  }
+  .dashboard-toggle { padding: 0 16px; font-weight: 700; }
+  .theme-toggle { width: 44px; padding: 4px; }
+  .dashboard-toggle:hover, .theme-toggle:hover { transform: translateY(-2px); background: rgba(255,255,255,.22); }
+  .stats-bar {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    padding: 7px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 14px;
+    background: rgba(12,26,75,.28);
+    backdrop-filter: blur(12px);
+  }
+  .stat-item { min-width: 76px; padding: 5px 11px; text-align: center; }
+  .stat-value { color: #fff; font-size: 21px; font-weight: 800; line-height: 1.2; }
+  .stat-label { margin-top: 3px; color: rgba(235,242,255,.72); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+  .search-bar {
+    margin: 0 0 16px;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card-bg);
+    box-shadow: var(--shadow-sm);
+  }
+  .search-top { margin-bottom: 18px; }
+  .search-input-wrapper { display: flex; align-items: center; gap: 10px; }
+  .search-input { position: relative; flex: 1; min-width: 0; }
+  .search-input input {
+    width: 100%;
+    height: 48px;
+    padding: 0 48px 0 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    transition: border .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .search-input input::placeholder { color: var(--text-muted); }
+  .search-input input:focus { border-color: var(--primary); background: var(--card-bg); box-shadow: 0 0 0 4px rgba(37,99,235,.09); outline: none; }
+  .search-icon-indicator { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); opacity: .65; }
+  .btn-search, .btn-export {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--accent-gradient);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: var(--shadow-glow);
+    cursor: pointer;
+    transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+  }
+  .btn-search:hover, .btn-export:hover { transform: translateY(-2px); filter: brightness(1.06); box-shadow: 0 10px 25px rgba(37,99,235,.25); }
+  .filter-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .filter-box { position: relative; min-width: 0; }
+  .filter-label { display: block; margin: 0 0 7px; color: var(--text-light); font-size: 11px; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 13px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: var(--card-bg);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: border .18s ease, background .18s ease;
+  }
+  .dropdown-toggle:hover, .dropdown-toggle[aria-expanded="true"] { border-color: var(--primary); background: var(--card-bg-hover); }
+  .dropdown-arrow { color: var(--text-muted); font-size: 10px; }
+  .dropdown-menu {
+    z-index: 20;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-lg);
+    color: var(--text);
+  }
+  .dropdown-item { display: flex; align-items: center; gap: 9px; padding: 10px 12px; border-radius: 8px; color: var(--text-light); font-size: 13px; cursor: pointer; }
+  .dropdown-item:hover { background: var(--card-bg-hover); color: var(--text); }
+  .dropdown-item input { accent-color: var(--primary); }
+
+  .action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin: 0 0 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-sm);
+  }
+  .view-buttons { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--border); border-radius: 11px; background: var(--bg); }
+  .view-buttons button {
+    min-height: 34px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-light);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .18s ease;
+  }
+  .view-buttons button.active { background: var(--card-bg); color: var(--primary); box-shadow: var(--shadow-sm); }
+  .btn-export { min-height: 40px; padding: 0 15px; font-size: 12px; }
+
+  .table-container {
+    overflow: auto;
+    max-width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-sm);
+    scrollbar-width: thin;
+    scrollbar-color: var(--text-muted) transparent;
+  }
+  #dataTable { width: 100%; min-width: 900px; border-collapse: separate; border-spacing: 0; color: var(--text); font-size: 12px; }
+  #dataTable thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 14px 15px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-light);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .075em;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  #dataTable tbody td { padding: 13px 15px; border-bottom: 1px solid var(--border); color: var(--text-light); vertical-align: middle; }
+  #dataTable tbody tr { transition: background .15s ease; }
+  #dataTable tbody tr:nth-child(even) { background: color-mix(in srgb, var(--bg) 42%, transparent); }
+  #dataTable tbody tr:hover { background: var(--card-bg-hover); }
+  #dataTable tbody tr:last-child td { border-bottom: 0; }
+  #dataTable tbody td:first-child { color: var(--text); font-weight: 750; }
+  .material-code, .card-code { display: inline-flex; align-items: center; padding: 4px 8px; border: 1px solid var(--border); border-radius: 7px; background: var(--bg); color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; font-weight: 700; }
+  .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border: 1px solid transparent; border-radius: 999px; font-size: 10px; font-weight: 800; white-space: nowrap; }
+  .card-mode { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+  .card-mode > * { border: 1px solid var(--border); border-radius: 16px; background: var(--card-bg); box-shadow: var(--shadow-sm); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .card-mode > *:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--primary) 35%, var(--border)); box-shadow: var(--shadow-md); }
+  .card-name { color: var(--text); font-size: 15px; font-weight: 750; line-height: 1.35; }
+  .card-note { color: var(--text-light); font-size: 12px; line-height: 1.6; }
+  .empty-state, .loading, .error-state { color: var(--text-light); }
+  .loading-spinner { border-color: var(--border); border-top-color: var(--primary); }
+
+  @media (max-width: 760px) {
+    body { width: min(100% - 24px, 1540px); padding: 12px 0 28px; }
+    .header-section { min-height: 0; align-items: flex-start; flex-direction: column; gap: 18px; margin-bottom: 14px; padding: 22px 20px; border-radius: 19px; }
+    .header-right { width: 100%; justify-content: flex-start; }
+    .stats-bar { order: 3; width: 100%; justify-content: space-around; }
+    .stat-item { flex: 1; }
+    .search-bar { padding: 16px; border-radius: 15px; }
+    .search-input-wrapper { align-items: stretch; }
+    .btn-search { min-width: 82px; padding: 0 12px; }
+    .filter-group { grid-template-columns: 1fr; gap: 10px; }
+    .action-bar { align-items: stretch; flex-direction: column; padding: 10px; }
+    .view-buttons { width: 100%; }
+    .view-buttons button { flex: 1; }
+    .btn-export { width: 100%; }
+    .card-mode { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 420px) {
+    .header-title h1 { font-size: 25px; }
+    .search-input input { font-size: 12px; }
+    .search-input-wrapper { flex-direction: column; }
+    .btn-search { width: 100%; }
+    .dashboard-toggle { flex: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  }
+
   </style>
 </head>
 
@@ -646,133 +1202,174 @@
     </div>
 
     <div class="header-right">
-      <div class="stats-bar" aria-label="Ringkasan produk">
+      <div class="stats-bar" id="dashboardStats" aria-label="Ringkasan produk" hidden>
         <div class="stat-item">
           <div class="stat-value" id="totalCount">0</div>
           <div class="stat-label">Total</div>
         </div>
+
         <div class="stat-item">
           <div class="stat-value" id="continueCount">0</div>
           <div class="stat-label">Lanjut</div>
         </div>
+
         <div class="stat-item">
           <div class="stat-value" id="discontinueCount">0</div>
           <div class="stat-label">Stop</div>
         </div>
       </div>
 
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ubah mode terang atau gelap">
+      <button class="dashboard-toggle" id="dashboardToggle" type="button" aria-expanded="false" aria-controls="dashboardStats">
+        📊 Dashboard
+      </button>
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Ubah mode terang atau gelap"
+        aria-pressed="false"
+        title="Ubah mode terang atau gelap"
+      >
         <span class="theme-toggle-slider" id="themeIcon">☀️</span>
       </button>
     </div>
   </header>
 
-  <!-- TAMPILAN AWAL: BERSIH -->
-  <section id="landingView">
-    <div class="landing">
-      <article class="dashboard-card total">
-        <h3>Total Produk</h3>
-        <p>Seluruh produk yang terdaftar pada data.</p>
-        <div class="dashboard-number" id="landingTotal">0</div>
-      </article>
+  <section class="search-bar">
+    <div class="search-top">
+      <div class="search-input-wrapper">
+        <div class="search-input">
+          <input
+            id="search"
+            type="search"
+            placeholder="Cari kode, nama produk, pemasok, asal, atau catatan..."
+            autocomplete="off"
+          >
+          <span class="search-icon-indicator" id="searchIcon">🔍</span>
+        </div>
 
-      <article class="dashboard-card continue">
-        <h3>Lanjut Produksi</h3>
-        <p>Produk dengan status masih berjalan.</p>
-        <div class="dashboard-number" id="landingContinue">0</div>
-      </article>
-
-      <article class="dashboard-card discontinue">
-        <h3>Dihentikan</h3>
-        <p>Produk dengan status berhenti atau discontinued.</p>
-        <div class="dashboard-number" id="landingDiscontinue">0</div>
-      </article>
+        <button class="btn-search" id="btnSearchAction" type="button">
+          🔍 Cari
+        </button>
+      </div>
     </div>
 
-    <div class="quick-actions">
-      <button class="btn btn-primary" id="btnOpenDashboard" type="button">
-        📊 Buka Dashboard
-      </button>
-      <button class="btn" id="btnOpenTable" type="button">
-        📋 Buka Tabel Produk
-      </button>
-      <button class="btn" id="btnLandingExport" type="button">
-        ⬇️ Ekspor Excel
-      </button>
+    <div class="filter-group">
+      <div class="filter-box">
+        <label class="filter-label">Pemasok</label>
+
+        <button
+          class="dropdown-toggle"
+          id="supplierToggle"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="supplierText">Semua Pemasok</span>
+          <span class="dropdown-arrow">▼</span>
+        </button>
+
+        <div class="dropdown-menu" id="supplierMenu" role="menu"></div>
+      </div>
+
+      <div class="filter-box">
+        <label class="filter-label">Asal</label>
+
+        <button
+          class="dropdown-toggle"
+          id="originToggle"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="originText">Semua Asal</span>
+          <span class="dropdown-arrow">▼</span>
+        </button>
+
+        <div class="dropdown-menu" id="originMenu" role="menu"></div>
+      </div>
+
+      <div class="filter-box">
+        <label class="filter-label">Status</label>
+
+        <button
+          class="dropdown-toggle"
+          id="statusToggle"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="statusText">Semua Status</span>
+          <span class="dropdown-arrow">▼</span>
+        </button>
+
+        <div class="dropdown-menu" id="statusMenu" role="menu">
+          <label class="dropdown-item select-all-item">
+            <input type="checkbox" id="statusSelectAll">
+            <span>Pilih Semua</span>
+          </label>
+
+          <label class="dropdown-item">
+            <input type="checkbox" class="status-check" value="continue">
+            <span>Lanjut Produksi</span>
+          </label>
+
+          <label class="dropdown-item">
+            <input type="checkbox" class="status-check" value="discontinue">
+            <span>Dihentikan</span>
+          </label>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- DASHBOARD / TABEL -->
-  <main id="workspace" class="workspace">
-    <section class="search-bar">
-      <div class="search-top">
-        <div class="search-input-wrapper">
-          <div class="search-input">
-            <input id="search" type="search" placeholder="Cari kode, nama produk, pemasok, asal, atau catatan..." autocomplete="off" />
-          </div>
-          <button class="btn btn-primary btn-search" id="btnSearchAction" type="button">Cari</button>
-        </div>
-      </div>
+  <section class="action-bar">
+    <div class="view-buttons">
+      <button id="btnTable" class="active" type="button" aria-pressed="true">
+        📋 Tabel
+      </button>
 
-      <div class="filter-group">
-        <div class="filter-box">
-          <label class="filter-label" for="supplierToggle">Pemasok</label>
-          <button class="dropdown-toggle" id="supplierToggle" type="button">
-            <span id="supplierText">Semua Pemasok</span>
-            <span class="dropdown-arrow">▼</span>
-          </button>
-          <div class="dropdown-menu" id="supplierMenu"></div>
-        </div>
+      <button id="btnCard" type="button" aria-pressed="false">
+        🃏 Kartu
+      </button>
+    </div>
 
-        <div class="filter-box">
-          <label class="filter-label" for="originToggle">Asal</label>
-          <button class="dropdown-toggle" id="originToggle" type="button">
-            <span id="originText">Semua Asal</span>
-            <span class="dropdown-arrow">▼</span>
-          </button>
-          <div class="dropdown-menu" id="originMenu"></div>
-        </div>
+    <button class="btn-export" id="btnExport" type="button">
+      📊 Ekspor Excel
+    </button>
+  </section>
 
-        <div class="filter-box">
-          <label class="filter-label" for="statusToggle">Status</label>
-          <button class="dropdown-toggle" id="statusToggle" type="button">
-            <span id="statusText">Semua Status</span>
-            <span class="dropdown-arrow">▼</span>
-          </button>
-          <div class="dropdown-menu" id="statusMenu"></div>
-        </div>
-      </div>
-    </section>
+  <section id="tableView" class="table-container">
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Kode Material</th>
+          <th>Nama Barang</th>
+          <th>Pemasok</th>
+          <th>Asal</th>
+          <th>Status</th>
+          <th>Catatan</th>
+        </tr>
+      </thead>
 
-    <section class="action-bar">
-      <div class="view-buttons">
-        <button id="btnTable" class="active" type="button">Tabel</button>
-        <button id="btnCard" type="button">Kartu</button>
-      </div>
-      <button class="btn btn-primary btn-export" id="btnExport" type="button">⬇️ Ekspor Excel</button>
-    </section>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </section>
 
-    <section id="tableView" class="table-container">
-      <table id="dataTable">
-        <thead>
-          <tr>
-            <th>Kode Material</th>
-            <th>Nama Barang</th>
-            <th>Pemasok</th>
-            <th>Asal</th>
-            <th>Status</th>
-            <th>Catatan</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-      </table>
-    </section>
+  <section id="cardView" class="card-mode"></section>
 
-    <section id="cardView" class="card-mode"></section>
-  </main>
-
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
   <script>
-    const CSVPATH = "./data.csv";
+    /*
+      Jika data.csv sejajar dengan index.html di GitHub Pages:
+      repository/
+      ├── index.html
+      └── data.csv
+
+      biarkan nilainya "./data.csv".
+    */
+    const CSV_PATH = "./data.csv";
 
     const allData = [];
     let suppliers = [];
@@ -787,47 +1384,82 @@
     const dom = {};
 
     function initDomCache() {
-      const ids = [
-        "search", "btnSearchAction", "btnExport", "btnLandingExport",
-        "supplierMenu", "originMenu", "statusMenu",
-        "supplierText", "originText", "statusText",
-        "supplierToggle", "originToggle", "statusToggle",
-        "tableBody", "tableView", "cardView",
-        "btnTable", "btnCard",
-        "totalCount", "continueCount", "discontinueCount",
-        "landingTotal", "landingContinue", "landingDiscontinue",
-        "themeToggle", "themeIcon",
-        "landingView", "workspace",
-        "btnOpenDashboard", "btnOpenTable"
-      ];
+      dom.search = document.getElementById("search");
+      dom.searchIcon = document.getElementById("searchIcon");
+      dom.btnSearch = document.getElementById("btnSearchAction");
+      dom.btnExport = document.getElementById("btnExport");
+      dom.dashboardToggle = document.getElementById("dashboardToggle");
+      dom.dashboardStats = document.getElementById("dashboardStats");
 
-      ids.forEach(id => dom[id] = document.getElementById(id));
+      dom.supplierMenu = document.getElementById("supplierMenu");
+      dom.originMenu = document.getElementById("originMenu");
+      dom.statusMenu = document.getElementById("statusMenu");
+
+      dom.supplierText = document.getElementById("supplierText");
+      dom.originText = document.getElementById("originText");
+      dom.statusText = document.getElementById("statusText");
+
+      dom.supplierToggle = document.getElementById("supplierToggle");
+      dom.originToggle = document.getElementById("originToggle");
+      dom.statusToggle = document.getElementById("statusToggle");
+
+      dom.tableBody = document.getElementById("tableBody");
+      dom.tableView = document.getElementById("tableView");
+      dom.cardView = document.getElementById("cardView");
+
+      dom.btnTable = document.getElementById("btnTable");
+      dom.btnCard = document.getElementById("btnCard");
+
+      dom.totalCount = document.getElementById("totalCount");
+      dom.continueCount = document.getElementById("continueCount");
+      dom.discontinueCount = document.getElementById("discontinueCount");
+
+      dom.themeToggle = document.getElementById("themeToggle");
+      dom.themeIcon = document.getElementById("themeIcon");
     }
 
     function escapeHtml(value) {
-      const el = document.createElement("div");
-      el.textContent = String(value ?? "");
-      return el.innerHTML;
+      const element = document.createElement("div");
+      element.textContent = String(value ?? "");
+      return element.innerHTML;
     }
 
     function normalize(value) {
-      return String(value ?? "").trim().toLowerCase();
+      return String(value || "").trim().toLowerCase();
     }
 
+    /*
+      Catatan penting:
+      "DISCONTINUE" mengandung teks "CONTINUE".
+      Maka status berhenti diperiksa lebih dahulu agar statistik benar.
+    */
     function isDiscontinued(status) {
       const s = normalize(status);
-      return s.includes("discontinue") ||
-             s.includes("dihentikan") ||
-             s.includes("stop") ||
-             s.includes("berhenti");
+
+      return (
+        s.includes("discontinue") ||
+        s.includes("dihentikan") ||
+        s.includes("stop") ||
+        s.includes("停产") ||
+        s.includes("停止生产")
+      );
     }
 
     function isContinuing(status) {
       const s = normalize(status);
-      if (isDiscontinued(s)) return false;
-      return s.includes("continue") ||
-             s.includes("lanjut produksi") ||
-             s.includes("lanjut");
+
+      if (isDiscontinued(s)) {
+        return false;
+      }
+
+      return (
+        s === "continue" ||
+        s.includes("continue produksi") ||
+        s.includes("lanjut produksi") ||
+        s.includes("lanjut") ||
+        s.includes("继续") ||
+        s.includes("生产继续")
+      );
     }
 
     function getStatusClass(status) {
@@ -836,13 +1468,36 @@
       return "other";
     }
 
+    /*
+      Parser CSV:
+      - Mendukung koma dalam kolom jika dibungkus tanda kutip
+      - Mendukung tanda kutip ganda ("")
+      - Mendukung line break di dalam kolom yang diapit tanda kutip
+    */
     function parseCSV(text) {
       const rows = [];
       let row = [];
       let field = "";
       let inQuotes = false;
 
-      const cleanText = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+      const cleanText = text.replace(/^\uFEFF/, "");
+
+      // Deteksi otomatis pemisah CSV: koma, titik koma, atau tab.
+      // Penghitungan mengabaikan pemisah yang berada di dalam tanda kutip.
+      const firstLine = cleanText.split(/\r?\n/, 1)[0] || "";
+      const delimiterCounts = { ",": 0, ";": 0, "\t": 0 };
+      let headerInQuotes = false;
+      for (let i = 0; i < firstLine.length; i++) {
+        const char = firstLine[i];
+        if (char === '"') {
+          if (headerInQuotes && firstLine[i + 1] === '"') i++;
+          else headerInQuotes = !headerInQuotes;
+        } else if (!headerInQuotes && Object.prototype.hasOwnProperty.call(delimiterCounts, char)) {
+          delimiterCounts[char]++;
+        }
+      }
+      const delimiter = Object.entries(delimiterCounts)
+        .sort((a, b) => b[1] - a[1])[0][0];
 
       for (let i = 0; i < cleanText.length; i++) {
         const char = cleanText[i];
@@ -858,17 +1513,25 @@
           continue;
         }
 
-        if (char === "," && !inQuotes) {
+        if (char === delimiter && !inQuotes) {
           row.push(field.trim());
           field = "";
           continue;
         }
 
-        if (char === "\n" && !inQuotes) {
+        if ((char === "\n" || char === "\r") && !inQuotes) {
+          if (char === "\r" && nextChar === "\n") {
+            i++;
+          }
+
           row.push(field.trim());
-          if (row.some(value => value !== "")) rows.push(row);
-          row = [];
           field = "";
+
+          if (row.some((value) => value !== "")) {
+            rows.push(row);
+          }
+
+          row = [];
           continue;
         }
 
@@ -876,13 +1539,10 @@
       }
 
       row.push(field.trim());
-      if (row.some(value => value !== "")) rows.push(row);
 
-      return rows;
-    }
-
-    function loadDataFromCSV(text) {
-      const rows = parseCSV(text);
+      if (row.some((value) => value !== "")) {
+        rows.push(row);
+      }
 
       if (rows.length < 2) {
         showEmptyState("CSV hanya memiliki header atau tidak memiliki data.");
@@ -891,27 +1551,42 @@
 
       const supplierSet = new Set();
       const originSet = new Set();
+
       allData.length = 0;
 
+      /*
+        Script memakai urutan kolom:
+        Kode Material, Nama Barang, Pemasok, Asal, Status, Catatan
+      */
       for (let i = 1; i < rows.length; i++) {
-        const r = rows[i];
+        const rowData = rows[i];
+
         const record = {
-          code: (r[0] || "").trim(),
-          name: (r[1] || "").trim(),
-          supplier: (r[2] || "").trim(),
-          origin: (r[3] || "").trim(),
-          status: (r[4] || "").trim(),
-          note: (r[5] || "").trim()
+          code: (rowData[0] || "").trim(),
+          name: (rowData[1] || "").trim(),
+          supplier: (rowData[2] || "").trim(),
+          origin: (rowData[3] || "").trim(),
+          status: (rowData[4] || "").trim(),
+          note: (rowData[5] || "").trim()
         };
 
-        if (!Object.values(record).some(value => value !== "")) continue;
+        /*
+          Abaikan baris yang benar-benar kosong,
+          tetapi tetap terima data jika hanya beberapa kolom kosong.
+        */
+        const hasContent = Object.values(record).some((value) => value !== "");
+
+        if (!hasContent) {
+          continue;
+        }
 
         allData.push(record);
+
         if (record.supplier) supplierSet.add(record.supplier);
         if (record.origin) originSet.add(record.origin);
       }
 
-      if (!allData.length) {
+      if (allData.length === 0) {
         showEmptyState("Data produk tidak ditemukan dalam CSV.");
         return;
       }
@@ -925,7 +1600,7 @@
       applyFilters();
     }
 
-    function createMenuItem(labelText, className, value, id) {
+    function createMenuItem({ labelText, className, value, id }) {
       const label = document.createElement("label");
       label.className = className;
 
@@ -944,15 +1619,26 @@
 
     function renderSupplierMenu() {
       const fragment = document.createDocumentFragment();
+
       fragment.appendChild(
-        createMenuItem("Pilih Semua", "dropdown-item select-all-item", undefined, "supplierSelectAll")
+        createMenuItem({
+          labelText: "Pilih Semua",
+          className: "dropdown-item select-all-item",
+          id: "supplierSelectAll"
+        })
       );
 
-      suppliers.forEach(supplier => {
-        const item = createMenuItem(supplier, "dropdown-item supplier-item", supplier);
+      suppliers.forEach((supplier) => {
+        const item = createMenuItem({
+          labelText: supplier,
+          className: "dropdown-item supplier-item",
+          value: supplier
+        });
+
         const checkbox = item.querySelector("input");
         checkbox.classList.add("supplier-check");
         checkbox.checked = selected.supplier.has(supplier);
+
         fragment.appendChild(item);
       });
 
@@ -962,15 +1648,26 @@
 
     function renderOriginMenu() {
       const fragment = document.createDocumentFragment();
+
       fragment.appendChild(
-        createMenuItem("Pilih Semua", "dropdown-item select-all-item", undefined, "originSelectAll")
+        createMenuItem({
+          labelText: "Pilih Semua",
+          className: "dropdown-item select-all-item",
+          id: "originSelectAll"
+        })
       );
 
-      origins.forEach(origin => {
-        const item = createMenuItem(origin, "dropdown-item origin-item", origin);
+      origins.forEach((origin) => {
+        const item = createMenuItem({
+          labelText: origin,
+          className: "dropdown-item origin-item",
+          value: origin
+        });
+
         const checkbox = item.querySelector("input");
         checkbox.classList.add("origin-check");
         checkbox.checked = selected.origin.has(origin);
+
         fragment.appendChild(item);
       });
 
@@ -981,24 +1678,42 @@
     function syncSelectAll(menu, itemSelector, selectAllSelector) {
       const itemCheckboxes = [...menu.querySelectorAll(itemSelector)];
       const selectAll = menu.querySelector(selectAllSelector);
+
       if (!selectAll) return;
 
-      const checkedCount = itemCheckboxes.filter(cb => cb.checked).length;
+      const checkedCount = itemCheckboxes.filter((checkbox) => checkbox.checked).length;
 
-      selectAll.checked = itemCheckboxes.length > 0 && checkedCount === itemCheckboxes.length;
-      selectAll.indeterminate = checkedCount > 0 && checkedCount < itemCheckboxes.length;
+      selectAll.checked =
+        itemCheckboxes.length > 0 &&
+        checkedCount === itemCheckboxes.length;
+
+      selectAll.indeterminate =
+        checkedCount > 0 &&
+        checkedCount < itemCheckboxes.length;
     }
 
     function syncSupplierSelectAll() {
-      syncSelectAll(dom.supplierMenu, ".supplier-check", "#supplierSelectAll");
+      syncSelectAll(
+        dom.supplierMenu,
+        ".supplier-check",
+        "#supplierSelectAll"
+      );
     }
 
     function syncOriginSelectAll() {
-      syncSelectAll(dom.originMenu, ".origin-check", "#originSelectAll");
+      syncSelectAll(
+        dom.originMenu,
+        ".origin-check",
+        "#originSelectAll"
+      );
     }
 
     function syncStatusSelectAll() {
-      syncSelectAll(dom.statusMenu, ".status-check", "#statusSelectAll");
+      syncSelectAll(
+        dom.statusMenu,
+        ".status-check",
+        "#statusSelectAll"
+      );
     }
 
     function updateToggleText(type) {
@@ -1033,19 +1748,37 @@
     function getFilteredData() {
       const keyword = normalize(dom.search.value);
 
-      return allData.filter(item => {
-        const matchKeyword = !keyword || [
-          item.code, item.name, item.supplier, item.origin, item.status, item.note
-        ].some(value => normalize(value).includes(keyword));
+      return allData.filter((item) => {
+        const matchKeyword =
+          !keyword ||
+          [
+            item.code,
+            item.name,
+            item.supplier,
+            item.origin,
+            item.status,
+            item.note
+          ].some((value) => normalize(value).includes(keyword));
 
-        const matchSupplier = selected.supplier.size === 0 || selected.supplier.has(item.supplier);
-        const matchOrigin = selected.origin.size === 0 || selected.origin.has(item.origin);
+        const matchSupplier =
+          selected.supplier.size === 0 ||
+          selected.supplier.has(item.supplier);
+
+        const matchOrigin =
+          selected.origin.size === 0 ||
+          selected.origin.has(item.origin);
 
         let matchStatus = true;
 
         if (selected.status.size > 0) {
-          const matchesContinue = selected.status.has("continue") && isContinuing(item.status);
-          const matchesDiscontinue = selected.status.has("discontinue") && isDiscontinued(item.status);
+          const matchesContinue =
+            selected.status.has("continue") &&
+            isContinuing(item.status);
+
+          const matchesDiscontinue =
+            selected.status.has("discontinue") &&
+            isDiscontinued(item.status);
+
           matchStatus = matchesContinue || matchesDiscontinue;
         }
 
@@ -1055,27 +1788,39 @@
 
     function updateStats(filteredData) {
       const total = filteredData.length;
-      const continueCount = filteredData.filter(item => isContinuing(item.status)).length;
-      const discontinueCount = filteredData.filter(item => isDiscontinued(item.status)).length;
+
+      const continueCount = filteredData.filter((item) => {
+        return isContinuing(item.status);
+      }).length;
+
+      const discontinueCount = filteredData.filter((item) => {
+        return isDiscontinued(item.status);
+      }).length;
 
       dom.totalCount.textContent = total;
       dom.continueCount.textContent = continueCount;
       dom.discontinueCount.textContent = discontinueCount;
+    }
 
-      dom.landingTotal.textContent = allData.length;
-      dom.landingContinue.textContent = allData.filter(item => isContinuing(item.status)).length;
-      dom.landingDiscontinue.textContent = allData.filter(item => isDiscontinued(item.status)).length;
+    function updateSearchIndicator() {
+      const hasActiveSearch =
+        dom.search.value.trim() !== "" ||
+        selected.supplier.size > 0 ||
+        selected.origin.size > 0 ||
+        selected.status.size > 0;
+
+      dom.searchIcon.classList.toggle("active", hasActiveSearch);
     }
 
     function renderTable(data) {
-      if (!data.length) {
+      if (data.length === 0) {
         dom.tableBody.innerHTML = "";
         return;
       }
 
       const fragment = document.createDocumentFragment();
 
-      data.forEach(item => {
+      data.forEach((item) => {
         const row = document.createElement("tr");
         const statusClass = getStatusClass(item.status);
 
@@ -1089,7 +1834,7 @@
               ${escapeHtml(item.status || "-")}
             </span>
           </td>
-          <td>${escapeHtml(item.note || "-")}</td>
+          <td>${escapeHtml(item.note) || '<span style="color: var(--text-muted)">-</span>'}</td>
         `;
 
         fragment.appendChild(row);
@@ -1099,27 +1844,30 @@
     }
 
     function renderCards(data) {
-      if (!data.length) {
+      if (data.length === 0) {
         dom.cardView.innerHTML = "";
         return;
       }
 
       const fragment = document.createDocumentFragment();
 
-      data.forEach(item => {
+      data.forEach((item) => {
         const statusClass = getStatusClass(item.status);
         const card = document.createElement("article");
+
         card.className = `card ${statusClass}`;
 
         card.innerHTML = `
           <div class="card-code">${escapeHtml(item.code)}</div>
           <h3 class="card-name">${escapeHtml(item.name)}</h3>
+
           <span class="status-badge status-${statusClass}">
             ${escapeHtml(item.status || "-")}
           </span>
+
           <p><strong>Pemasok:</strong> ${escapeHtml(item.supplier || "-")}</p>
           <p><strong>Asal:</strong> ${escapeHtml(item.origin || "-")}</p>
-          <p class="card-note">${escapeHtml(item.note || "Tidak ada catatan")}</p>
+          <p class="card-note">${escapeHtml(item.note) || "Tidak ada catatan"}</p>
         `;
 
         fragment.appendChild(card);
@@ -1132,13 +1880,15 @@
       dom.tableBody.innerHTML = `
         <tr>
           <td class="empty-cell" colspan="6">
-            <div class="empty-state"><strong>${escapeHtml(message)}</strong></div>
+            <div class="empty-state">
+              <strong>${escapeHtml(message)}</strong>
+            </div>
           </td>
         </tr>
       `;
 
       dom.cardView.innerHTML = `
-        <div class="empty-state" style="width:100%">
+        <div class="empty-state" style="width: 100%;">
           <strong>${escapeHtml(message)}</strong>
         </div>
       `;
@@ -1152,25 +1902,27 @@
           <td class="empty-cell" colspan="6">
             <div class="empty-state">
               <strong>Tidak ada hasil ditemukan.</strong>
-              <div style="margin-top:6px">Ubah kata kunci atau pilihan filter Anda.</div>
+              <div style="margin-top: 6px;">Ubah kata kunci atau pilihan filter Anda.</div>
             </div>
           </td>
         </tr>
       `;
 
       dom.cardView.innerHTML = `
-        <div class="empty-state" style="width:100%">
+        <div class="empty-state" style="width: 100%;">
           <strong>Tidak ada hasil ditemukan.</strong>
-          <div style="margin-top:6px">Ubah kata kunci atau pilihan filter Anda.</div>
+          <div style="margin-top: 6px;">Ubah kata kunci atau pilihan filter Anda.</div>
         </div>
       `;
     }
 
     function applyFilters() {
       const filteredData = getFilteredData();
-      updateStats(filteredData);
 
-      if (!filteredData.length) {
+      updateStats(filteredData);
+      updateSearchIndicator();
+
+      if (filteredData.length === 0 && allData.length > 0) {
         showNoResult();
         return;
       }
@@ -1180,17 +1932,22 @@
     }
 
     function closeAllDropdowns() {
-      document.querySelectorAll(".dropdown-menu").forEach(menu => menu.classList.remove("open"));
-      document.querySelectorAll(".dropdown-toggle").forEach(toggle => {
+      document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+        menu.classList.remove("open");
+      });
+
+      document.querySelectorAll(".dropdown-toggle").forEach((toggle) => {
         toggle.classList.remove("active");
         toggle.setAttribute("aria-expanded", "false");
       });
     }
 
     function setupDropdown(toggle, menu) {
-      toggle.addEventListener("click", event => {
+      toggle.addEventListener("click", (event) => {
         event.stopPropagation();
+
         const isOpen = menu.classList.contains("open");
+
         closeAllDropdowns();
 
         if (!isOpen) {
@@ -1200,7 +1957,9 @@
         }
       });
 
-      menu.addEventListener("click", event => event.stopPropagation());
+      menu.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
     }
 
     function handleSupplierFilter(event) {
@@ -1211,9 +1970,13 @@
         const checkboxes = dom.supplierMenu.querySelectorAll(".supplier-check");
 
         selected.supplier.clear();
-        checkboxes.forEach(cb => {
-          cb.checked = shouldCheckAll;
-          if (shouldCheckAll) selected.supplier.add(cb.value);
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.supplier.add(checkbox.value);
+          }
         });
 
         syncSupplierSelectAll();
@@ -1223,7 +1986,12 @@
       }
 
       if (target.classList.contains("supplier-check")) {
-        target.checked ? selected.supplier.add(target.value) : selected.supplier.delete(target.value);
+        if (target.checked) {
+          selected.supplier.add(target.value);
+        } else {
+          selected.supplier.delete(target.value);
+        }
+
         syncSupplierSelectAll();
         updateToggleText("supplier");
         applyFilters();
@@ -1238,9 +2006,13 @@
         const checkboxes = dom.originMenu.querySelectorAll(".origin-check");
 
         selected.origin.clear();
-        checkboxes.forEach(cb => {
-          cb.checked = shouldCheckAll;
-          if (shouldCheckAll) selected.origin.add(cb.value);
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.origin.add(checkbox.value);
+          }
         });
 
         syncOriginSelectAll();
@@ -1250,7 +2022,12 @@
       }
 
       if (target.classList.contains("origin-check")) {
-        target.checked ? selected.origin.add(target.value) : selected.origin.delete(target.value);
+        if (target.checked) {
+          selected.origin.add(target.value);
+        } else {
+          selected.origin.delete(target.value);
+        }
+
         syncOriginSelectAll();
         updateToggleText("origin");
         applyFilters();
@@ -1265,9 +2042,13 @@
         const checkboxes = dom.statusMenu.querySelectorAll(".status-check");
 
         selected.status.clear();
-        checkboxes.forEach(cb => {
-          cb.checked = shouldCheckAll;
-          if (shouldCheckAll) selected.status.add(cb.value);
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.status.add(checkbox.value);
+          }
         });
 
         syncStatusSelectAll();
@@ -1277,7 +2058,12 @@
       }
 
       if (target.classList.contains("status-check")) {
-        target.checked ? selected.status.add(target.value) : selected.status.delete(target.value);
+        if (target.checked) {
+          selected.status.add(target.value);
+        } else {
+          selected.status.delete(target.value);
+        }
+
         syncStatusSelectAll();
         updateToggleText("status");
         applyFilters();
@@ -1288,19 +2074,30 @@
       const tableMode = view === "table";
 
       dom.tableView.style.display = tableMode ? "block" : "none";
-      dom.cardView.classList.toggle("active", !tableMode);
+      dom.cardView.style.display = tableMode ? "none" : "flex";
 
       dom.btnTable.classList.toggle("active", tableMode);
       dom.btnCard.classList.toggle("active", !tableMode);
+
+      dom.btnTable.setAttribute("aria-pressed", String(tableMode));
+      dom.btnCard.setAttribute("aria-pressed", String(!tableMode));
     }
 
+    /*
+      Halaman selalu mulai dalam Light Mode.
+      Tidak menggunakan localStorage atau pengaturan Dark Mode browser
+      saat halaman/link pertama kali dibuka.
+    */
     function initTheme() {
-      document.documentElement.setAttribute("data-theme", "light");
-      updateThemeButton("light");
+      const initialTheme = "light";
+
+      document.documentElement.setAttribute("data-theme", initialTheme);
+      updateThemeButton(initialTheme);
     }
 
     function updateThemeButton(theme) {
       const isDark = theme === "dark";
+
       dom.themeToggle.classList.toggle("active", isDark);
       dom.themeToggle.setAttribute("aria-pressed", String(isDark));
       dom.themeIcon.textContent = isDark ? "🌙" : "☀️";
@@ -1309,121 +2106,191 @@
     function toggleTheme() {
       const currentTheme = document.documentElement.getAttribute("data-theme");
       const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
       document.documentElement.setAttribute("data-theme", nextTheme);
       updateThemeButton(nextTheme);
     }
 
-    function showWorkspace() {
-      dom.landingView.classList.add("hidden");
-      dom.workspace.classList.add("active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function showLanding() {
-      dom.workspace.classList.remove("active");
-      dom.landingView.classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    /* EXPORT EXCEL */
-    function autoFitColumns(rows) {
-      const widths = [];
-
-      rows.forEach(row => {
-        row.forEach((cell, colIndex) => {
-          const text = String(cell ?? "");
-          const length = Math.max(text.length, 10);
-          widths[colIndex] = Math.max(widths[colIndex] || 10, Math.min(length + 3, 60));
-        });
-      });
-
-      return widths.map(width => ({ wch: width }));
-    }
-
-    function exportToExcel() {
+    async function exportToExcel() {
       const filteredData = getFilteredData();
 
       if (!filteredData.length) {
-        alert("Tidak ada data untuk diekspor.");
+        alert("Tidak ada data untuk diekspor. Ubah kata kunci atau filter terlebih dahulu.");
         return;
       }
+
+      if (typeof ExcelJS === "undefined") {
+        alert("Library Excel belum berhasil dimuat. Periksa koneksi internet lalu coba lagi.");
+        return;
+      }
+
+      const workbook = new ExcelJS.Workbook();
+      workbook.creator = "Advance Digitals";
+      workbook.created = new Date();
+      workbook.modified = new Date();
+      workbook.subject = "Data produk dan status";
+      workbook.company = "Advance Digitals";
 
       const headers = [
         "Kode Material", "Nama Barang", "Pemasok", "Asal", "Status", "Catatan"
       ];
+      const toRows = (items) => items.map((item) => [
+        item.code || "", item.name || "", item.supplier || "",
+        item.origin || "", item.status || "", item.note || ""
+      ]);
 
-      const productRows = [
-        headers,
-        ...filteredData.map(item => [
-          item.code, item.name, item.supplier, item.origin, item.status, item.note
-        ])
-      ];
+      function fitColumns(worksheet, rows, columnHeaders) {
+        worksheet.columns = columnHeaders.map((header, index) => {
+          const longest = Math.max(
+            String(header).length,
+            ...rows.map((row) => String(row[index] ?? "").length)
+          );
+          return { width: Math.min(Math.max(longest + 3, 14), 52) };
+        });
+      }
 
-      const continueCount = filteredData.filter(item => isContinuing(item.status)).length;
-      const discontinueCount = filteredData.filter(item => isDiscontinued(item.status)).length;
-      const otherCount = filteredData.length - continueCount - discontinueCount;
+      function styleSheet(worksheet, headerRow = 1) {
+        worksheet.views = [{ state: "frozen", ySplit: headerRow }];
+        worksheet.getRow(headerRow).height = 26;
+        worksheet.getRow(headerRow).eachCell((cell) => {
+          cell.font = { bold: true, color: { argb: "FFFFFFFF" }, size: 11 };
+          cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF087F83" } };
+          cell.alignment = { vertical: "middle", horizontal: "center", wrapText: true };
+          cell.border = { bottom: { style: "medium", color: { argb: "FF0B7077" } } };
+        });
+        worksheet.eachRow((row, rowNumber) => {
+          if (rowNumber > headerRow) {
+            row.alignment = { vertical: "top", wrapText: true };
+            row.eachCell((cell) => {
+              cell.border = { bottom: { style: "hair", color: { argb: "FFDCE5E8" } } };
+            });
+          }
+        });
+      }
 
+      function addStatusColors(worksheet, statusColumn, firstDataRow, lastDataRow) {
+        // Aturan conditional formatting Excel: warna mengikuti isi sel status.
+        if (lastDataRow >= firstDataRow && typeof worksheet.addConditionalFormatting === "function") {
+          const statusRange = `${worksheet.getColumn(statusColumn).letter}${firstDataRow}:${worksheet.getColumn(statusColumn).letter}${lastDataRow}`;
+          worksheet.addConditionalFormatting({
+            ref: statusRange,
+            rules: [
+              {
+                type: "expression",
+                formulae: [`OR(ISNUMBER(SEARCH("discontinue",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("dihentikan",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("stop",${worksheet.getColumn(statusColumn).letter}${firstDataRow})))`],
+                style: { font: { bold: true, color: { argb: "FFA82929" } }, fill: { type: "pattern", pattern: "solid", bgColor: { argb: "FFFFEEEE" } } }
+              },
+              {
+                type: "expression",
+                formulae: [`AND(OR(ISNUMBER(SEARCH("continue",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("lanjut",${worksheet.getColumn(statusColumn).letter}${firstDataRow}))),NOT(OR(ISNUMBER(SEARCH("discontinue",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("dihentikan",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("stop",${worksheet.getColumn(statusColumn).letter}${firstDataRow})))))`],
+                style: { font: { bold: true, color: { argb: "FF08784F" } }, fill: { type: "pattern", pattern: "solid", bgColor: { argb: "FFE8F8EF" } } }
+              }
+            ]
+          });
+        }
+        for (let row = firstDataRow; row <= lastDataRow; row++) {
+          const cell = worksheet.getCell(row, statusColumn);
+          const value = String(cell.value || "").toLowerCase();
+          if (isContinuing(value)) {
+            cell.font = { bold: true, color: { argb: "FF08784F" } };
+            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFE8F8EF" } };
+          } else if (isDiscontinued(value)) {
+            cell.font = { bold: true, color: { argb: "FFA82929" } };
+            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFEEEE" } };
+          } else {
+            cell.font = { bold: true, color: { argb: "FF95630E" } };
+            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFF7DF" } };
+          }
+        }
+      }
+
+      // Sheet 1: filtered product data, formatted as a native Excel table.
+      const productRows = toRows(filteredData);
+      const products = workbook.addWorksheet("Data Produk", {
+        properties: { tabColor: { argb: "FF087F83" } }
+      });
+      products.addTable({
+        name: "TabelDataProduk",
+        ref: "A1",
+        headerRow: true,
+        totalsRow: false,
+        style: { theme: "TableStyleMedium2", showRowStripes: true },
+        columns: headers.map((name) => ({ name, filterButton: true })),
+        rows: productRows
+      });
+      fitColumns(products, productRows, headers);
+      styleSheet(products);
+      addStatusColors(products, 5, 2, productRows.length + 1);
+      products.autoFilter = { from: "A1", to: `F${productRows.length + 1}` };
+
+      // Sheet 2: overall summary based on the complete dataset.
+      const summary = workbook.addWorksheet("Ringkasan", {
+        properties: { tabColor: { argb: "FF2563EB" } }
+      });
+      const total = allData.length;
+      const continued = allData.filter((item) => isContinuing(item.status)).length;
+      const stopped = allData.filter((item) => isDiscontinued(item.status)).length;
+      const other = total - continued - stopped;
       const summaryRows = [
-        ["Ringkasan Produk", ""],
-        ["Total Produk", filteredData.length],
-        ["Lanjut Produksi", continueCount],
-        ["Dihentikan", discontinueCount],
-        ["Status Lain", otherCount],
-        ["", ""],
+        ["Total Produk", total],
+        ["Lanjut Produksi", continued],
+        ["Dihentikan", stopped],
+        ["Status Lainnya", other],
+        ["Diekspor (sesuai filter)", filteredData.length],
         ["Tanggal Ekspor", new Date().toLocaleString("id-ID")]
       ];
+      summary.addTable({
+        name: "TabelRingkasan",
+        ref: "A1",
+        headerRow: true,
+        style: { theme: "TableStyleMedium2", showRowStripes: true },
+        columns: [{ name: "Keterangan" }, { name: "Jumlah / Nilai" }],
+        rows: summaryRows
+      });
+      fitColumns(summary, summaryRows, ["Keterangan", "Jumlah / Nilai"]);
+      styleSheet(summary);
 
-      const workbook = XLSX.utils.book_new();
+      // Sheet 3: supplier summary based on the complete dataset.
+      const supplierMap = new Map();
+      allData.forEach((item) => {
+        const name = item.supplier || "Tidak diketahui";
+        if (!supplierMap.has(name)) supplierMap.set(name, { total: 0, continued: 0, stopped: 0 });
+        const entry = supplierMap.get(name);
+        entry.total++;
+        if (isContinuing(item.status)) entry.continued++;
+        if (isDiscontinued(item.status)) entry.stopped++;
+      });
+      const supplierHeaders = ["Pemasok", "Total Produk", "Lanjut Produksi", "Dihentikan"];
+      const supplierRows = [...supplierMap.entries()]
+        .sort((a, b) => b[1].total - a[1].total)
+        .map(([name, value]) => [name, value.total, value.continued, value.stopped]);
+      const supplierSheet = workbook.addWorksheet("Pemasok", {
+        properties: { tabColor: { argb: "FF7C3AED" } }
+      });
+      supplierSheet.addTable({
+        name: "TabelPemasok",
+        ref: "A1",
+        headerRow: true,
+        style: { theme: "TableStyleMedium4", showRowStripes: true },
+        columns: supplierHeaders.map((name) => ({ name, filterButton: true })),
+        rows: supplierRows
+      });
+      fitColumns(supplierSheet, supplierRows, supplierHeaders);
+      styleSheet(supplierSheet);
 
-      const productSheet = XLSX.utils.aoa_to_sheet(productRows);
-      productSheet["!cols"] = autoFitColumns(productRows);
-      productSheet["!autofilter"] = { ref: XLSX.utils.encode_range({
-        s: { r: 0, c: 0 },
-        e: { r: productRows.length - 1, c: headers.length - 1 }
-      })};
-      productSheet["!freeze"] = { xSplit: 0, ySplit: 1 };
-
-      const summarySheet = XLSX.utils.aoa_to_sheet(summaryRows);
-      summarySheet["!cols"] = autoFitColumns(summaryRows);
-
-      XLSX.utils.book_append_sheet(workbook, productSheet, "Data Produk");
-      XLSX.utils.book_append_sheet(workbook, summarySheet, "Ringkasan");
-
-      /* Conditional formatting pada sheet Data Produk */
-      const lastRow = productRows.length - 1;
-      const statusRange = `E2:E${lastRow + 1}`;
-
-      if (!productSheet["!conditionalFormats"]) productSheet["!conditionalFormats"] = [];
-
-      productSheet["!conditionalFormats"].push(
-        {
-          ref: statusRange,
-          rules: [{
-            type: "containsText",
-            operator: "containsText",
-            text: "DISCONTINUE",
-            style: {
-              fill: { fgColor: { rgb: "FFC7CE" } },
-              font: { color: { rgb: "9C0006" }, bold: true }
-            }
-          }]
-        },
-        {
-          ref: statusRange,
-          rules: [{
-            type: "containsText",
-            operator: "containsText",
-            text: "CONTINUE",
-            style: {
-              fill: { fgColor: { rgb: "C6EFCE" } },
-              font: { color: { rgb: "006100" }, bold: true }
-            }
-          }]
-        }
-      );
-
-      const today = new Date().toISOString().slice(0, 10);
-      XLSX.writeFile(workbook, `Advance-Digitals-Product-${today}.xlsx`);
+      const buffer = await workbook.xlsx.writeBuffer();
+      const blob = new Blob([buffer], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const today = new Date().toLocaleDateString("id-ID").replace(/\//g, "-");
+      link.href = url;
+      link.download = `Product_Advance_${today}.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     async function loadData() {
@@ -1439,7 +2306,13 @@
       `;
 
       try {
-        const response = await fetch(CSVPATH, { cache: "no-store" });
+        /*
+          cache: "no-store" membantu GitHub Pages mengambil CSV terbaru,
+          bukan isi cache browser yang lama.
+        */
+        const response = await fetch(CSV_PATH, {
+          cache: "no-store"
+        });
 
         if (!response.ok) {
           throw new Error(`CSV tidak ditemukan. HTTP ${response.status}`);
@@ -1451,7 +2324,9 @@
           throw new Error("Isi file data.csv kosong.");
         }
 
-        loadDataFromCSV(text);
+        console.log(`CSV berhasil dimuat dari: ${CSV_PATH}`);
+        parseCSV(text);
+
       } catch (error) {
         console.error("Gagal memuat CSV:", error);
 
@@ -1460,10 +2335,10 @@
             <td class="empty-cell" colspan="6">
               <div class="error-state">
                 <strong>Gagal memuat data.csv</strong>
-                <div style="margin-top:7px;font-size:12px">
-                  Pastikan file bernama <strong>data.csv</strong> berada di folder yang sama dengan <strong>index.html</strong>.
+                <div style="margin-top: 7px; font-size: 12px;">
+                  Periksa nama file, huruf besar/kecil, folder file CSV, dan pengaturan GitHub Pages.
                 </div>
-                <div style="margin-top:5px;font-size:11px;opacity:.8">
+                <div style="margin-top: 5px; font-size: 11px; opacity: 0.8;">
                   ${escapeHtml(error.message)}
                 </div>
               </div>
@@ -1475,6 +2350,7 @@
 
     function debounce(callback, delay = 120) {
       let timer;
+
       return (...args) => {
         clearTimeout(timer);
         timer = setTimeout(() => callback(...args), delay);
@@ -1496,26 +2372,30 @@
       dom.statusMenu.addEventListener("change", handleStatusFilter);
 
       const searchDebounced = debounce(applyFilters, 120);
+
       dom.search.addEventListener("input", searchDebounced);
 
-      dom.search.addEventListener("keydown", event => {
+      dom.search.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
           event.preventDefault();
           applyFilters();
         }
       });
 
-      dom.btnSearchAction.addEventListener("click", applyFilters);
+      dom.btnSearch.addEventListener("click", applyFilters);
       dom.btnExport.addEventListener("click", exportToExcel);
-      dom.btnLandingExport.addEventListener("click", exportToExcel);
+
+      dom.dashboardToggle.addEventListener("click", () => {
+        const willOpen = dom.dashboardStats.hidden;
+        dom.dashboardStats.hidden = !willOpen;
+        dom.dashboardToggle.setAttribute("aria-expanded", String(willOpen));
+        dom.dashboardToggle.textContent = willOpen ? "✕ Tutup Dashboard" : "📊 Dashboard";
+      });
 
       dom.btnTable.addEventListener("click", () => setView("table"));
       dom.btnCard.addEventListener("click", () => setView("card"));
 
       dom.themeToggle.addEventListener("click", toggleTheme);
-
-      dom.btnOpenDashboard.addEventListener("click", showWorkspace);
-      dom.btnOpenTable.addEventListener("click", showWorkspace);
 
       loadData();
     });
