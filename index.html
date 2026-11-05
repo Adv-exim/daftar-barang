@@ -3,414 +3,379 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advance Digitals — Product and Status</title>
+  <title>Advance Digitals — Status Produk</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
+    /* =========================================================
+       TOKEN WARNA & UKURAN
+       ========================================================= */
     :root {
-      --primary: #0f8b93;
-      --primary-dark: #0b7077;
-      --primary-light: #27b9c1;
-      --accent-gradient: linear-gradient(135deg, #12b7c5, #087f83);
+      --brand: #0e7c86;
+      --brand-strong: #0a626a;
+      --brand-soft: #e3f3f4;
 
-      --bg: #f2f7f8;
-      --bg-gradient: linear-gradient(135deg, #f7fbfc 0%, #edf4f6 100%);
-      --card-bg: #ffffff;
-      --card-bg-hover: #f7fbfc;
-      --border: #dfe8eb;
+      --bg: #f5f8f8;
+      --surface: #ffffff;
+      --surface-2: #f0f5f5;
+      --line: #e2e9ea;
+      --line-strong: #cfd9db;
 
-      --text: #334155;
-      --text-light: #64748b;
-      --text-muted: #94a3b8;
+      --text: #1b2b32;
+      --text-2: #51646c;
+      --text-3: #7d8e95;
 
-      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
-      --shadow-md: 0 3px 9px rgba(15, 23, 42, 0.10);
-      --shadow-lg: 0 12px 24px rgba(15, 23, 42, 0.14);
-      --shadow-glow: 0 0 18px rgba(18, 183, 197, 0.17);
+      --ok: #12805c;
+      --ok-bg: #e4f5ed;
+      --stop: #bf3a2b;
+      --stop-bg: #fce9e6;
+      --warn: #96600a;
+      --warn-bg: #fff3d8;
 
-      --radius: 12px;
-      --radius-sm: 8px;
+      --shadow: 0 1px 2px rgba(20, 40, 50, .06), 0 4px 14px rgba(20, 40, 50, .05);
+      --shadow-pop: 0 12px 32px rgba(20, 40, 50, .16);
 
-      --status-disc-bg: #fff4f4;
-      --status-disc-text: #a82929;
-      --status-disc-border: #f3b4b4;
-
-      --status-cont-bg: #ecfdf6;
-      --status-cont-text: #08784f;
-      --status-cont-border: #92dfbd;
-
-      --status-other-bg: #fff9e7;
-      --status-other-text: #95630e;
-      --status-other-border: #f6d87c;
-
-      --glass-bg: rgba(255, 255, 255, 0.88);
-      --glass-border: rgba(255, 255, 255, 0.55);
+      --r-lg: 14px;
+      --r-md: 10px;
+      --r-sm: 7px;
     }
 
     [data-theme="dark"] {
-      --primary: #22c5cb;
-      --primary-dark: #11979e;
-      --primary-light: #5ee7e9;
-      --accent-gradient: linear-gradient(135deg, #20c8d2, #149b9e);
+      --brand: #35c2cc;
+      --brand-strong: #6bd9e0;
+      --brand-soft: rgba(53, 194, 204, .14);
 
-      --bg: #111c2a;
-      --bg-gradient: linear-gradient(135deg, #101b29 0%, #1b2a3b 100%);
-      --card-bg: #1c2b3d;
-      --card-bg-hover: #263a50;
-      --border: #35495e;
+      --bg: #0f1a22;
+      --surface: #17252f;
+      --surface-2: #1d2e3a;
+      --line: #2b3f4d;
+      --line-strong: #3a5161;
 
-      --text: #e6edf5;
-      --text-light: #b2c0d0;
-      --text-muted: #8ea0b5;
+      --text: #e8f0f4;
+      --text-2: #b0c0ca;
+      --text-3: #84979f;
 
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.30);
-      --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.34);
-      --shadow-lg: 0 12px 26px rgba(0, 0, 0, 0.44);
-      --shadow-glow: 0 0 18px rgba(34, 197, 203, 0.16);
+      --ok: #67dba9;
+      --ok-bg: rgba(103, 219, 169, .13);
+      --stop: #ff9c8f;
+      --stop-bg: rgba(255, 156, 143, .13);
+      --warn: #f4cf78;
+      --warn-bg: rgba(244, 207, 120, .13);
 
-      --status-disc-bg: rgba(239, 68, 68, 0.13);
-      --status-disc-text: #fca5a5;
-      --status-disc-border: rgba(252, 165, 165, 0.42);
-
-      --status-cont-bg: rgba(16, 185, 129, 0.13);
-      --status-cont-text: #86efac;
-      --status-cont-border: rgba(134, 239, 172, 0.36);
-
-      --status-other-bg: rgba(234, 179, 8, 0.13);
-      --status-other-text: #fde68a;
-      --status-other-border: rgba(253, 230, 138, 0.35);
-
-      --glass-bg: rgba(28, 43, 61, 0.89);
-      --glass-border: rgba(255, 255, 255, 0.10);
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 14px rgba(0, 0, 0, .22);
+      --shadow-pop: 0 12px 32px rgba(0, 0, 0, .5);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      background: var(--bg);
-    }
+    html { background: var(--bg); }
 
     body {
-      max-width: 1450px;
-      min-height: 100vh;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 20px;
-      background: var(--bg-gradient);
+      padding: 24px 24px 56px;
       color: var(--text);
-      font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
       font-size: 14px;
       line-height: 1.5;
-      transition: background 0.25s ease, color 0.25s ease;
+      -webkit-font-smoothing: antialiased;
+      transition: background .25s ease, color .25s ease;
     }
 
-    button,
-    input {
-      font: inherit;
+    button, input { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+
+    :focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
     }
 
-    button {
-      cursor: pointer;
-    }
-
-    .header-section {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .header-title h1 {
-      margin: 0 0 3px;
-      font-size: 25px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .header-title p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .stats-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .stat-item {
-      min-width: 70px;
-      padding: 6px 12px;
-      text-align: center;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--card-bg-hover);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .stat-item:hover {
-      border-color: var(--primary-light);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .stat-value {
-      color: var(--text);
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1.15;
-    }
-
-    .stat-label {
-      margin-top: 2px;
-      color: var(--text-muted);
-      font-size: 10px;
-      font-weight: 600;
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
       white-space: nowrap;
     }
 
-    .theme-toggle {
-      position: relative;
-      width: 64px;
-      height: 32px;
-      padding: 0;
-      border: 2px solid var(--border);
-      border-radius: 999px;
-      background: #dfe7ee;
-      box-shadow: none;
-      transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--primary-light);
-      box-shadow: var(--shadow-glow);
-      transform: none;
-    }
-
-    .theme-toggle.active {
-      border-color: transparent;
-      background: var(--accent-gradient);
-    }
-
-    .theme-toggle-slider {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      display: grid;
-      place-items: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-      font-size: 14px;
-      line-height: 1;
-      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .theme-toggle.active .theme-toggle-slider {
-      transform: translateX(32px);
-    }
-
-    .search-bar {
-      position: relative;
-      z-index: 20;
-      overflow: visible;
-      padding: 15px 18px;
-      margin-bottom: 15px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
-      transition: background 0.25s ease, border-color 0.25s ease;
-    }
-
-    .search-bar::before {
-      position: absolute;
-      top: -1px;
-      right: -1px;
-      left: -1px;
-      height: 3px;
-      content: "";
-      border-radius: 12px 12px 0 0;
-      background: var(--accent-gradient);
-    }
-
-    .search-top {
+    /* =========================================================
+       HEADER
+       ========================================================= */
+    .topbar {
       display: flex;
-      margin-bottom: 12px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
     }
 
-    .search-input-wrapper {
+    .brand {
       display: flex;
-      flex: 1;
-      gap: 10px;
+      align-items: center;
+      gap: 12px;
       min-width: 0;
     }
 
-    .search-input {
-      position: relative;
-      flex: 1;
-      min-width: 180px;
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 40px; height: 40px;
+      border-radius: 11px;
+      background: var(--brand);
+      color: #fff;
     }
 
-    .search-input input {
-      width: 100%;
-      height: 44px;
-      padding: 10px 44px 10px 14px;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      outline: none;
-      background: var(--card-bg-hover);
-      font-size: 13px;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.2;
     }
 
-    .search-input input::placeholder {
-      color: var(--text-muted);
+    .brand p {
+      margin: 1px 0 0;
+      color: var(--text-3);
+      font-size: 12.5px;
     }
 
-    .search-input input:focus {
-      border-color: var(--primary-light);
-      background: var(--card-bg);
-      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.13);
-    }
-
-    .search-icon-indicator {
-      position: absolute;
-      top: 50%;
-      right: 14px;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-50%);
-      transition: opacity 0.2s ease;
-      font-size: 16px;
-    }
-
-    .search-icon-indicator.active {
-      opacity: 1;
-    }
-
-    .btn-search,
-    .btn-export {
-      color: #ffffff !important;
-      border: none;
-      border-radius: var(--radius-sm);
-      background: var(--accent-gradient);
-      box-shadow: 0 2px 6px rgba(15, 118, 122, 0.25);
-      font-size: 13px;
-      font-weight: 650;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    }
-
-    .btn-search {
-      height: 44px;
-      padding: 0 20px;
-      white-space: nowrap;
-    }
-
-    .btn-export {
-      padding: 10px 20px;
-      white-space: nowrap;
-    }
-
-    .btn-search:hover,
-    .btn-export:hover {
-      color: #ffffff !important;
-      filter: brightness(1.04);
-      box-shadow: 0 6px 14px rgba(15, 118, 122, 0.30);
-      transform: translateY(-1px);
-    }
-
-    .btn-search:active,
-    .btn-export:active {
-      transform: translateY(0);
-    }
-
-    .filter-group {
-      position: relative;
-      z-index: 30;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .filter-box {
-      position: relative;
-      flex: 1;
-      min-width: 205px;
-    }
-
-    .filter-label {
-      display: block;
-      margin-bottom: 5px;
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 650;
-    }
-
-    .dropdown-toggle {
+    .topbar-actions {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      min-height: 42px;
-      padding: 9px 12px;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      display: grid;
+      place-items: center;
+      width: 40px; height: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      color: var(--text-2);
+      transition: border-color .15s, color .15s, background .15s;
+    }
+
+    .icon-btn:hover { border-color: var(--brand); color: var(--brand); }
+
+    .icon-btn .i-moon { display: none; }
+    [data-theme="dark"] .icon-btn .i-sun { display: none; }
+    [data-theme="dark"] .icon-btn .i-moon { display: block; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 40px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: var(--r-md);
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+      transition: background .15s, transform .1s;
+    }
+
+    [data-theme="dark"] .btn-primary { color: #06262a; }
+    .btn-primary:hover { background: var(--brand-strong); }
+    .btn-primary:active { transform: translateY(1px); }
+    .btn-primary[disabled] { opacity: .6; cursor: progress; }
+
+    /* =========================================================
+       RINGKASAN (satu panel, satu bar proporsi)
+       ========================================================= */
+    .summary {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 12px 36px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .summary-total {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .summary-total strong {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .summary-total span {
+      color: var(--text-2);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .summary-side { min-width: 0; }
+
+    .ratio-bar {
+      display: flex;
+      height: 10px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--surface-2);
+    }
+
+    .ratio-bar span {
+      display: block;
+      height: 100%;
+      width: 0;
+      transition: width .5s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .seg-ok { background: var(--ok); }
+    .seg-stop { background: var(--stop); }
+    .seg-warn { background: #e0a526; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 22px;
+      margin-top: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-2);
+      font-size: 13px;
+    }
+
+    .legend-item i {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+    }
+
+    .legend-item b {
       color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--card-bg-hover);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* =========================================================
+       TOOLBAR: cari + filter
+       ========================================================= */
+    .toolbar {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .search {
+      position: relative;
+      flex: 1 1 280px;
+      min-width: 220px;
+    }
+
+    .search svg {
+      position: absolute;
+      top: 50%; left: 13px;
+      color: var(--text-3);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .search input {
+      width: 100%;
+      height: 42px;
+      padding: 0 38px 0 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      outline: none;
+      background: var(--surface);
+      font-size: 13.5px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    .search input::placeholder { color: var(--text-3); }
+
+    .search input:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px var(--brand-soft);
+    }
+
+    .search input::-webkit-search-cancel-button { display: none; }
+
+    .search-clear {
+      position: absolute;
+      top: 50%; right: 8px;
+      display: none;
+      place-items: center;
+      width: 26px; height: 26px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--text-3);
+      transform: translateY(-50%);
+    }
+
+    .search-clear.show { display: grid; }
+    .search-clear:hover { background: var(--surface-2); color: var(--text); }
+
+    .filter { position: relative; }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 42px;
+      max-width: 240px;
+      padding: 0 12px 0 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
       font-size: 13px;
       font-weight: 600;
-      text-align: left;
-      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+      transition: border-color .15s, background .15s;
     }
 
-    .dropdown-toggle:hover,
-    .dropdown-toggle.active {
-      color: var(--text);
-      border-color: var(--primary-light);
-      background: var(--card-bg);
-      box-shadow: var(--shadow-glow);
-      transform: none;
+    .filter-btn:hover,
+    .filter-btn[aria-expanded="true"] { border-color: var(--brand); }
+
+    .filter-btn.has-value {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+      color: var(--brand-strong);
     }
 
-    .dropdown-arrow {
+    .filter-btn .filter-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .filter-btn svg {
       flex: 0 0 auto;
-      margin-left: 10px;
-      color: var(--text-muted);
-      font-size: 10px;
-      transition: transform 0.2s ease;
+      color: var(--text-3);
+      transition: transform .2s;
     }
 
-    .dropdown-toggle.active .dropdown-arrow {
-      transform: rotate(180deg);
-    }
+    .filter-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
 
-    .dropdown-menu {
+    .menu {
       position: absolute;
       top: calc(100% + 6px);
       left: 0;
@@ -418,600 +383,513 @@
       display: none;
       width: max-content;
       min-width: 100%;
-      max-width: min(390px, calc(100vw - 48px));
-      max-height: 300px;
-      padding: 5px 0;
-      overflow-x: hidden;
+      max-width: min(380px, calc(100vw - 48px));
+      max-height: 320px;
+      padding: 6px;
       overflow-y: auto;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--card-bg);
-      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-pop);
     }
 
-    .dropdown-menu.open {
-      display: block;
-      animation: slideDown 0.16s ease-out;
+    .menu.open { display: block; animation: pop .14s ease-out; }
+
+    @keyframes pop {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: none; }
     }
 
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .dropdown-item {
+    .menu-item {
       display: flex;
       align-items: center;
       gap: 10px;
-      min-width: max-content;
-      padding: 8px 14px;
-      color: var(--text);
+      padding: 8px 10px;
+      border-radius: var(--r-sm);
       cursor: pointer;
       font-size: 13px;
-      line-height: 1.35;
-      transition: background 0.15s ease;
     }
 
-    .dropdown-item:hover {
-      color: var(--text);
-      background: var(--card-bg-hover);
-    }
+    .menu-item:hover { background: var(--surface-2); }
 
-    .dropdown-item span {
-      overflow-wrap: anywhere;
-    }
+    .menu-item span { overflow-wrap: anywhere; }
 
-    .dropdown-item input[type="checkbox"] {
+    .menu-item input {
       flex: 0 0 auto;
-      width: 16px;
-      height: 16px;
+      width: 16px; height: 16px;
       margin: 0;
+      accent-color: var(--brand);
       cursor: pointer;
-      accent-color: var(--primary);
     }
 
-    .select-all-item {
+    .menu-all {
       position: sticky;
-      top: -5px;
+      top: -6px;
       z-index: 2;
+      margin-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+      border-radius: var(--r-sm) var(--r-sm) 0 0;
+      background: var(--surface);
       font-weight: 700;
-      border-bottom: 1px solid var(--border);
-      background: var(--card-bg-hover);
     }
 
-    .select-all-item:hover {
-      background: var(--card-bg-hover);
+    .btn-reset {
+      height: 42px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: var(--r-md);
+      background: transparent;
+      color: var(--text-2);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
-    .action-bar {
+    .btn-reset[hidden] { display: none; }
+    .btn-reset:hover { color: var(--brand); }
+
+    /* =========================================================
+       BARIS HASIL + SWITCH TAMPILAN
+       ========================================================= */
+    .result-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 15px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
-    .view-buttons {
-      display: flex;
-      gap: 8px;
-    }
-
-    .view-buttons button {
-      padding: 9px 16px;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background: var(--card-bg);
+    .result-count {
+      margin: 0;
+      color: var(--text-2);
       font-size: 13px;
-      font-weight: 650;
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .view-buttons button:hover {
+    .result-count b { color: var(--text); }
+
+    .segmented {
+      display: inline-flex;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface-2);
+    }
+
+    .segmented button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text-2);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .segmented button.active {
+      background: var(--surface);
       color: var(--text);
-      border-color: var(--primary-light);
-      background: var(--card-bg-hover);
-      box-shadow: var(--shadow-sm);
-      transform: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
     }
 
-    .view-buttons button.active {
-      color: #ffffff !important;
-      border-color: transparent;
-      background: var(--accent-gradient);
-      box-shadow: 0 3px 8px rgba(15, 118, 122, 0.22);
-    }
-
-    .table-container {
-      max-height: 72vh;
+    /* =========================================================
+       TABEL
+       ========================================================= */
+    .table-wrap {
+      max-height: 70vh;
       overflow: auto;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--card-bg);
-      box-shadow: var(--shadow-md);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
     }
 
     table {
       width: 100%;
-      min-width: 920px;
-      border-spacing: 0;
+      min-width: 900px;
       border-collapse: separate;
-      background: var(--card-bg);
+      border-spacing: 0;
     }
 
-    th {
+    thead th {
       position: sticky;
       top: 0;
       z-index: 5;
-      padding: 13px 14px;
-      color: #ffffff;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.18);
-      background: var(--accent-gradient);
-      font-size: 12px;
-      font-weight: 700;
+      padding: 0;
+      border-bottom: 1px solid var(--line-strong);
+      background: var(--surface-2);
       text-align: left;
       white-space: nowrap;
     }
 
-    td {
-      padding: 12px 14px;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      background: var(--card-bg);
-      font-size: 13px;
+    .th-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      padding: 12px 16px;
+      border: 0;
+      background: transparent;
+      color: var(--text-2);
+      font-size: 12.5px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .th-btn:hover { color: var(--text); }
+
+    .th-btn .arrow {
+      color: var(--brand);
+      font-size: 10px;
+      opacity: 0;
+    }
+
+    th[aria-sort="ascending"] .arrow,
+    th[aria-sort="descending"] .arrow { opacity: 1; }
+
+    th[aria-sort="ascending"] .arrow::before { content: "▲"; }
+    th[aria-sort="descending"] .arrow::before { content: "▼"; }
+    th:not([aria-sort]) .arrow::before { content: "▲"; }
+    th[aria-sort] .th-btn { color: var(--text); }
+
+    tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
       vertical-align: middle;
-      transition: background 0.16s ease;
     }
 
-    tbody tr:hover td {
-      background: var(--card-bg-hover);
-    }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: var(--surface-2); }
 
-    tbody tr:last-child td {
-      border-bottom: none;
-    }
+    .col-code { white-space: nowrap; }
 
-    .material-code {
-      color: var(--text);
+    .code {
       font-weight: 700;
-      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .01em;
     }
 
-    .status-badge {
-      display: inline-block;
-      padding: 5px 10px;
-      border: 1px solid;
+    .muted { color: var(--text-3); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 11px 4px 9px;
       border-radius: 999px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.3;
       white-space: nowrap;
     }
 
-    .status-disc {
-      color: var(--status-disc-text);
-      border-color: var(--status-disc-border);
-      background: var(--status-disc-bg);
-    }
-
-    .status-cont {
-      color: var(--status-cont-text);
-      border-color: var(--status-cont-border);
-      background: var(--status-cont-bg);
-    }
-
-    .status-other {
-      color: var(--status-other-text);
-      border-color: var(--status-other-border);
-      background: var(--status-other-bg);
-    }
-
-    .empty-cell {
-      padding: 0 !important;
-    }
-
-    .empty-state,
-    .loading,
-    .error-state {
-      padding: 54px 20px;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    .empty-state strong,
-    .error-state strong {
-      color: var(--text);
-    }
-
-    .error-state {
-      color: #dc2626;
-    }
-
-    .loading-spinner {
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      margin-bottom: 10px;
-      border: 3px solid var(--border);
-      border-top-color: var(--primary);
+    .badge::before {
+      content: "";
+      width: 7px; height: 7px;
       border-radius: 50%;
-      animation: spin 0.75s linear infinite;
+      background: currentColor;
     }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+    .badge.cont { color: var(--ok); background: var(--ok-bg); }
+    .badge.disc { color: var(--stop); background: var(--stop-bg); }
+    .badge.other { color: var(--warn); background: var(--warn-bg); }
 
-    .card-mode {
+    /* =========================================================
+       KARTU
+       ========================================================= */
+    .card-grid {
       display: none;
-      flex-wrap: wrap;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 14px;
     }
 
     .card {
-      position: relative;
-      flex: 1 1 290px;
-      min-width: 280px;
-      max-width: calc(33.333% - 10px);
-      overflow: hidden;
-      padding: 16px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--card-bg);
-      box-shadow: var(--shadow-md);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--line-strong);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      box-shadow: var(--shadow);
     }
 
-    .card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-2px);
-    }
+    .card.cont { border-top-color: var(--ok); }
+    .card.disc { border-top-color: var(--stop); }
+    .card.other { border-top-color: #e0a526; }
 
-    .card::before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 4px;
-      content: "";
-    }
-
-    .card.disc::before {
-      background: #ef4444;
-    }
-
-    .card.cont::before {
-      background: #10b981;
-    }
-
-    .card.other::before {
-      background: #f59e0b;
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
     }
 
     .card-code {
-      margin-bottom: 4px;
-      color: var(--text-muted);
-      font-size: 11px;
+      color: var(--text-3);
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: .02em;
     }
 
     .card-name {
-      margin: 0 0 10px;
-      color: var(--text);
-      font-size: 14px;
+      margin: 2px 0 0;
+      font-size: 14.5px;
       font-weight: 700;
       line-height: 1.4;
       word-break: break-word;
     }
 
-    .card .status-badge {
-      margin-bottom: 11px;
+    .card dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4px 14px;
+      margin: 0;
+      font-size: 13px;
     }
 
-    .card p {
-      margin: 5px 0;
-      color: var(--text-light);
-      font-size: 12px;
-    }
-
-    .card p strong {
-      color: var(--text);
-    }
+    .card dt { color: var(--text-3); }
+    .card dd { margin: 0; font-weight: 600; word-break: break-word; }
 
     .card-note {
-      margin-top: 10px !important;
-      padding-top: 9px;
-      border-top: 1px solid var(--border);
+      margin: 0;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line-strong);
+      color: var(--text-2);
+      font-size: 12.5px;
     }
 
-    @media (max-width: 1050px) {
-      .card {
-        max-width: calc(50% - 7px);
-      }
+    /* =========================================================
+       STATE KOSONG / MEMUAT / ERROR
+       ========================================================= */
+    .state {
+      padding: 56px 20px;
+      color: var(--text-2);
+      text-align: center;
     }
 
+    .state strong { display: block; color: var(--text); font-size: 15px; }
+    .state small { display: block; margin-top: 6px; color: var(--text-3); font-size: 12.5px; }
+    .state.error strong { color: var(--stop); }
+
+    .spinner {
+      display: inline-block;
+      width: 24px; height: 24px;
+      margin-bottom: 12px;
+      border: 3px solid var(--line);
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: spin .75s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .td-state { padding: 0 !important; }
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+    .toast {
+      position: fixed;
+      right: 20px; bottom: 20px;
+      z-index: 2000;
+      max-width: 340px;
+      padding: 12px 16px;
+      border-radius: var(--r-md);
+      background: #17252f;
+      color: #fff;
+      box-shadow: var(--shadow-pop);
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .2s, transform .2s;
+    }
+
+    [data-theme="dark"] .toast { background: #e8f0f4; color: #0f1a22; }
+    .toast.show { opacity: 1; transform: none; }
+
+    /* =========================================================
+       RESPONSIF
+       ========================================================= */
     @media (max-width: 760px) {
-      body {
-        padding: 14px;
-      }
+      body { padding: 16px 14px 48px; }
 
-      .header-section {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 14px 16px;
-      }
+      .summary { grid-template-columns: 1fr; padding: 16px 18px; }
+      .summary-total strong { font-size: 38px; }
 
-      .header-right {
-        justify-content: space-between;
-        width: 100%;
-      }
+      .btn-primary span { display: none; }
+      .btn-primary { padding: 0 12px; }
 
-      .header-title h1 {
-        font-size: 23px;
-      }
-
-      .search-input-wrapper {
-        flex-direction: column;
-      }
-
-      .btn-search {
-        width: 100%;
-      }
-
-      .filter-group {
-        flex-direction: column;
-      }
-
-      .filter-box {
-        width: 100%;
-        min-width: 100%;
-      }
-
-      .dropdown-menu {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .action-bar {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .btn-export {
-        width: 100%;
-      }
-
-      .card {
-        max-width: 100%;
-      }
+      .filter { flex: 1 1 calc(50% - 10px); }
+      .filter-btn { width: 100%; max-width: none; justify-content: space-between; }
+      .menu { max-width: calc(100vw - 28px); }
     }
 
     @media (max-width: 460px) {
-      .header-right {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .stats-bar {
-        width: 100%;
-      }
-
-      .stat-item {
-        flex: 1;
-      }
+      .filter { flex: 1 1 100%; }
     }
 
-    .dropdown-menu::-webkit-scrollbar,
-    .table-container::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
     }
 
-    .dropdown-menu::-webkit-scrollbar-track,
-    .table-container::-webkit-scrollbar-track {
-      background: var(--card-bg-hover);
-    }
-
-    .dropdown-menu::-webkit-scrollbar-thumb,
-    .table-container::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background: var(--border);
-    }
-
-    .dropdown-menu::-webkit-scrollbar-thumb:hover,
-    .table-container::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-light);
-    }
+    .table-wrap::-webkit-scrollbar,
+    .menu::-webkit-scrollbar { width: 8px; height: 8px; }
+    .table-wrap::-webkit-scrollbar-thumb,
+    .menu::-webkit-scrollbar-thumb { border-radius: 10px; background: var(--line-strong); }
+    .table-wrap::-webkit-scrollbar-track,
+    .menu::-webkit-scrollbar-track { background: transparent; }
   </style>
 </head>
 
 <body>
-  <header class="header-section">
-    <div class="header-title">
-      <h1>Advance Digitals</h1>
-      <p>Product and Status Dashboard</p>
+  <!-- ===================== HEADER ===================== -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Advance Digitals</h1>
+        <p>Status produk dan material</p>
+      </div>
     </div>
 
-    <div class="header-right">
-      <div class="stats-bar" aria-label="Ringkasan produk">
-        <div class="stat-item">
-          <div class="stat-value" id="totalCount">0</div>
-          <div class="stat-label">Total</div>
-        </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Ganti mode terang atau gelap" title="Ganti mode terang atau gelap">
+        <svg class="i-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="i-moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+      </button>
 
-        <div class="stat-item">
-          <div class="stat-value" id="continueCount">0</div>
-          <div class="stat-label">Lanjut</div>
-        </div>
-
-        <div class="stat-item">
-          <div class="stat-value" id="discontinueCount">0</div>
-          <div class="stat-label">Stop</div>
-        </div>
-      </div>
-
-      <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="Ubah mode terang atau gelap"
-        aria-pressed="false"
-        title="Ubah mode terang atau gelap"
-      >
-        <span class="theme-toggle-slider" id="themeIcon">☀️</span>
+      <button class="btn-primary" id="btnExport" type="button">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        <span>Unduh Excel</span>
       </button>
     </div>
   </header>
 
-  <section class="search-bar">
-    <div class="search-top">
-      <div class="search-input-wrapper">
-        <div class="search-input">
-          <input
-            id="search"
-            type="search"
-            placeholder="Cari kode, nama produk, pemasok, asal, atau catatan..."
-            autocomplete="off"
-          >
-          <span class="search-icon-indicator" id="searchIcon">🔍</span>
-        </div>
-
-        <button class="btn-search" id="btnSearchAction" type="button">
-          🔍 Cari
-        </button>
-      </div>
+  <!-- ===================== RINGKASAN ===================== -->
+  <section class="summary" aria-label="Ringkasan produk">
+    <div class="summary-total">
+      <strong id="totalCount">0</strong>
+      <span>produk</span>
     </div>
 
-    <div class="filter-group">
-      <div class="filter-box">
-        <label class="filter-label">Pemasok</label>
-
-        <button
-          class="dropdown-toggle"
-          id="supplierToggle"
-          type="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <span id="supplierText">Semua Pemasok</span>
-          <span class="dropdown-arrow">▼</span>
-        </button>
-
-        <div class="dropdown-menu" id="supplierMenu" role="menu"></div>
+    <div class="summary-side">
+      <div class="ratio-bar" role="img" aria-label="Perbandingan status produk">
+        <span class="seg-ok" id="barOk"></span>
+        <span class="seg-stop" id="barStop"></span>
+        <span class="seg-warn" id="barWarn"></span>
       </div>
 
-      <div class="filter-box">
-        <label class="filter-label">Asal</label>
-
-        <button
-          class="dropdown-toggle"
-          id="originToggle"
-          type="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <span id="originText">Semua Asal</span>
-          <span class="dropdown-arrow">▼</span>
-        </button>
-
-        <div class="dropdown-menu" id="originMenu" role="menu"></div>
-      </div>
-
-      <div class="filter-box">
-        <label class="filter-label">Status</label>
-
-        <button
-          class="dropdown-toggle"
-          id="statusToggle"
-          type="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <span id="statusText">Semua Status</span>
-          <span class="dropdown-arrow">▼</span>
-        </button>
-
-        <div class="dropdown-menu" id="statusMenu" role="menu">
-          <label class="dropdown-item select-all-item">
-            <input type="checkbox" id="statusSelectAll">
-            <span>Pilih Semua</span>
-          </label>
-
-          <label class="dropdown-item">
-            <input type="checkbox" class="status-check" value="continue">
-            <span>Lanjut Produksi</span>
-          </label>
-
-          <label class="dropdown-item">
-            <input type="checkbox" class="status-check" value="discontinue">
-            <span>Dihentikan</span>
-          </label>
-        </div>
+      <div class="legend">
+        <div class="legend-item"><i class="seg-ok"></i>Lanjut produksi <b id="continueCount">0</b></div>
+        <div class="legend-item"><i class="seg-stop"></i>Dihentikan <b id="discontinueCount">0</b></div>
+        <div class="legend-item" id="legendOther" hidden><i class="seg-warn"></i>Lainnya <b id="otherCount">0</b></div>
       </div>
     </div>
   </section>
 
-  <section class="action-bar">
-    <div class="view-buttons">
+  <!-- ===================== PENCARIAN & FILTER ===================== -->
+  <section class="toolbar" aria-label="Pencarian dan filter">
+    <div class="search">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label class="sr-only" for="search">Cari produk</label>
+      <input id="search" type="search" placeholder="Cari kode, nama, pemasok, asal, atau catatan" autocomplete="off">
+      <button class="search-clear" id="searchClear" type="button" aria-label="Hapus pencarian">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="filter">
+      <button class="filter-btn" id="supplierToggle" type="button" aria-haspopup="true" aria-expanded="false">
+        <span class="filter-text" id="supplierText">Semua pemasok</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="menu" id="supplierMenu"></div>
+    </div>
+
+    <div class="filter">
+      <button class="filter-btn" id="originToggle" type="button" aria-haspopup="true" aria-expanded="false">
+        <span class="filter-text" id="originText">Semua asal</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="menu" id="originMenu"></div>
+    </div>
+
+    <div class="filter">
+      <button class="filter-btn" id="statusToggle" type="button" aria-haspopup="true" aria-expanded="false">
+        <span class="filter-text" id="statusText">Semua status</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="menu" id="statusMenu"></div>
+    </div>
+
+    <button class="btn-reset" id="btnReset" type="button" hidden>Reset filter</button>
+  </section>
+
+  <!-- ===================== HASIL ===================== -->
+  <section class="result-bar">
+    <p class="result-count" id="resultCount" aria-live="polite">Memuat data…</p>
+
+    <div class="segmented" role="group" aria-label="Pilih tampilan">
       <button id="btnTable" class="active" type="button" aria-pressed="true">
-        📋 Tabel
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        Tabel
       </button>
-
       <button id="btnCard" type="button" aria-pressed="false">
-        🃏 Kartu
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
+        Kartu
       </button>
     </div>
-
-    <button class="btn-export" id="btnExport" type="button">
-      📊 Ekspor Excel
-    </button>
   </section>
 
-  <section id="tableView" class="table-container">
+  <section id="tableView" class="table-wrap">
     <table id="dataTable">
       <thead>
         <tr>
-          <th>Kode Material</th>
-          <th>Nama Barang</th>
-          <th>Pemasok</th>
-          <th>Asal</th>
-          <th>Status</th>
-          <th>Catatan</th>
+          <th data-key="code"><button class="th-btn" type="button">Kode Material <span class="arrow"></span></button></th>
+          <th data-key="name"><button class="th-btn" type="button">Nama Barang <span class="arrow"></span></button></th>
+          <th data-key="supplier"><button class="th-btn" type="button">Pemasok <span class="arrow"></span></button></th>
+          <th data-key="origin"><button class="th-btn" type="button">Asal <span class="arrow"></span></button></th>
+          <th data-key="status"><button class="th-btn" type="button">Status <span class="arrow"></span></button></th>
+          <th data-key="note"><button class="th-btn" type="button">Catatan <span class="arrow"></span></button></th>
         </tr>
       </thead>
-
       <tbody id="tableBody"></tbody>
     </table>
   </section>
 
-  <section id="cardView" class="card-mode"></section>
+  <section id="cardView" class="card-grid"></section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Library untuk membuat file .xlsx berformat (warna, border, lebar kolom). -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js" defer></script>
 
   <script>
     /*
-      Jika data.csv sejajar dengan index.html di GitHub Pages:
+      Letakkan data.csv sejajar dengan index.html:
       repository/
       ├── index.html
       └── data.csv
 
-      biarkan nilainya "./data.csv".
+      Urutan kolom CSV:
+      Kode Material, Nama Barang, Pemasok, Asal, Status, Catatan
     */
     const CSV_PATH = "./data.csv";
 
     const allData = [];
-    let suppliers = [];
-    let origins = [];
+    const options = { supplier: [], origin: [] };
 
     const selected = {
       supplier: new Set(),
@@ -1019,59 +897,72 @@
       status: new Set()
     };
 
+    const sortState = { key: null, dir: "asc" };
+
+    const LABELS = {
+      supplier: "Semua pemasok",
+      origin: "Semua asal",
+      status: "Semua status"
+    };
+
+    const STATUS_OPTIONS = [
+      { value: "continue", label: "Lanjut produksi" },
+      { value: "discontinue", label: "Dihentikan" },
+      { value: "other", label: "Lainnya" }
+    ];
+
     const dom = {};
 
+    /* =========================================================
+       UTILITAS
+       ========================================================= */
     function initDomCache() {
-      dom.search = document.getElementById("search");
-      dom.searchIcon = document.getElementById("searchIcon");
-      dom.btnSearch = document.getElementById("btnSearchAction");
-      dom.btnExport = document.getElementById("btnExport");
-
-      dom.supplierMenu = document.getElementById("supplierMenu");
-      dom.originMenu = document.getElementById("originMenu");
-      dom.statusMenu = document.getElementById("statusMenu");
-
-      dom.supplierText = document.getElementById("supplierText");
-      dom.originText = document.getElementById("originText");
-      dom.statusText = document.getElementById("statusText");
-
-      dom.supplierToggle = document.getElementById("supplierToggle");
-      dom.originToggle = document.getElementById("originToggle");
-      dom.statusToggle = document.getElementById("statusToggle");
-
-      dom.tableBody = document.getElementById("tableBody");
-      dom.tableView = document.getElementById("tableView");
-      dom.cardView = document.getElementById("cardView");
-
-      dom.btnTable = document.getElementById("btnTable");
-      dom.btnCard = document.getElementById("btnCard");
-
-      dom.totalCount = document.getElementById("totalCount");
-      dom.continueCount = document.getElementById("continueCount");
-      dom.discontinueCount = document.getElementById("discontinueCount");
-
-      dom.themeToggle = document.getElementById("themeToggle");
-      dom.themeIcon = document.getElementById("themeIcon");
+      [
+        "search", "searchClear", "btnExport", "btnReset",
+        "supplierMenu", "originMenu", "statusMenu",
+        "supplierText", "originText", "statusText",
+        "supplierToggle", "originToggle", "statusToggle",
+        "tableBody", "tableView", "cardView",
+        "btnTable", "btnCard",
+        "totalCount", "continueCount", "discontinueCount", "otherCount",
+        "legendOther", "barOk", "barStop", "barWarn",
+        "resultCount", "themeToggle", "toast"
+      ].forEach((id) => { dom[id] = document.getElementById(id); });
     }
 
     function escapeHtml(value) {
-      const element = document.createElement("div");
-      element.textContent = String(value ?? "");
-      return element.innerHTML;
+      const el = document.createElement("div");
+      el.textContent = String(value ?? "");
+      return el.innerHTML;
     }
 
     function normalize(value) {
       return String(value || "").trim().toLowerCase();
     }
 
-    /*
-      Catatan penting:
-      "DISCONTINUE" mengandung teks "CONTINUE".
-      Maka status berhenti diperiksa lebih dahulu agar statistik benar.
-    */
+    function debounce(fn, delay = 120) {
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), delay);
+      };
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      dom.toast.textContent = message;
+      dom.toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => dom.toast.classList.remove("show"), 3200);
+    }
+
+    /* =========================================================
+       STATUS
+       Catatan: "DISCONTINUE" mengandung kata "CONTINUE",
+       maka status berhenti selalu diperiksa lebih dahulu.
+       ========================================================= */
     function isDiscontinued(status) {
       const s = normalize(status);
-
       return (
         s.includes("discontinue") ||
         s.includes("dihentikan") ||
@@ -1083,10 +974,7 @@
 
     function isContinuing(status) {
       const s = normalize(status);
-
-      if (isDiscontinued(s)) {
-        return false;
-      }
+      if (isDiscontinued(s)) return false;
 
       return (
         s === "continue" ||
@@ -1104,26 +992,25 @@
       return "other";
     }
 
-    /*
-      Parser CSV:
-      - Mendukung koma dalam kolom jika dibungkus tanda kutip
-      - Mendukung tanda kutip ganda ("")
-      - Mendukung line break di dalam kolom yang diapit tanda kutip
-    */
+    /* =========================================================
+       PARSER CSV
+       Mendukung koma dalam tanda kutip, kutip ganda (""),
+       dan baris baru di dalam kolom bertanda kutip.
+       ========================================================= */
     function parseCSV(text) {
       const rows = [];
       let row = [];
       let field = "";
       let inQuotes = false;
 
-      const cleanText = text.replace(/^\uFEFF/, "");
+      const clean = text.replace(/^\uFEFF/, "");
 
-      for (let i = 0; i < cleanText.length; i++) {
-        const char = cleanText[i];
-        const nextChar = cleanText[i + 1];
+      for (let i = 0; i < clean.length; i++) {
+        const char = clean[i];
+        const next = clean[i + 1];
 
         if (char === '"') {
-          if (inQuotes && nextChar === '"') {
+          if (inQuotes && next === '"') {
             field += '"';
             i++;
           } else {
@@ -1139,17 +1026,12 @@
         }
 
         if ((char === "\n" || char === "\r") && !inQuotes) {
-          if (char === "\r" && nextChar === "\n") {
-            i++;
-          }
+          if (char === "\r" && next === "\n") i++;
 
           row.push(field.trim());
           field = "";
 
-          if (row.some((value) => value !== "")) {
-            rows.push(row);
-          }
-
+          if (row.some((v) => v !== "")) rows.push(row);
           row = [];
           continue;
         }
@@ -1158,13 +1040,10 @@
       }
 
       row.push(field.trim());
-
-      if (row.some((value) => value !== "")) {
-        rows.push(row);
-      }
+      if (row.some((v) => v !== "")) rows.push(row);
 
       if (rows.length < 2) {
-        showEmptyState("CSV hanya memiliki header atau tidak memiliki data.");
+        showEmptyState("CSV hanya berisi header atau tidak memiliki data.");
         return;
       }
 
@@ -1173,31 +1052,19 @@
 
       allData.length = 0;
 
-      /*
-        Script memakai urutan kolom:
-        Kode Material, Nama Barang, Pemasok, Asal, Status, Catatan
-      */
       for (let i = 1; i < rows.length; i++) {
-        const rowData = rows[i];
+        const r = rows[i];
 
         const record = {
-          code: (rowData[0] || "").trim(),
-          name: (rowData[1] || "").trim(),
-          supplier: (rowData[2] || "").trim(),
-          origin: (rowData[3] || "").trim(),
-          status: (rowData[4] || "").trim(),
-          note: (rowData[5] || "").trim()
+          code: (r[0] || "").trim(),
+          name: (r[1] || "").trim(),
+          supplier: (r[2] || "").trim(),
+          origin: (r[3] || "").trim(),
+          status: (r[4] || "").trim(),
+          note: (r[5] || "").trim()
         };
 
-        /*
-          Abaikan baris yang benar-benar kosong,
-          tetapi tetap terima data jika hanya beberapa kolom kosong.
-        */
-        const hasContent = Object.values(record).some((value) => value !== "");
-
-        if (!hasContent) {
-          continue;
-        }
+        if (!Object.values(record).some((v) => v !== "")) continue;
 
         allData.push(record);
 
@@ -1206,254 +1073,255 @@
       }
 
       if (allData.length === 0) {
-        showEmptyState("Data produk tidak ditemukan dalam CSV.");
+        showEmptyState("Data produk tidak ditemukan di dalam CSV.");
         return;
       }
 
-      suppliers = [...supplierSet].sort((a, b) => a.localeCompare(b));
-      origins = [...originSet].sort((a, b) => a.localeCompare(b));
+      options.supplier = [...supplierSet].sort((a, b) => a.localeCompare(b));
+      options.origin = [...originSet].sort((a, b) => a.localeCompare(b));
 
-      renderSupplierMenu();
-      renderOriginMenu();
-      syncStatusSelectAll();
+      buildMenu("supplier", options.supplier.map((v) => ({ value: v, label: v })));
+      buildMenu("origin", options.origin.map((v) => ({ value: v, label: v })));
+      buildMenu("status", STATUS_OPTIONS);
+
       applyFilters();
     }
 
-    function createMenuItem({ labelText, className, value, id }) {
-      const label = document.createElement("label");
-      label.className = className;
+    /* =========================================================
+       DROPDOWN FILTER (satu fungsi untuk ketiga filter)
+       ========================================================= */
+    function createMenuItem({ label, value, className, isAll }) {
+      const item = document.createElement("label");
+      item.className = className;
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
-
-      if (value !== undefined) checkbox.value = value;
-      if (id) checkbox.id = id;
+      if (isAll) checkbox.dataset.all = "true";
+      else checkbox.value = value;
 
       const text = document.createElement("span");
-      text.textContent = labelText;
+      text.textContent = label;
 
-      label.append(checkbox, text);
-      return label;
+      item.append(checkbox, text);
+      return item;
     }
 
-    function renderSupplierMenu() {
+    function buildMenu(type, items) {
+      const menu = dom[`${type}Menu`];
       const fragment = document.createDocumentFragment();
 
       fragment.appendChild(
-        createMenuItem({
-          labelText: "Pilih Semua",
-          className: "dropdown-item select-all-item",
-          id: "supplierSelectAll"
-        })
+        createMenuItem({ label: "Pilih semua", className: "menu-item menu-all", isAll: true })
       );
 
-      suppliers.forEach((supplier) => {
-        const item = createMenuItem({
-          labelText: supplier,
-          className: "dropdown-item supplier-item",
-          value: supplier
-        });
-
-        const checkbox = item.querySelector("input");
-        checkbox.classList.add("supplier-check");
-        checkbox.checked = selected.supplier.has(supplier);
-
+      items.forEach(({ value, label }) => {
+        const item = createMenuItem({ label, value, className: "menu-item" });
+        item.querySelector("input").checked = selected[type].has(value);
         fragment.appendChild(item);
       });
 
-      dom.supplierMenu.replaceChildren(fragment);
-      syncSupplierSelectAll();
+      menu.replaceChildren(fragment);
+      syncSelectAll(type);
     }
 
-    function renderOriginMenu() {
-      const fragment = document.createDocumentFragment();
+    function syncSelectAll(type) {
+      const menu = dom[`${type}Menu`];
+      const all = menu.querySelector("input[data-all]");
+      const boxes = [...menu.querySelectorAll("input:not([data-all])")];
+      if (!all) return;
 
-      fragment.appendChild(
-        createMenuItem({
-          labelText: "Pilih Semua",
-          className: "dropdown-item select-all-item",
-          id: "originSelectAll"
-        })
-      );
-
-      origins.forEach((origin) => {
-        const item = createMenuItem({
-          labelText: origin,
-          className: "dropdown-item origin-item",
-          value: origin
-        });
-
-        const checkbox = item.querySelector("input");
-        checkbox.classList.add("origin-check");
-        checkbox.checked = selected.origin.has(origin);
-
-        fragment.appendChild(item);
-      });
-
-      dom.originMenu.replaceChildren(fragment);
-      syncOriginSelectAll();
-    }
-
-    function syncSelectAll(menu, itemSelector, selectAllSelector) {
-      const itemCheckboxes = [...menu.querySelectorAll(itemSelector)];
-      const selectAll = menu.querySelector(selectAllSelector);
-
-      if (!selectAll) return;
-
-      const checkedCount = itemCheckboxes.filter((checkbox) => checkbox.checked).length;
-
-      selectAll.checked =
-        itemCheckboxes.length > 0 &&
-        checkedCount === itemCheckboxes.length;
-
-      selectAll.indeterminate =
-        checkedCount > 0 &&
-        checkedCount < itemCheckboxes.length;
-    }
-
-    function syncSupplierSelectAll() {
-      syncSelectAll(
-        dom.supplierMenu,
-        ".supplier-check",
-        "#supplierSelectAll"
-      );
-    }
-
-    function syncOriginSelectAll() {
-      syncSelectAll(
-        dom.originMenu,
-        ".origin-check",
-        "#originSelectAll"
-      );
-    }
-
-    function syncStatusSelectAll() {
-      syncSelectAll(
-        dom.statusMenu,
-        ".status-check",
-        "#statusSelectAll"
-      );
+      const count = boxes.filter((b) => b.checked).length;
+      all.checked = boxes.length > 0 && count === boxes.length;
+      all.indeterminate = count > 0 && count < boxes.length;
     }
 
     function updateToggleText(type) {
-      const selectedSet = selected[type];
-      const target = dom[`${type}Text`];
+      const set = selected[type];
+      const text = dom[`${type}Text`];
+      const toggle = dom[`${type}Toggle`];
 
-      const labels = {
-        supplier: "Semua Pemasok",
-        origin: "Semua Asal",
-        status: "Semua Status"
-      };
+      toggle.classList.toggle("has-value", set.size > 0);
 
-      if (selectedSet.size === 0) {
-        target.textContent = labels[type];
-        return;
+      if (set.size === 0) {
+        text.textContent = LABELS[type];
+      } else if (set.size === 1) {
+        const value = [...set][0];
+        text.textContent =
+          type === "status"
+            ? STATUS_OPTIONS.find((o) => o.value === value).label
+            : value;
+      } else {
+        text.textContent = `${set.size} dipilih`;
+      }
+    }
+
+    function handleMenuChange(type, event) {
+      const target = event.target;
+      if (target.tagName !== "INPUT") return;
+
+      const menu = dom[`${type}Menu`];
+
+      if (target.dataset.all) {
+        selected[type].clear();
+
+        menu.querySelectorAll("input:not([data-all])").forEach((box) => {
+          box.checked = target.checked;
+          if (target.checked) selected[type].add(box.value);
+        });
+      } else if (target.checked) {
+        selected[type].add(target.value);
+      } else {
+        selected[type].delete(target.value);
       }
 
-      if (selectedSet.size === 1) {
-        if (type === "status") {
-          target.textContent = selectedSet.has("continue")
-            ? "Lanjut Produksi"
-            : "Dihentikan";
-        } else {
-          target.textContent = [...selectedSet][0];
+      syncSelectAll(type);
+      updateToggleText(type);
+      applyFilters();
+    }
+
+    function closeAllMenus() {
+      document.querySelectorAll(".menu").forEach((m) => m.classList.remove("open"));
+      document.querySelectorAll(".filter-btn").forEach((b) => b.setAttribute("aria-expanded", "false"));
+    }
+
+    function setupDropdown(toggle, menu) {
+      toggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const wasOpen = menu.classList.contains("open");
+
+        closeAllMenus();
+
+        if (!wasOpen) {
+          menu.classList.add("open");
+          toggle.setAttribute("aria-expanded", "true");
         }
-        return;
-      }
+      });
 
-      target.textContent = `${selectedSet.size} dipilih`;
+      menu.addEventListener("click", (event) => event.stopPropagation());
+    }
+
+    /* =========================================================
+       FILTER, URUTAN, STATISTIK
+       ========================================================= */
+    function matchesStatusFilter(item) {
+      if (selected.status.size === 0) return true;
+
+      return (
+        (selected.status.has("continue") && isContinuing(item.status)) ||
+        (selected.status.has("discontinue") && isDiscontinued(item.status)) ||
+        (selected.status.has("other") && getStatusClass(item.status) === "other")
+      );
     }
 
     function getFilteredData() {
       const keyword = normalize(dom.search.value);
 
-      return allData.filter((item) => {
+      const result = allData.filter((item) => {
         const matchKeyword =
           !keyword ||
-          [
-            item.code,
-            item.name,
-            item.supplier,
-            item.origin,
-            item.status,
-            item.note
-          ].some((value) => normalize(value).includes(keyword));
+          [item.code, item.name, item.supplier, item.origin, item.status, item.note]
+            .some((v) => normalize(v).includes(keyword));
 
-        const matchSupplier =
-          selected.supplier.size === 0 ||
-          selected.supplier.has(item.supplier);
+        const matchSupplier = selected.supplier.size === 0 || selected.supplier.has(item.supplier);
+        const matchOrigin = selected.origin.size === 0 || selected.origin.has(item.origin);
 
-        const matchOrigin =
-          selected.origin.size === 0 ||
-          selected.origin.has(item.origin);
-
-        let matchStatus = true;
-
-        if (selected.status.size > 0) {
-          const matchesContinue =
-            selected.status.has("continue") &&
-            isContinuing(item.status);
-
-          const matchesDiscontinue =
-            selected.status.has("discontinue") &&
-            isDiscontinued(item.status);
-
-          matchStatus = matchesContinue || matchesDiscontinue;
-        }
-
-        return matchKeyword && matchSupplier && matchOrigin && matchStatus;
+        return matchKeyword && matchSupplier && matchOrigin && matchStatusFilter(item);
       });
+
+      if (sortState.key) {
+        const dir = sortState.dir === "asc" ? 1 : -1;
+        const key = sortState.key;
+
+        result.sort((a, b) =>
+          dir * String(a[key] || "").localeCompare(String(b[key] || ""), "id", {
+            numeric: true,
+            sensitivity: "base"
+          })
+        );
+      }
+
+      return result;
     }
 
-    function updateStats(filteredData) {
-      const total = filteredData.length;
-
-      const continueCount = filteredData.filter((item) => {
-        return isContinuing(item.status);
-      }).length;
-
-      const discontinueCount = filteredData.filter((item) => {
-        return isDiscontinued(item.status);
-      }).length;
-
-      dom.totalCount.textContent = total;
-      dom.continueCount.textContent = continueCount;
-      dom.discontinueCount.textContent = discontinueCount;
-    }
-
-    function updateSearchIndicator() {
-      const hasActiveSearch =
+    function hasActiveFilter() {
+      return (
         dom.search.value.trim() !== "" ||
         selected.supplier.size > 0 ||
         selected.origin.size > 0 ||
-        selected.status.size > 0;
-
-      dom.searchIcon.classList.toggle("active", hasActiveSearch);
+        selected.status.size > 0
+      );
     }
 
-    function renderTable(data) {
-      if (data.length === 0) {
-        dom.tableBody.innerHTML = "";
-        return;
-      }
+    function updateStats(data) {
+      const total = data.length;
+      const cont = data.filter((i) => isContinuing(i.status)).length;
+      const disc = data.filter((i) => isDiscontinued(i.status)).length;
+      const other = total - cont - disc;
 
+      dom.totalCount.textContent = total.toLocaleString("id-ID");
+      dom.continueCount.textContent = cont.toLocaleString("id-ID");
+      dom.discontinueCount.textContent = disc.toLocaleString("id-ID");
+      dom.otherCount.textContent = other.toLocaleString("id-ID");
+      dom.legendOther.hidden = other === 0;
+
+      const pct = (n) => (total ? (n / total) * 100 : 0);
+      dom.barOk.style.width = `${pct(cont)}%`;
+      dom.barStop.style.width = `${pct(disc)}%`;
+      dom.barWarn.style.width = `${pct(other)}%`;
+
+      dom.resultCount.innerHTML = allData.length
+        ? `Menampilkan <b>${total.toLocaleString("id-ID")}</b> dari ${allData.length.toLocaleString("id-ID")} produk`
+        : "Tidak ada data";
+    }
+
+    function updateControls() {
+      const active = hasActiveFilter();
+      dom.btnReset.hidden = !active;
+      dom.searchClear.classList.toggle("show", dom.search.value !== "");
+    }
+
+    function updateSortHeaders() {
+      document.querySelectorAll("#dataTable thead th").forEach((th) => {
+        if (th.dataset.key === sortState.key) {
+          th.setAttribute("aria-sort", sortState.dir === "asc" ? "ascending" : "descending");
+        } else {
+          th.removeAttribute("aria-sort");
+        }
+      });
+    }
+
+    function resetFilters() {
+      dom.search.value = "";
+
+      ["supplier", "origin", "status"].forEach((type) => {
+        selected[type].clear();
+        dom[`${type}Menu`].querySelectorAll("input").forEach((box) => {
+          box.checked = false;
+          box.indeterminate = false;
+        });
+        updateToggleText(type);
+      });
+
+      applyFilters();
+    }
+
+    /* =========================================================
+       RENDER
+       ========================================================= */
+    function renderTable(data) {
       const fragment = document.createDocumentFragment();
 
       data.forEach((item) => {
         const row = document.createElement("tr");
-        const statusClass = getStatusClass(item.status);
+        const cls = getStatusClass(item.status);
 
         row.innerHTML = `
-          <td><span class="material-code">${escapeHtml(item.code)}</span></td>
-          <td>${escapeHtml(item.name)}</td>
-          <td>${escapeHtml(item.supplier)}</td>
-          <td>${escapeHtml(item.origin)}</td>
-          <td>
-            <span class="status-badge status-${statusClass}">
-              ${escapeHtml(item.status || "-")}
-            </span>
-          </td>
-          <td>${escapeHtml(item.note) || '<span style="color: var(--text-muted)">-</span>'}</td>
+          <td class="col-code"><span class="code">${escapeHtml(item.code) || '<span class="muted">-</span>'}</span></td>
+          <td>${escapeHtml(item.name) || '<span class="muted">-</span>'}</td>
+          <td>${escapeHtml(item.supplier) || '<span class="muted">-</span>'}</td>
+          <td>${escapeHtml(item.origin) || '<span class="muted">-</span>'}</td>
+          <td><span class="badge ${cls}">${escapeHtml(item.status || "-")}</span></td>
+          <td>${escapeHtml(item.note) || '<span class="muted">-</span>'}</td>
         `;
 
         fragment.appendChild(row);
@@ -1463,30 +1331,28 @@
     }
 
     function renderCards(data) {
-      if (data.length === 0) {
-        dom.cardView.innerHTML = "";
-        return;
-      }
-
       const fragment = document.createDocumentFragment();
 
       data.forEach((item) => {
-        const statusClass = getStatusClass(item.status);
+        const cls = getStatusClass(item.status);
         const card = document.createElement("article");
-
-        card.className = `card ${statusClass}`;
+        card.className = `card ${cls}`;
 
         card.innerHTML = `
-          <div class="card-code">${escapeHtml(item.code)}</div>
-          <h3 class="card-name">${escapeHtml(item.name)}</h3>
+          <div class="card-head">
+            <div>
+              <div class="card-code">${escapeHtml(item.code) || "-"}</div>
+              <h3 class="card-name">${escapeHtml(item.name) || "-"}</h3>
+            </div>
+            <span class="badge ${cls}">${escapeHtml(item.status || "-")}</span>
+          </div>
 
-          <span class="status-badge status-${statusClass}">
-            ${escapeHtml(item.status || "-")}
-          </span>
+          <dl>
+            <dt>Pemasok</dt><dd>${escapeHtml(item.supplier) || "-"}</dd>
+            <dt>Asal</dt><dd>${escapeHtml(item.origin) || "-"}</dd>
+          </dl>
 
-          <p><strong>Pemasok:</strong> ${escapeHtml(item.supplier || "-")}</p>
-          <p><strong>Asal:</strong> ${escapeHtml(item.origin || "-")}</p>
-          <p class="card-note">${escapeHtml(item.note) || "Tidak ada catatan"}</p>
+          ${item.note ? `<p class="card-note">${escapeHtml(item.note)}</p>` : ""}
         `;
 
         fragment.appendChild(card);
@@ -1495,382 +1361,492 @@
       dom.cardView.replaceChildren(fragment);
     }
 
-    function showEmptyState(message) {
-      dom.tableBody.innerHTML = `
-        <tr>
-          <td class="empty-cell" colspan="6">
-            <div class="empty-state">
-              <strong>${escapeHtml(message)}</strong>
-            </div>
-          </td>
-        </tr>
-      `;
-
-      dom.cardView.innerHTML = `
-        <div class="empty-state" style="width: 100%;">
-          <strong>${escapeHtml(message)}</strong>
+    function stateMarkup({ title, hint, error }) {
+      return `
+        <div class="state${error ? " error" : ""}">
+          <strong>${escapeHtml(title)}</strong>
+          ${hint ? `<small>${escapeHtml(hint)}</small>` : ""}
         </div>
       `;
+    }
 
+    function showState(config) {
+      dom.tableBody.innerHTML = `<tr><td class="td-state" colspan="6">${stateMarkup(config)}</td></tr>`;
+      dom.cardView.innerHTML = `<div style="grid-column: 1 / -1">${stateMarkup(config)}</div>`;
+    }
+
+    function showEmptyState(message) {
+      showState({ title: message });
       updateStats([]);
     }
 
-    function showNoResult() {
-      dom.tableBody.innerHTML = `
-        <tr>
-          <td class="empty-cell" colspan="6">
-            <div class="empty-state">
-              <strong>Tidak ada hasil ditemukan.</strong>
-              <div style="margin-top: 6px;">Ubah kata kunci atau pilihan filter Anda.</div>
-            </div>
-          </td>
-        </tr>
-      `;
-
-      dom.cardView.innerHTML = `
-        <div class="empty-state" style="width: 100%;">
-          <strong>Tidak ada hasil ditemukan.</strong>
-          <div style="margin-top: 6px;">Ubah kata kunci atau pilihan filter Anda.</div>
-        </div>
-      `;
-    }
-
     function applyFilters() {
-      const filteredData = getFilteredData();
+      const data = getFilteredData();
 
-      updateStats(filteredData);
-      updateSearchIndicator();
+      updateStats(data);
+      updateControls();
+      updateSortHeaders();
 
-      if (filteredData.length === 0 && allData.length > 0) {
-        showNoResult();
-        return;
-      }
-
-      renderTable(filteredData);
-      renderCards(filteredData);
-    }
-
-    function closeAllDropdowns() {
-      document.querySelectorAll(".dropdown-menu").forEach((menu) => {
-        menu.classList.remove("open");
-      });
-
-      document.querySelectorAll(".dropdown-toggle").forEach((toggle) => {
-        toggle.classList.remove("active");
-        toggle.setAttribute("aria-expanded", "false");
-      });
-    }
-
-    function setupDropdown(toggle, menu) {
-      toggle.addEventListener("click", (event) => {
-        event.stopPropagation();
-
-        const isOpen = menu.classList.contains("open");
-
-        closeAllDropdowns();
-
-        if (!isOpen) {
-          menu.classList.add("open");
-          toggle.classList.add("active");
-          toggle.setAttribute("aria-expanded", "true");
-        }
-      });
-
-      menu.addEventListener("click", (event) => {
-        event.stopPropagation();
-      });
-    }
-
-    function handleSupplierFilter(event) {
-      const target = event.target;
-
-      if (target.id === "supplierSelectAll") {
-        const shouldCheckAll = target.checked;
-        const checkboxes = dom.supplierMenu.querySelectorAll(".supplier-check");
-
-        selected.supplier.clear();
-
-        checkboxes.forEach((checkbox) => {
-          checkbox.checked = shouldCheckAll;
-
-          if (shouldCheckAll) {
-            selected.supplier.add(checkbox.value);
-          }
+      if (data.length === 0 && allData.length > 0) {
+        showState({
+          title: "Tidak ada hasil",
+          hint: "Ubah kata kunci atau pilihan filter."
         });
-
-        syncSupplierSelectAll();
-        updateToggleText("supplier");
-        applyFilters();
         return;
       }
 
-      if (target.classList.contains("supplier-check")) {
-        if (target.checked) {
-          selected.supplier.add(target.value);
-        } else {
-          selected.supplier.delete(target.value);
-        }
-
-        syncSupplierSelectAll();
-        updateToggleText("supplier");
-        applyFilters();
-      }
-    }
-
-    function handleOriginFilter(event) {
-      const target = event.target;
-
-      if (target.id === "originSelectAll") {
-        const shouldCheckAll = target.checked;
-        const checkboxes = dom.originMenu.querySelectorAll(".origin-check");
-
-        selected.origin.clear();
-
-        checkboxes.forEach((checkbox) => {
-          checkbox.checked = shouldCheckAll;
-
-          if (shouldCheckAll) {
-            selected.origin.add(checkbox.value);
-          }
-        });
-
-        syncOriginSelectAll();
-        updateToggleText("origin");
-        applyFilters();
-        return;
-      }
-
-      if (target.classList.contains("origin-check")) {
-        if (target.checked) {
-          selected.origin.add(target.value);
-        } else {
-          selected.origin.delete(target.value);
-        }
-
-        syncOriginSelectAll();
-        updateToggleText("origin");
-        applyFilters();
-      }
-    }
-
-    function handleStatusFilter(event) {
-      const target = event.target;
-
-      if (target.id === "statusSelectAll") {
-        const shouldCheckAll = target.checked;
-        const checkboxes = dom.statusMenu.querySelectorAll(".status-check");
-
-        selected.status.clear();
-
-        checkboxes.forEach((checkbox) => {
-          checkbox.checked = shouldCheckAll;
-
-          if (shouldCheckAll) {
-            selected.status.add(checkbox.value);
-          }
-        });
-
-        syncStatusSelectAll();
-        updateToggleText("status");
-        applyFilters();
-        return;
-      }
-
-      if (target.classList.contains("status-check")) {
-        if (target.checked) {
-          selected.status.add(target.value);
-        } else {
-          selected.status.delete(target.value);
-        }
-
-        syncStatusSelectAll();
-        updateToggleText("status");
-        applyFilters();
-      }
+      renderTable(data);
+      renderCards(data);
     }
 
     function setView(view) {
-      const tableMode = view === "table";
+      const isTable = view === "table";
 
-      dom.tableView.style.display = tableMode ? "block" : "none";
-      dom.cardView.style.display = tableMode ? "none" : "flex";
+      dom.tableView.style.display = isTable ? "block" : "none";
+      dom.cardView.style.display = isTable ? "none" : "grid";
 
-      dom.btnTable.classList.toggle("active", tableMode);
-      dom.btnCard.classList.toggle("active", !tableMode);
-
-      dom.btnTable.setAttribute("aria-pressed", String(tableMode));
-      dom.btnCard.setAttribute("aria-pressed", String(!tableMode));
+      dom.btnTable.classList.toggle("active", isTable);
+      dom.btnCard.classList.toggle("active", !isTable);
+      dom.btnTable.setAttribute("aria-pressed", String(isTable));
+      dom.btnCard.setAttribute("aria-pressed", String(!isTable));
     }
 
-    /*
-      Halaman selalu mulai dalam Light Mode.
-      Tidak menggunakan localStorage atau pengaturan Dark Mode browser
-      saat halaman/link pertama kali dibuka.
-    */
-    function initTheme() {
-      const initialTheme = "light";
-
-      document.documentElement.setAttribute("data-theme", initialTheme);
-      updateThemeButton(initialTheme);
-    }
-
-    function updateThemeButton(theme) {
-      const isDark = theme === "dark";
-
-      dom.themeToggle.classList.toggle("active", isDark);
-      dom.themeToggle.setAttribute("aria-pressed", String(isDark));
-      dom.themeIcon.textContent = isDark ? "🌙" : "☀️";
-    }
-
+    /* =========================================================
+       TEMA (selalu mulai dari mode terang)
+       ========================================================= */
     function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute("data-theme");
-      const nextTheme = currentTheme === "dark" ? "light" : "dark";
-
-      document.documentElement.setAttribute("data-theme", nextTheme);
-      updateThemeButton(nextTheme);
+      const current = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", current === "dark" ? "light" : "dark");
     }
 
-    function exportToExcel() {
-      const filteredData = getFilteredData();
+    /* =========================================================
+       EKSPOR EXCEL (.xlsx berformat rapi)
+       Sheet 1 "Data Produk"  : judul, info filter, tabel berwarna
+       Sheet 2 "Ringkasan"    : jumlah per status, pemasok, dan asal
+       ========================================================= */
+    const XL = {
+      brand: "FF0E7C86",
+      brandDark: "FF0A626A",
+      brandSoft: "FFE3F3F4",
+      zebra: "FFF5F9F9",
+      line: "FFD3DFE1",
+      text: "FF1B2B32",
+      muted: "FF6B7C83",
+      status: {
+        cont: { fill: "FFE4F5ED", font: "FF0F6B4D" },
+        disc: { fill: "FFFCE9E6", font: "FFA5281B" },
+        other: { fill: "FFFFF3D8", font: "FF8A5A00" }
+      }
+    };
 
-      const escapeCSV = (value) => {
-        return `"${String(value || "").replace(/"/g, '""')}"`;
+    function todayLabel() {
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2, "0");
+      return `${pad(d.getDate())}-${pad(d.getMonth() + 1)}-${d.getFullYear()}`;
+    }
+
+    function describeFilters() {
+      const parts = [];
+      const keyword = dom.search.value.trim();
+
+      if (keyword) parts.push(`Kata kunci: "${keyword}"`);
+      if (selected.supplier.size) parts.push(`Pemasok: ${[...selected.supplier].join(", ")}`);
+      if (selected.origin.size) parts.push(`Asal: ${[...selected.origin].join(", ")}`);
+      if (selected.status.size) {
+        const names = [...selected.status].map((v) => STATUS_OPTIONS.find((o) => o.value === v).label);
+        parts.push(`Status: ${names.join(", ")}`);
+      }
+
+      return parts.length ? parts.join("  |  ") : "Semua data (tanpa filter)";
+    }
+
+    function borderAll(color = XL.line) {
+      const side = { style: "thin", color: { argb: color } };
+      return { top: side, left: side, bottom: side, right: side };
+    }
+
+    function countBy(data, key) {
+      const map = new Map();
+      data.forEach((item) => {
+        const name = item[key] || "(kosong)";
+        map.set(name, (map.get(name) || 0) + 1);
+      });
+      return [...map.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    }
+
+    function buildDataSheet(wb, data) {
+      const headers = ["No", "Kode Material", "Nama Barang", "Pemasok", "Asal", "Status", "Catatan"];
+      const keys = ["code", "name", "supplier", "origin", "status", "note"];
+      const lastCol = headers.length;
+      const headerRow = 5;
+
+      const ws = wb.addWorksheet("Data Produk", {
+        views: [{ state: "frozen", ySplit: headerRow, showGridLines: false }],
+        properties: { tabColor: { argb: XL.brand } },
+        pageSetup: {
+          paperSize: 9,
+          orientation: "landscape",
+          fitToPage: true,
+          fitToWidth: 1,
+          fitToHeight: 0,
+          margins: { left: 0.4, right: 0.4, top: 0.5, bottom: 0.5, header: 0.25, footer: 0.25 }
+        },
+        headerFooter: { oddFooter: "&LAdvance Digitals&CHalaman &P dari &N&R&D" }
+      });
+
+      /* Lebar kolom mengikuti isi data, dengan batas bawah dan atas */
+      const widths = [6, 18, 30, 22, 14, 18, 36];
+      keys.forEach((key, i) => {
+        const longest = Math.max(
+          headers[i + 1].length,
+          ...data.map((item) => String(item[key] || "").length)
+        );
+        const limit = [26, 52, 34, 20, 26, 60][i];
+        widths[i + 1] = Math.max(widths[i + 1], Math.min(longest + 3, limit));
+      });
+      ws.columns = widths.map((width) => ({ width }));
+
+      /* Judul */
+      ws.mergeCells(1, 1, 1, lastCol);
+      const title = ws.getCell(1, 1);
+      title.value = "Advance Digitals — Status Produk";
+      title.font = { name: "Calibri", size: 18, bold: true, color: { argb: XL.brandDark } };
+      title.alignment = { vertical: "middle", horizontal: "left" };
+      ws.getRow(1).height = 32;
+
+      ws.mergeCells(2, 1, 2, lastCol);
+      const sub = ws.getCell(2, 1);
+      sub.value = `Diunduh: ${todayLabel()}    |    Jumlah: ${data.length.toLocaleString("id-ID")} produk`;
+      sub.font = { name: "Calibri", size: 10.5, color: { argb: XL.muted } };
+
+      ws.mergeCells(3, 1, 3, lastCol);
+      const info = ws.getCell(3, 1);
+      info.value = `Filter: ${describeFilters()}`;
+      info.font = { name: "Calibri", size: 10.5, italic: true, color: { argb: XL.muted } };
+      info.alignment = { wrapText: true, vertical: "top" };
+
+      /* Garis aksen di bawah judul */
+      for (let c = 1; c <= lastCol; c++) {
+        ws.getCell(4, c).border = { top: { style: "medium", color: { argb: XL.brand } } };
+      }
+      ws.getRow(4).height = 6;
+
+      /* Header tabel */
+      const head = ws.getRow(headerRow);
+      head.values = headers;
+      head.height = 26;
+
+      head.eachCell((cell, col) => {
+        cell.font = { name: "Calibri", size: 11, bold: true, color: { argb: "FFFFFFFF" } };
+        cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.brand } };
+        cell.alignment = {
+          vertical: "middle",
+          horizontal: col === 1 || col === 6 ? "center" : "left",
+          indent: col === 1 || col === 6 ? 0 : 1
+        };
+        cell.border = borderAll(XL.brandDark);
+      });
+
+      /* Isi tabel */
+      data.forEach((item, index) => {
+        const rowNumber = headerRow + 1 + index;
+        const row = ws.getRow(rowNumber);
+        const cls = getStatusClass(item.status);
+
+        row.values = [index + 1, ...keys.map((k) => item[k] || "")];
+        row.height = item.note && item.note.length > 45 ? 32 : 22;
+
+        row.eachCell({ includeEmpty: true }, (cell, col) => {
+          cell.font = { name: "Calibri", size: 10.5, color: { argb: XL.text } };
+          cell.border = borderAll();
+          cell.alignment = {
+            vertical: "middle",
+            horizontal: col === 1 || col === 6 ? "center" : "left",
+            indent: col === 1 || col === 6 ? 0 : 1,
+            wrapText: col === 3 || col === 7
+          };
+
+          if (index % 2 === 1) {
+            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.zebra } };
+          }
+        });
+
+        /* Kode material dibuat tebal dan tetap sebagai teks */
+        const codeCell = row.getCell(2);
+        codeCell.numFmt = "@";
+        codeCell.font = { name: "Calibri", size: 10.5, bold: true, color: { argb: XL.text } };
+
+        /* Warna status */
+        const statusCell = row.getCell(6);
+        statusCell.font = { name: "Calibri", size: 10.5, bold: true, color: { argb: XL.status[cls].font } };
+        statusCell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.status[cls].fill } };
+      });
+
+      /* Baris total */
+      const totalRowNumber = headerRow + data.length + 1;
+      ws.mergeCells(totalRowNumber, 1, totalRowNumber, lastCol);
+
+      const totalCell = ws.getCell(totalRowNumber, 1);
+      totalCell.value = `Total: ${data.length.toLocaleString("id-ID")} produk`;
+      totalCell.font = { name: "Calibri", size: 11, bold: true, color: { argb: XL.brandDark } };
+      totalCell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.brandSoft } };
+      totalCell.alignment = { vertical: "middle", horizontal: "left", indent: 1 };
+      totalCell.border = borderAll(XL.line);
+      ws.getRow(totalRowNumber).height = 24;
+
+      /* Filter dropdown di header + judul tabel berulang saat dicetak */
+      ws.autoFilter = {
+        from: { row: headerRow, column: 1 },
+        to: { row: headerRow + data.length, column: lastCol }
+      };
+      ws.pageSetup.printTitlesRow = `${headerRow}:${headerRow}`;
+    }
+
+    function buildSummarySheet(wb, data) {
+      const ws = wb.addWorksheet("Ringkasan", {
+        views: [{ showGridLines: false }],
+        properties: { tabColor: { argb: "FF35C2CC" } },
+        pageSetup: { paperSize: 9, orientation: "portrait", fitToPage: true, fitToWidth: 1, fitToHeight: 0 }
+      });
+
+      ws.columns = [{ width: 34 }, { width: 14 }, { width: 14 }];
+
+      ws.mergeCells("A1:C1");
+      const title = ws.getCell("A1");
+      title.value = "Ringkasan Produk";
+      title.font = { name: "Calibri", size: 18, bold: true, color: { argb: XL.brandDark } };
+      title.alignment = { vertical: "middle" };
+      ws.getRow(1).height = 32;
+
+      ws.mergeCells("A2:C2");
+      const sub = ws.getCell("A2");
+      sub.value = `Diunduh: ${todayLabel()}`;
+      sub.font = { name: "Calibri", size: 10.5, color: { argb: XL.muted } };
+
+      const total = data.length;
+      const cont = data.filter((i) => isContinuing(i.status)).length;
+      const disc = data.filter((i) => isDiscontinued(i.status)).length;
+      const other = total - cont - disc;
+
+      let row = 4;
+
+      const addTable = (heading, rows, withTotal) => {
+        /* Judul bagian */
+        ws.mergeCells(row, 1, row, 3);
+        const h = ws.getCell(row, 1);
+        h.value = heading;
+        h.font = { name: "Calibri", size: 12, bold: true, color: { argb: "FFFFFFFF" } };
+        h.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.brand } };
+        h.alignment = { vertical: "middle", indent: 1 };
+        ws.getRow(row).height = 24;
+        row++;
+
+        /* Header kolom */
+        ["Kategori", "Jumlah", "Persen"].forEach((text, i) => {
+          const cell = ws.getCell(row, i + 1);
+          cell.value = text;
+          cell.font = { name: "Calibri", size: 10.5, bold: true, color: { argb: XL.brandDark } };
+          cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.brandSoft } };
+          cell.alignment = { horizontal: i === 0 ? "left" : "center", indent: i === 0 ? 1 : 0 };
+          cell.border = borderAll();
+        });
+        row++;
+
+        rows.forEach(([name, count, style], index) => {
+          const cells = [ws.getCell(row, 1), ws.getCell(row, 2), ws.getCell(row, 3)];
+
+          cells[0].value = name;
+          cells[1].value = count;
+          cells[2].value = total ? count / total : 0;
+          cells[2].numFmt = "0.0%";
+
+          cells.forEach((cell, i) => {
+            cell.font = { name: "Calibri", size: 10.5, color: { argb: XL.text } };
+            cell.alignment = { horizontal: i === 0 ? "left" : "center", indent: i === 0 ? 1 : 0 };
+            cell.border = borderAll();
+            if (index % 2 === 1) {
+              cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.zebra } };
+            }
+          });
+
+          if (style) {
+            cells[0].font = { name: "Calibri", size: 10.5, bold: true, color: { argb: XL.status[style].font } };
+            cells[0].fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.status[style].fill } };
+          }
+
+          row++;
+        });
+
+        if (withTotal) {
+          const cells = [ws.getCell(row, 1), ws.getCell(row, 2), ws.getCell(row, 3)];
+          cells[0].value = "Total";
+          cells[1].value = total;
+          cells[2].value = total ? 1 : 0;
+          cells[2].numFmt = "0.0%";
+
+          cells.forEach((cell, i) => {
+            cell.font = { name: "Calibri", size: 10.5, bold: true, color: { argb: XL.brandDark } };
+            cell.alignment = { horizontal: i === 0 ? "left" : "center", indent: i === 0 ? 1 : 0 };
+            cell.border = borderAll();
+            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: XL.brandSoft } };
+          });
+
+          row++;
+        }
+
+        row += 1;
       };
 
-      const separator = ";";
-      let csv = "\uFEFF";
+      const statusRows = [
+        ["Lanjut produksi", cont, "cont"],
+        ["Dihentikan", disc, "disc"]
+      ];
+      if (other > 0) statusRows.push(["Lainnya", other, "other"]);
 
-      csv += [
-        "Kode Material",
-        "Nama Barang",
-        "Pemasok",
-        "Asal",
-        "Status",
-        "Catatan"
-      ].map(escapeCSV).join(separator) + "\n";
+      addTable("Berdasarkan Status", statusRows, true);
+      addTable("Berdasarkan Pemasok", countBy(data, "supplier"), true);
+      addTable("Berdasarkan Asal", countBy(data, "origin"), true);
+    }
 
-      filteredData.forEach((item) => {
-        csv += [
-          item.code,
-          item.name,
-          item.supplier,
-          item.origin,
-          item.status,
-          item.note
-        ].map(escapeCSV).join(separator) + "\n";
-      });
-
-      const blob = new Blob([csv], {
-        type: "text/csv;charset=utf-8;"
-      });
-
+    function downloadBlob(blob, filename) {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
 
-      const today = new Date()
-        .toLocaleDateString("id-ID")
-        .replace(/\//g, "-");
-
       link.href = url;
-      link.download = `Product_Advance_${today}.csv`;
+      link.download = filename;
 
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
 
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
+    /* Cadangan: jika library Excel gagal dimuat (misalnya tanpa internet) */
+    function exportCsvFallback(data) {
+      const esc = (v) => `"${String(v || "").replace(/"/g, '""')}"`;
+      let csv = "\uFEFF";
+
+      csv += ["Kode Material", "Nama Barang", "Pemasok", "Asal", "Status", "Catatan"].map(esc).join(";") + "\n";
+
+      data.forEach((i) => {
+        csv += [i.code, i.name, i.supplier, i.origin, i.status, i.note].map(esc).join(";") + "\n";
+      });
+
+      downloadBlob(
+        new Blob([csv], { type: "text/csv;charset=utf-8;" }),
+        `Product_Advance_${todayLabel()}.csv`
+      );
+
+      showToast("Library Excel tidak termuat, file diunduh sebagai CSV.");
+    }
+
+    async function exportToExcel() {
+      const data = getFilteredData();
+
+      if (data.length === 0) {
+        showToast("Tidak ada data untuk diunduh.");
+        return;
+      }
+
+      if (typeof ExcelJS === "undefined") {
+        exportCsvFallback(data);
+        return;
+      }
+
+      dom.btnExport.disabled = true;
+
+      try {
+        const wb = new ExcelJS.Workbook();
+        wb.creator = "Advance Digitals";
+        wb.created = new Date();
+
+        buildDataSheet(wb, data);
+        buildSummarySheet(wb, data);
+
+        const buffer = await wb.xlsx.writeBuffer();
+
+        downloadBlob(
+          new Blob([buffer], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          }),
+          `Product_Advance_${todayLabel()}.xlsx`
+        );
+
+        showToast(`${data.length.toLocaleString("id-ID")} produk berhasil diunduh.`);
+      } catch (error) {
+        console.error("Gagal membuat Excel:", error);
+        exportCsvFallback(data);
+      } finally {
+        dom.btnExport.disabled = false;
+      }
+    }
+
+    /* =========================================================
+       MUAT DATA
+       ========================================================= */
     async function loadData() {
+      showState({ title: "Memuat data…" });
       dom.tableBody.innerHTML = `
-        <tr>
-          <td class="empty-cell" colspan="6">
-            <div class="loading">
-              <div class="loading-spinner"></div>
-              <div>Memuat data...</div>
-            </div>
-          </td>
-        </tr>
+        <tr><td class="td-state" colspan="6">
+          <div class="state"><div class="spinner"></div><strong>Memuat data…</strong></div>
+        </td></tr>
       `;
 
       try {
-        /*
-          cache: "no-store" membantu GitHub Pages mengambil CSV terbaru,
-          bukan isi cache browser yang lama.
-        */
-        const response = await fetch(CSV_PATH, {
-          cache: "no-store"
-        });
+        /* cache: "no-store" agar GitHub Pages selalu mengambil CSV terbaru */
+        const response = await fetch(CSV_PATH, { cache: "no-store" });
 
         if (!response.ok) {
-          throw new Error(`CSV tidak ditemukan. HTTP ${response.status}`);
+          throw new Error(`CSV tidak ditemukan (HTTP ${response.status})`);
         }
 
         const text = await response.text();
 
-        if (!text || !text.trim()) {
+        if (!text.trim()) {
           throw new Error("Isi file data.csv kosong.");
         }
 
-        console.log(`CSV berhasil dimuat dari: ${CSV_PATH}`);
         parseCSV(text);
-
       } catch (error) {
         console.error("Gagal memuat CSV:", error);
 
-        dom.tableBody.innerHTML = `
-          <tr>
-            <td class="empty-cell" colspan="6">
-              <div class="error-state">
-                <strong>Gagal memuat data.csv</strong>
-                <div style="margin-top: 7px; font-size: 12px;">
-                  Periksa nama file, huruf besar/kecil, folder file CSV, dan pengaturan GitHub Pages.
-                </div>
-                <div style="margin-top: 5px; font-size: 11px; opacity: 0.8;">
-                  ${escapeHtml(error.message)}
-                </div>
-              </div>
-            </td>
-          </tr>
-        `;
+        showState({
+          title: "Data tidak bisa dimuat",
+          hint: `${error.message}. Periksa nama file data.csv, huruf besar/kecil, dan lokasi foldernya.`,
+          error: true
+        });
+
+        dom.resultCount.textContent = "Data tidak tersedia";
       }
     }
 
-    function debounce(callback, delay = 120) {
-      let timer;
-
-      return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => callback(...args), delay);
-      };
-    }
-
+    /* =========================================================
+       INISIALISASI
+       ========================================================= */
     document.addEventListener("DOMContentLoaded", () => {
       initDomCache();
-      initTheme();
 
-      setupDropdown(dom.supplierToggle, dom.supplierMenu);
-      setupDropdown(dom.originToggle, dom.originMenu);
-      setupDropdown(dom.statusToggle, dom.statusMenu);
-
-      document.addEventListener("click", closeAllDropdowns);
-
-      dom.supplierMenu.addEventListener("change", handleSupplierFilter);
-      dom.originMenu.addEventListener("change", handleOriginFilter);
-      dom.statusMenu.addEventListener("change", handleStatusFilter);
-
-      const searchDebounced = debounce(applyFilters, 120);
-
-      dom.search.addEventListener("input", searchDebounced);
-
-      dom.search.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          applyFilters();
-        }
+      ["supplier", "origin", "status"].forEach((type) => {
+        setupDropdown(dom[`${type}Toggle`], dom[`${type}Menu`]);
+        dom[`${type}Menu`].addEventListener("change", (event) => handleMenuChange(type, event));
       });
 
-      dom.btnSearch.addEventListener("click", applyFilters);
+      document.addEventListener("click", closeAllMenus);
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeAllMenus();
+      });
+
+      dom.search.addEventListener("input", debounce(applyFilters, 120));
+      dom.search.addEventListener("input", updateControls);
+
+      dom.searchClear.addEventListener("click", () => {
+        dom.search.value = "";
+        dom.search.focus();
+        applyFilters();
+      });
+
+      dom.btnReset.addEventListener("click", resetFilters);
       dom.btnExport.addEventListener("click", exportToExcel);
 
       dom.btnTable.addEventListener("click", () => setView("table"));
@@ -1878,6 +1854,27 @@
 
       dom.themeToggle.addEventListener("click", toggleTheme);
 
+      document.querySelectorAll("#dataTable thead th").forEach((th) => {
+        th.querySelector("button").addEventListener("click", () => {
+          const key = th.dataset.key;
+
+          if (sortState.key === key) {
+            if (sortState.dir === "asc") {
+              sortState.dir = "desc";
+            } else {
+              sortState.key = null;
+              sortState.dir = "asc";
+            }
+          } else {
+            sortState.key = key;
+            sortState.dir = "asc";
+          }
+
+          applyFilters();
+        });
+      });
+
+      setView("table");
       loadData();
     });
   </script>
