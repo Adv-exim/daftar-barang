@@ -813,6 +813,29 @@
       }
     }
 
+
+    .dashboard-toggle {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px 13px;
+      background: var(--card-bg);
+      color: var(--text);
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .dashboard-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--primary);
+      background: var(--card-bg-hover);
+    }
+    .stats-bar[hidden] { display: none !important; }
+    .header-right { gap: 12px; }
+    @media (max-width: 600px) {
+      .header-right { width: 100%; flex-wrap: wrap; }
+      .dashboard-toggle { flex: 1 1 auto; }
+    }
+
     .dropdown-menu::-webkit-scrollbar,
     .table-container::-webkit-scrollbar {
       width: 7px;
@@ -845,7 +868,7 @@
     </div>
 
     <div class="header-right">
-      <div class="stats-bar" aria-label="Ringkasan produk">
+      <div class="stats-bar" id="dashboardStats" aria-label="Ringkasan produk" hidden>
         <div class="stat-item">
           <div class="stat-value" id="totalCount">0</div>
           <div class="stat-label">Total</div>
@@ -861,6 +884,10 @@
           <div class="stat-label">Stop</div>
         </div>
       </div>
+
+      <button class="dashboard-toggle" id="dashboardToggle" type="button" aria-expanded="false" aria-controls="dashboardStats">
+        📊 Dashboard
+      </button>
 
       <button
         class="theme-toggle"
@@ -998,6 +1025,7 @@
 
   <section id="cardView" class="card-mode"></section>
 
+  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
   <script>
     /*
       Jika data.csv sejajar dengan index.html di GitHub Pages:
@@ -1026,6 +1054,8 @@
       dom.searchIcon = document.getElementById("searchIcon");
       dom.btnSearch = document.getElementById("btnSearchAction");
       dom.btnExport = document.getElementById("btnExport");
+      dom.dashboardToggle = document.getElementById("dashboardToggle");
+      dom.dashboardStats = document.getElementById("dashboardStats");
 
       dom.supplierMenu = document.getElementById("supplierMenu");
       dom.originMenu = document.getElementById("originMenu");
@@ -1118,6 +1148,23 @@
 
       const cleanText = text.replace(/^\uFEFF/, "");
 
+      // Deteksi otomatis pemisah CSV: koma, titik koma, atau tab.
+      // Penghitungan mengabaikan pemisah yang berada di dalam tanda kutip.
+      const firstLine = cleanText.split(/\r?\n/, 1)[0] || "";
+      const delimiterCounts = { ",": 0, ";": 0, "\t": 0 };
+      let headerInQuotes = false;
+      for (let i = 0; i < firstLine.length; i++) {
+        const char = firstLine[i];
+        if (char === '"') {
+          if (headerInQuotes && firstLine[i + 1] === '"') i++;
+          else headerInQuotes = !headerInQuotes;
+        } else if (!headerInQuotes && Object.prototype.hasOwnProperty.call(delimiterCounts, char)) {
+          delimiterCounts[char]++;
+        }
+      }
+      const delimiter = Object.entries(delimiterCounts)
+        .sort((a, b) => b[1] - a[1])[0][0];
+
       for (let i = 0; i < cleanText.length; i++) {
         const char = cleanText[i];
         const nextChar = cleanText[i + 1];
@@ -1132,7 +1179,7 @@
           continue;
         }
 
-        if (char === "," && !inQuotes) {
+        if (char === delimiter && !inQuotes) {
           row.push(field.trim());
           field = "";
           continue;
@@ -1730,55 +1777,186 @@
       updateThemeButton(nextTheme);
     }
 
-    function exportToExcel() {
+    async function exportToExcel() {
       const filteredData = getFilteredData();
 
-      const escapeCSV = (value) => {
-        return `"${String(value || "").replace(/"/g, '""')}"`;
-      };
+      if (!filteredData.length) {
+        alert("Tidak ada data untuk diekspor. Ubah kata kunci atau filter terlebih dahulu.");
+        return;
+      }
 
-      const separator = ";";
-      let csv = "\uFEFF";
+      if (typeof ExcelJS === "undefined") {
+        alert("Library Excel belum berhasil dimuat. Periksa koneksi internet lalu coba lagi.");
+        return;
+      }
 
-      csv += [
-        "Kode Material",
-        "Nama Barang",
-        "Pemasok",
-        "Asal",
-        "Status",
-        "Catatan"
-      ].map(escapeCSV).join(separator) + "\n";
+      const workbook = new ExcelJS.Workbook();
+      workbook.creator = "Advance Digitals";
+      workbook.created = new Date();
+      workbook.modified = new Date();
+      workbook.subject = "Data produk dan status";
+      workbook.company = "Advance Digitals";
 
-      filteredData.forEach((item) => {
-        csv += [
-          item.code,
-          item.name,
-          item.supplier,
-          item.origin,
-          item.status,
-          item.note
-        ].map(escapeCSV).join(separator) + "\n";
+      const headers = [
+        "Kode Material", "Nama Barang", "Pemasok", "Asal", "Status", "Catatan"
+      ];
+      const toRows = (items) => items.map((item) => [
+        item.code || "", item.name || "", item.supplier || "",
+        item.origin || "", item.status || "", item.note || ""
+      ]);
+
+      function fitColumns(worksheet, rows, columnHeaders) {
+        worksheet.columns = columnHeaders.map((header, index) => {
+          const longest = Math.max(
+            String(header).length,
+            ...rows.map((row) => String(row[index] ?? "").length)
+          );
+          return { width: Math.min(Math.max(longest + 3, 14), 52) };
+        });
+      }
+
+      function styleSheet(worksheet, headerRow = 1) {
+        worksheet.views = [{ state: "frozen", ySplit: headerRow }];
+        worksheet.getRow(headerRow).height = 26;
+        worksheet.getRow(headerRow).eachCell((cell) => {
+          cell.font = { bold: true, color: { argb: "FFFFFFFF" }, size: 11 };
+          cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF087F83" } };
+          cell.alignment = { vertical: "middle", horizontal: "center", wrapText: true };
+          cell.border = { bottom: { style: "medium", color: { argb: "FF0B7077" } } };
+        });
+        worksheet.eachRow((row, rowNumber) => {
+          if (rowNumber > headerRow) {
+            row.alignment = { vertical: "top", wrapText: true };
+            row.eachCell((cell) => {
+              cell.border = { bottom: { style: "hair", color: { argb: "FFDCE5E8" } } };
+            });
+          }
+        });
+      }
+
+      function addStatusColors(worksheet, statusColumn, firstDataRow, lastDataRow) {
+        // Aturan conditional formatting Excel: warna mengikuti isi sel status.
+        if (lastDataRow >= firstDataRow && typeof worksheet.addConditionalFormatting === "function") {
+          const statusRange = `${worksheet.getColumn(statusColumn).letter}${firstDataRow}:${worksheet.getColumn(statusColumn).letter}${lastDataRow}`;
+          worksheet.addConditionalFormatting({
+            ref: statusRange,
+            rules: [
+              {
+                type: "expression",
+                formulae: [`OR(ISNUMBER(SEARCH("discontinue",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("dihentikan",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("stop",${worksheet.getColumn(statusColumn).letter}${firstDataRow})))`],
+                style: { font: { bold: true, color: { argb: "FFA82929" } }, fill: { type: "pattern", pattern: "solid", bgColor: { argb: "FFFFEEEE" } } }
+              },
+              {
+                type: "expression",
+                formulae: [`AND(OR(ISNUMBER(SEARCH("continue",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("lanjut",${worksheet.getColumn(statusColumn).letter}${firstDataRow}))),NOT(OR(ISNUMBER(SEARCH("discontinue",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("dihentikan",${worksheet.getColumn(statusColumn).letter}${firstDataRow})),ISNUMBER(SEARCH("stop",${worksheet.getColumn(statusColumn).letter}${firstDataRow})))))`],
+                style: { font: { bold: true, color: { argb: "FF08784F" } }, fill: { type: "pattern", pattern: "solid", bgColor: { argb: "FFE8F8EF" } } }
+              }
+            ]
+          });
+        }
+        for (let row = firstDataRow; row <= lastDataRow; row++) {
+          const cell = worksheet.getCell(row, statusColumn);
+          const value = String(cell.value || "").toLowerCase();
+          if (isContinuing(value)) {
+            cell.font = { bold: true, color: { argb: "FF08784F" } };
+            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFE8F8EF" } };
+          } else if (isDiscontinued(value)) {
+            cell.font = { bold: true, color: { argb: "FFA82929" } };
+            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFEEEE" } };
+          } else {
+            cell.font = { bold: true, color: { argb: "FF95630E" } };
+            cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFF7DF" } };
+          }
+        }
+      }
+
+      // Sheet 1: filtered product data, formatted as a native Excel table.
+      const productRows = toRows(filteredData);
+      const products = workbook.addWorksheet("Data Produk", {
+        properties: { tabColor: { argb: "FF087F83" } }
       });
-
-      const blob = new Blob([csv], {
-        type: "text/csv;charset=utf-8;"
+      products.addTable({
+        name: "TabelDataProduk",
+        ref: "A1",
+        headerRow: true,
+        totalsRow: false,
+        style: { theme: "TableStyleMedium2", showRowStripes: true },
+        columns: headers.map((name) => ({ name, filterButton: true })),
+        rows: productRows
       });
+      fitColumns(products, productRows, headers);
+      styleSheet(products);
+      addStatusColors(products, 5, 2, productRows.length + 1);
+      products.autoFilter = { from: "A1", to: `F${productRows.length + 1}` };
 
+      // Sheet 2: overall summary based on the complete dataset.
+      const summary = workbook.addWorksheet("Ringkasan", {
+        properties: { tabColor: { argb: "FF2563EB" } }
+      });
+      const total = allData.length;
+      const continued = allData.filter((item) => isContinuing(item.status)).length;
+      const stopped = allData.filter((item) => isDiscontinued(item.status)).length;
+      const other = total - continued - stopped;
+      const summaryRows = [
+        ["Total Produk", total],
+        ["Lanjut Produksi", continued],
+        ["Dihentikan", stopped],
+        ["Status Lainnya", other],
+        ["Diekspor (sesuai filter)", filteredData.length],
+        ["Tanggal Ekspor", new Date().toLocaleString("id-ID")]
+      ];
+      summary.addTable({
+        name: "TabelRingkasan",
+        ref: "A1",
+        headerRow: true,
+        style: { theme: "TableStyleMedium2", showRowStripes: true },
+        columns: [{ name: "Keterangan" }, { name: "Jumlah / Nilai" }],
+        rows: summaryRows
+      });
+      fitColumns(summary, summaryRows, ["Keterangan", "Jumlah / Nilai"]);
+      styleSheet(summary);
+
+      // Sheet 3: supplier summary based on the complete dataset.
+      const supplierMap = new Map();
+      allData.forEach((item) => {
+        const name = item.supplier || "Tidak diketahui";
+        if (!supplierMap.has(name)) supplierMap.set(name, { total: 0, continued: 0, stopped: 0 });
+        const entry = supplierMap.get(name);
+        entry.total++;
+        if (isContinuing(item.status)) entry.continued++;
+        if (isDiscontinued(item.status)) entry.stopped++;
+      });
+      const supplierHeaders = ["Pemasok", "Total Produk", "Lanjut Produksi", "Dihentikan"];
+      const supplierRows = [...supplierMap.entries()]
+        .sort((a, b) => b[1].total - a[1].total)
+        .map(([name, value]) => [name, value.total, value.continued, value.stopped]);
+      const supplierSheet = workbook.addWorksheet("Pemasok", {
+        properties: { tabColor: { argb: "FF7C3AED" } }
+      });
+      supplierSheet.addTable({
+        name: "TabelPemasok",
+        ref: "A1",
+        headerRow: true,
+        style: { theme: "TableStyleMedium4", showRowStripes: true },
+        columns: supplierHeaders.map((name) => ({ name, filterButton: true })),
+        rows: supplierRows
+      });
+      fitColumns(supplierSheet, supplierRows, supplierHeaders);
+      styleSheet(supplierSheet);
+
+      const buffer = await workbook.xlsx.writeBuffer();
+      const blob = new Blob([buffer], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
-
-      const today = new Date()
-        .toLocaleDateString("id-ID")
-        .replace(/\//g, "-");
-
+      const today = new Date().toLocaleDateString("id-ID").replace(/\//g, "-");
       link.href = url;
-      link.download = `Product_Advance_${today}.csv`;
-
+      link.download = `Product_Advance_${today}.xlsx`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     async function loadData() {
@@ -1872,6 +2050,13 @@
 
       dom.btnSearch.addEventListener("click", applyFilters);
       dom.btnExport.addEventListener("click", exportToExcel);
+
+      dom.dashboardToggle.addEventListener("click", () => {
+        const willOpen = dom.dashboardStats.hidden;
+        dom.dashboardStats.hidden = !willOpen;
+        dom.dashboardToggle.setAttribute("aria-expanded", String(willOpen));
+        dom.dashboardToggle.textContent = willOpen ? "✕ Tutup Dashboard" : "📊 Dashboard";
+      });
 
       dom.btnTable.addEventListener("click", () => setView("table"));
       dom.btnCard.addEventListener("click", () => setView("card"));
