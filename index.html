@@ -3,106 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advance Digitals — Product & Status</title>
+  <title>Advance Digitals Product and Status</title>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
   <style>
     :root {
-      --primary: #4f6d7a;
-      --primary-soft: #eef3f5;
-      --primary-dark: #3d5762;
-
-      --accent-gradient: linear-gradient(135deg, #5b7c8a, #43606c);
-
-      /* Warna judul halaman */
-      --page-header-bg: linear-gradient(120deg, #4f6d7a, #6b8f9c 55%, #7fa3ad);
-      --page-header-text: #ffffff;
-      --page-header-subtext: rgba(255, 255, 255, .82);
-
-      /* Warna header tabel */
-      --table-header-bg: #dcebe9;
-      --table-header-text: #2f4f4f;
-      --table-header-border: #c3d8d5;
-
-      --bg: #f7f9fa;
-      --bg-gradient: linear-gradient(180deg, #f9fbfc 0%, #f2f6f8 100%);
-
+      --primary: #0f8b93;
+      --primary-dark: #0b7077;
+      --primary-light: #27b9c1;
+      --accent-gradient: linear-gradient(135deg, #12b7c5, #087f83);
+      --bg: #f2f7f8;
+      --bg-gradient: linear-gradient(135deg, #f7fbfc 0%, #edf4f6 100%);
       --card-bg: #ffffff;
-      --card-bg-hover: #f7fafb;
-      --border: #e2e9ed;
-      --text: #2f3e46;
-      --text-light: #5d6f78;
-      --text-muted: #8b9aa2;
-
-      --shadow-sm: 0 1px 3px rgba(47, 62, 70, .06);
-      --shadow-md: 0 6px 18px rgba(47, 62, 70, .07);
-      --shadow-lg: 0 14px 30px rgba(47, 62, 70, .10);
-
-      --radius: 14px;
-      --radius-sm: 10px;
-
-      --status-disc-bg: #fdf2f3;
-      --status-disc-text: #a5545f;
-      --status-disc-border: #f2d7db;
-
-      --status-cont-bg: #eff7f2;
-      --status-cont-text: #4b7a63;
-      --status-cont-border: #d3e7dc;
-
-      --status-other-bg: #fbf6ec;
-      --status-other-text: #8a7040;
-      --status-other-border: #eddfc4;
+      --card-bg-hover: #f7fbfc;
+      --border: #dfe8eb;
+      --text: #334155;
+      --text-light: #64748b;
+      --text-muted: #94a3b8;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, .08);
+      --shadow-md: 0 3px 9px rgba(15, 23, 42, .10);
+      --shadow-lg: 0 12px 24px rgba(15, 23, 42, .14);
+      --shadow-glow: 0 0 18px rgba(18, 183, 197, .17);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --status-disc-bg: #fff4f4;
+      --status-disc-text: #a82929;
+      --status-disc-border: #f3b4b4;
+      --status-cont-bg: #ecfdf6;
+      --status-cont-text: #08784f;
+      --status-cont-border: #92dfbd;
+      --status-other-bg: #fff9e7;
+      --status-other-text: #95630e;
+      --status-other-border: #f6d87c;
+      --glass-bg: rgba(255, 255, 255, .88);
+      --glass-border: rgba(255, 255, 255, .55);
     }
 
     [data-theme="dark"] {
-      --primary: #8fb0bd;
-      --primary-soft: rgba(143, 176, 189, .12);
-      --primary-dark: #a8c5d0;
-
-      --accent-gradient: linear-gradient(135deg, #4a6472, #33474f);
-
-      --page-header-bg: linear-gradient(120deg, #22303a, #2c414b 55%, #35505a);
-      --page-header-text: #eaf3f5;
-      --page-header-subtext: rgba(234, 243, 245, .78);
-
-      --table-header-bg: #243c3c;
-      --table-header-text: #d8ece9;
-      --table-header-border: #34504e;
-
-      --bg: #101820;
-      --bg-gradient: linear-gradient(180deg, #101820 0%, #151f27 100%);
-
-      --card-bg: #17222b;
-      --card-bg-hover: #1d2b36;
-      --border: #2b3b46;
-      --text: #e5edf1;
-      --text-light: #b3c2ca;
-      --text-muted: #8496a0;
-
+      --primary: #22c5cb;
+      --primary-dark: #11979e;
+      --primary-light: #5ee7e9;
+      --accent-gradient: linear-gradient(135deg, #20c8d2, #149b9e);
+      --bg: #111c2a;
+      --bg-gradient: linear-gradient(135deg, #101b29 0%, #1b2a3b 100%);
+      --card-bg: #1c2b3d;
+      --card-bg-hover: #263a50;
+      --border: #35495e;
+      --text: #e6edf5;
+      --text-light: #b2c0d0;
+      --text-muted: #8ea0b5;
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, .30);
-      --shadow-md: 0 6px 18px rgba(0, 0, 0, .32);
-      --shadow-lg: 0 14px 30px rgba(0, 0, 0, .40);
-
-      --status-disc-bg: rgba(214, 116, 130, .12);
-      --status-disc-text: #e8b3ba;
-      --status-disc-border: rgba(232, 179, 186, .28);
-
-      --status-cont-bg: rgba(112, 168, 140, .12);
-      --status-cont-text: #b4d6c4;
-      --status-cont-border: rgba(180, 214, 196, .28);
-
-      --status-other-bg: rgba(196, 164, 103, .12);
-      --status-other-text: #e2cfa4;
-      --status-other-border: rgba(226, 207, 164, .28);
+      --shadow-md: 0 4px 10px rgba(0, 0, 0, .34);
+      --shadow-lg: 0 12px 26px rgba(0, 0, 0, .44);
+      --shadow-glow: 0 0 18px rgba(34, 197, 203, .16);
+      --status-disc-bg: rgba(239, 68, 68, .13);
+      --status-disc-text: #fca5a5;
+      --status-disc-border: rgba(252, 165, 165, .42);
+      --status-cont-bg: rgba(16, 185, 129, .13);
+      --status-cont-text: #86efac;
+      --status-cont-border: rgba(134, 239, 172, .36);
+      --status-other-bg: rgba(234, 179, 8, .13);
+      --status-other-text: #fde68a;
+      --status-other-border: rgba(253, 230, 138, .35);
+      --glass-bg: rgba(28, 43, 61, .89);
+      --glass-border: rgba(255, 255, 255, .10);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { background: var(--bg); }
+    html {
+      background: var(--bg);
+    }
 
     body {
-      max-width: 1500px;
+      max-width: 1450px;
       min-height: 100vh;
       margin: 0 auto;
       padding: 20px;
@@ -114,111 +91,119 @@
       transition: background .25s ease, color .25s ease;
     }
 
-    button, input { font: inherit; }
-    button { cursor: pointer; }
+    button,
+    input {
+      font: inherit;
+    }
 
-    /* HEADER HALAMAN — JUDUL BERWARNA */
+    button {
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* HEADER */
     .header-section {
-      position: relative;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      padding: 22px;
-      margin-bottom: 18px;
-      color: var(--page-header-text);
-      background: var(--page-header-bg);
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius);
       box-shadow: var(--shadow-md);
-    }
-
-    .header-section::after {
-      content: "";
-      position: absolute;
-      right: -70px;
-      top: -90px;
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .08);
-    }
-
-    .header-title {
-      position: relative;
-      z-index: 1;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .header-title h1 {
-      margin: 0 0 5px;
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 900;
-      letter-spacing: -.02em;
-      color: var(--page-header-text);
+      margin: 0 0 3px;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .header-title p {
       margin: 0;
-      color: var(--page-header-subtext);
+      color: var(--text-muted);
       font-size: 12px;
-      font-weight: 650;
+      font-weight: 500;
     }
 
     .header-right {
-      position: relative;
-      z-index: 1;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 14px;
     }
 
     .stats-bar {
       display: flex;
       align-items: center;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
     .stat-item {
-      min-width: 82px;
-      padding: 9px 13px;
+      min-width: 70px;
+      padding: 6px 12px;
       text-align: center;
-      border: 1px solid rgba(255, 255, 255, .25);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, .12);
-      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg-hover);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .stat-item:hover {
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow-sm);
     }
 
     .stat-value {
-      font-size: 18px;
-      font-weight: 850;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 700;
       line-height: 1.15;
     }
 
     .stat-label {
       margin-top: 2px;
-      color: var(--page-header-subtext);
+      color: var(--text-muted);
       font-size: 10px;
-      font-weight: 750;
+      font-weight: 600;
       white-space: nowrap;
     }
 
     .theme-toggle {
       position: relative;
-      width: 62px;
-      height: 31px;
+      width: 64px;
+      height: 32px;
       padding: 0;
-      border: 1px solid rgba(255, 255, 255, .35);
+      border: 2px solid var(--border);
       border-radius: 999px;
-      background: rgba(255, 255, 255, .15);
-      transition: all .25s ease;
+      background: #dfe7ee;
+      box-shadow: none;
+      transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary-light);
+      box-shadow: var(--shadow-glow);
+      transform: none;
     }
 
     .theme-toggle.active {
       border-color: transparent;
-      background: rgba(255, 255, 255, .88);
+      background: var(--accent-gradient);
     }
 
     .theme-toggle-slider {
@@ -230,45 +215,75 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: #fff;
-      box-shadow: var(--shadow-sm);
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+      font-size: 14px;
+      line-height: 1;
       transition: transform .28s cubic-bezier(.34, 1.56, .64, 1);
     }
 
-    .theme-toggle.active .theme-toggle-slider { transform: translateX(31px); }
+    .theme-toggle.active .theme-toggle-slider {
+      transform: translateX(32px);
+    }
 
-    /* TOOLBAR */
-    .toolbar {
+    /* LANDING */
+    .landing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .dashboard-card {
+      padding: 22px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .dashboard-card h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .dashboard-card p {
+      margin: 0;
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    .dashboard-number {
+      margin-top: 16px;
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .dashboard-card.total .dashboard-number {
+      color: var(--primary);
+    }
+
+    .dashboard-card.continue .dashboard-number {
+      color: #10b981;
+    }
+
+    .dashboard-card.discontinue .dashboard-number {
+      color: #ef4444;
+    }
+
+    .quick-actions {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .search-wrapper {
-      position: relative;
-      flex: 1;
-      min-width: 260px;
-    }
-
-    .search-wrapper input {
-      width: 100%;
-      height: 45px;
-      padding: 10px 16px;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      outline: none;
-      background: var(--card-bg);
-      box-shadow: var(--shadow-sm);
-      transition: all .2s ease;
-    }
-
-    .search-wrapper input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-soft);
+      margin-bottom: 18px;
     }
 
     .btn {
@@ -276,54 +291,334 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 45px;
-      padding: 0 20px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--card-bg);
+      min-height: 46px;
+      padding: 0 22px;
       color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
       font-size: 13px;
       font-weight: 700;
       transition: all .2s ease;
     }
 
     .btn:hover {
-      border-color: var(--primary);
+      border-color: var(--primary-light);
       background: var(--card-bg-hover);
-      transform: translateY(-1px);
       box-shadow: var(--shadow-sm);
+      transform: translateY(-1px);
     }
 
     .btn-primary {
-      color: #fff !important;
+      color: #ffffff !important;
       border-color: transparent;
+      background: var(--accent-gradient);
+      box-shadow: 0 3px 8px rgba(15, 118, 122, .22);
+    }
+
+    .btn-primary:hover {
+      color: #ffffff !important;
+      filter: brightness(1.05);
+      box-shadow: 0 6px 14px rgba(15, 118, 122, .28);
+    }
+
+    /* WORKSPACE */
+    .workspace {
+      display: none;
+    }
+
+    .workspace.active {
+      display: block;
+    }
+
+    /* SEARCH */
+    .search-bar {
+      position: relative;
+      z-index: 20;
+      overflow: visible;
+      padding: 15px 18px;
+      margin-bottom: 15px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      transition: background .25s ease, border-color .25s ease;
+    }
+
+    .search-bar::before {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      left: -1px;
+      height: 3px;
+      content: "";
+      border-radius: 12px 12px 0 0;
       background: var(--accent-gradient);
     }
 
-    .btn-primary:hover { filter: brightness(1.05); }
+    .search-top {
+      display: flex;
+      margin-bottom: 12px;
+    }
 
-    .view-buttons { display: flex; gap: 8px; }
+    .search-input-wrapper {
+      display: flex;
+      flex: 1;
+      gap: 10px;
+      min-width: 0;
+    }
 
-    .view-buttons button {
-      min-height: 45px;
-      padding: 0 18px;
+    .search-input {
+      position: relative;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .search-input input {
+      width: 100%;
+      height: 44px;
+      padding: 10px 44px 10px 14px;
       color: var(--text);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      background: var(--card-bg-hover);
+      font-size: 13px;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .search-input input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input input:focus {
+      border-color: var(--primary-light);
+      background: var(--card-bg);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, .13);
+    }
+
+    .btn-search,
+    .btn-export {
+      color: #ffffff !important;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--accent-gradient);
+      box-shadow: 0 2px 6px rgba(15, 118, 122, .25);
+      font-size: 13px;
+      font-weight: 650;
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+
+    .btn-search {
+      height: 44px;
+      padding: 0 20px;
+      white-space: nowrap;
+    }
+
+    .btn-export {
+      padding: 10px 20px;
+      white-space: nowrap;
+    }
+
+    .btn-search:hover,
+    .btn-export:hover {
+      color: #ffffff !important;
+      filter: brightness(1.04);
+      box-shadow: 0 6px 14px rgba(15, 118, 122, .30);
+      transform: translateY(-1px);
+    }
+
+    .btn-search:active,
+    .btn-export:active {
+      transform: translateY(0);
+    }
+
+    /* FILTER DROPDOWN */
+    .filter-group {
+      position: relative;
+      z-index: 30;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .filter-box {
+      position: relative;
+      flex: 1;
+      min-width: 205px;
+    }
+
+    .filter-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .dropdown-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 12px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg-hover);
+      font-size: 13px;
+      font-weight: 600;
+      text-align: left;
+      transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+
+    .dropdown-toggle:hover,
+    .dropdown-toggle.active {
+      color: var(--text);
+      border-color: var(--primary-light);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-glow);
+      transform: none;
+    }
+
+    .dropdown-arrow {
+      flex: 0 0 auto;
+      margin-left: 10px;
+      color: var(--text-muted);
+      font-size: 10px;
+      transition: transform .2s ease;
+    }
+
+    .dropdown-toggle.active .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      z-index: 1000;
+      display: none;
+      width: max-content;
+      min-width: 100%;
+      max-width: min(390px, calc(100vw - 48px));
+      max-height: 300px;
+      padding: 5px 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .dropdown-menu.open {
+      display: block;
+      animation: slideDown .16s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: max-content;
+      padding: 8px 14px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1.35;
+      transition: background .15s ease;
+    }
+
+    .dropdown-item:hover {
+      color: var(--text);
+      background: var(--card-bg-hover);
+    }
+
+    .dropdown-item span {
+      overflow-wrap: anywhere;
+    }
+
+    .dropdown-item input[type="checkbox"] {
+      flex: 0 0 auto;
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .select-all-item {
+      position: sticky;
+      top: -5px;
+      z-index: 2;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      background: var(--card-bg-hover);
+    }
+
+    .select-all-item:hover {
+      background: var(--card-bg-hover);
+    }
+
+    /* ACTION BAR */
+    .action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .view-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .view-buttons button {
+      padding: 9px 16px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
       background: var(--card-bg);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 650;
+      transition: background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+
+    .view-buttons button:hover {
+      color: var(--text);
+      border-color: var(--primary-light);
+      background: var(--card-bg-hover);
+      box-shadow: var(--shadow-sm);
+      transform: none;
     }
 
     .view-buttons button.active {
-      color: #fff !important;
+      color: #ffffff !important;
       border-color: transparent;
       background: var(--accent-gradient);
+      box-shadow: 0 3px 8px rgba(15, 118, 122, .22);
     }
 
     /* TABLE */
     .table-container {
-      max-height: 74vh;
+      max-height: 72vh;
       overflow: auto;
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -333,76 +628,24 @@
 
     table {
       width: 100%;
-      min-width: 950px;
+      min-width: 920px;
       border-spacing: 0;
       border-collapse: separate;
       background: var(--card-bg);
     }
 
-    /* HEADER TABEL — BERWARNA SOFT */
     th {
       position: sticky;
       top: 0;
-      z-index: 20;
-      padding: 0;
-      color: var(--table-header-text);
-      background: var(--table-header-bg);
-      border-bottom: 1px solid var(--table-header-border);
+      z-index: 5;
+      padding: 13px 14px;
+      color: #ffffff;
+      border-bottom: 2px solid rgba(255, 255, 255, .18);
+      background: var(--accent-gradient);
       font-size: 12px;
-      font-weight: 850;
+      font-weight: 700;
       text-align: left;
       white-space: nowrap;
-    }
-
-    th .th-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 13px 14px;
-    }
-
-    .column-filter-btn {
-      display: inline-grid;
-      place-items: center;
-      width: 27px;
-      height: 27px;
-      color: var(--table-header-text);
-      border: 1px solid rgba(47, 79, 79, .22);
-      border-radius: 7px;
-      background: rgba(255, 255, 255, .55);
-      font-size: 12px;
-      transition: all .18s ease;
-    }
-
-    [data-theme="dark"] .column-filter-btn {
-      color: var(--table-header-text);
-      border-color: rgba(216, 236, 233, .22);
-      background: rgba(255, 255, 255, .08);
-    }
-
-    .column-filter-btn:hover,
-    .column-filter-btn.active {
-      color: #ffffff;
-      border-color: transparent;
-      background: #4f6d7a;
-    }
-
-    [data-theme="dark"] .column-filter-btn:hover,
-    [data-theme="dark"] .column-filter-btn.active {
-      color: #101820;
-      background: #8fb0bd;
-    }
-
-    .column-filter-btn.has-filter {
-      color: #ffffff;
-      border-color: transparent;
-      background: #4f6d7a;
-    }
-
-    [data-theme="dark"] .column-filter-btn.has-filter {
-      color: #101820;
-      background: #8fb0bd;
     }
 
     td {
@@ -412,15 +655,20 @@
       background: var(--card-bg);
       font-size: 13px;
       vertical-align: middle;
-      overflow-wrap: anywhere;
+      transition: background .16s ease;
     }
 
-    tbody tr:hover td { background: var(--card-bg-hover); }
-    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td {
+      background: var(--card-bg-hover);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
 
     .material-code {
-      color: var(--primary-dark);
-      font-weight: 800;
+      color: var(--text);
+      font-weight: 700;
       white-space: nowrap;
     }
 
@@ -430,7 +678,8 @@
       border: 1px solid;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 700;
+      line-height: 1.2;
       white-space: nowrap;
     }
 
@@ -452,110 +701,31 @@
       background: var(--status-other-bg);
     }
 
-    /* FILTER KOLOM */
-    .filter-popover {
-      position: absolute;
-      top: calc(100% + 6px);
-      left: 8px;
-      z-index: 1000;
-      display: none;
-      width: min(320px, calc(100vw - 40px));
-      padding: 12px;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--card-bg);
-      box-shadow: var(--shadow-lg);
+    .empty-cell {
+      padding: 0 !important;
     }
 
-    .filter-popover.open { display: block; }
-
-    .filter-search {
-      width: 100%;
-      height: 38px;
-      margin-bottom: 10px;
-      padding: 8px 12px;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      outline: none;
-      background: var(--card-bg-hover);
-    }
-
-    .filter-search:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-soft);
-    }
-
-    .filter-options {
-      max-height: 230px;
-      overflow: auto;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      background: var(--card-bg);
-    }
-
-    .filter-option {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 11px;
-      color: var(--text);
-      cursor: pointer;
-      font-size: 12.5px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .filter-option:last-child { border-bottom: none; }
-    .filter-option:hover { background: var(--card-bg-hover); }
-    .filter-option span { overflow-wrap: anywhere; }
-
-    .filter-option input {
-      flex: 0 0 auto;
-      width: 15px;
-      height: 15px;
-      margin: 0;
-      accent-color: var(--primary);
-    }
-
-    .filter-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .filter-actions button {
-      flex: 1;
-      min-height: 36px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--card-bg-hover);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 750;
-    }
-
-    .filter-actions .apply {
-      color: #fff;
-      border-color: transparent;
-      background: var(--accent-gradient);
-    }
-
-    .empty-cell { padding: 0 !important; }
-
-    .empty-state, .loading, .error-state {
-      padding: 56px 20px;
+    .empty-state,
+    .loading,
+    .error-state {
+      padding: 54px 20px;
       color: var(--text-muted);
       text-align: center;
     }
 
-    .empty-state strong, .error-state strong { color: var(--text); }
-    .error-state { color: #b4595f; }
+    .empty-state strong,
+    .error-state strong {
+      color: var(--text);
+    }
+
+    .error-state {
+      color: #dc2626;
+    }
 
     .loading-spinner {
       display: inline-block;
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       margin-bottom: 10px;
       border: 3px solid var(--border);
       border-top-color: var(--primary);
@@ -563,23 +733,30 @@
       animation: spin .75s linear infinite;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-    /* CARD VIEW */
+    /* CARD MODE */
     .card-mode {
       display: none;
       flex-wrap: wrap;
       gap: 14px;
     }
 
-    .card-mode.active { display: flex; }
+    .card-mode.active {
+      display: flex;
+    }
 
     .card {
       position: relative;
-      flex: 1 1 300px;
+      flex: 1 1 290px;
       min-width: 280px;
       max-width: calc(33.333% - 10px);
-      padding: 18px;
+      overflow: hidden;
+      padding: 16px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       background: var(--card-bg);
@@ -588,8 +765,8 @@
     }
 
     .card:hover {
-      transform: translateY(-3px);
       box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
     }
 
     .card::before {
@@ -598,31 +775,51 @@
       bottom: 0;
       left: 0;
       width: 4px;
-      border-radius: 4px 0 0 4px;
       content: "";
     }
 
-    .card.disc::before { background: #c98a93; }
-    .card.cont::before { background: #7fa892; }
-    .card.other::before { background: #c7ab74; }
+    .card.disc::before {
+      background: #ef4444;
+    }
+
+    .card.cont::before {
+      background: #10b981;
+    }
+
+    .card.other::before {
+      background: #f59e0b;
+    }
 
     .card-code {
       margin-bottom: 4px;
       color: var(--text-muted);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: .04em;
     }
 
     .card-name {
       margin: 0 0 10px;
-      font-size: 14.5px;
-      font-weight: 800;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.4;
       word-break: break-word;
     }
 
-    .card p { margin: 5px 0; color: var(--text-light); font-size: 12px; }
-    .card p strong { color: var(--text); }
+    .card .status-badge {
+      margin-bottom: 11px;
+    }
+
+    .card p {
+      margin: 5px 0;
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    .card p strong {
+      color: var(--text);
+    }
 
     .card-note {
       margin-top: 10px !important;
@@ -630,29 +827,109 @@
       border-top: 1px solid var(--border);
     }
 
+    /* RESPONSIVE */
     @media (max-width: 1050px) {
-      .card { max-width: calc(50% - 7px); }
+      .card {
+        max-width: calc(50% - 7px);
+      }
     }
 
     @media (max-width: 760px) {
-      body { padding: 14px; }
+      body {
+        padding: 14px;
+      }
 
-      .header-section,
-      .toolbar {
+      .header-section {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 16px;
+      }
+
+      .header-right {
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .header-title h1 {
+        font-size: 23px;
+      }
+
+      .search-input-wrapper {
+        flex-direction: column;
+      }
+
+      .btn-search {
+        width: 100%;
+      }
+
+      .filter-group {
+        flex-direction: column;
+      }
+
+      .filter-box {
+        width: 100%;
+        min-width: 100%;
+      }
+
+      .dropdown-menu {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .action-bar {
         align-items: stretch;
         flex-direction: column;
       }
 
-      .header-right { justify-content: flex-start; }
-      .btn, .view-buttons button { width: 100%; }
-      .view-buttons { flex-direction: column; }
-      .card { max-width: 100%; }
-      .filter-popover { left: 4px; }
+      .btn-export {
+        width: 100%;
+      }
+
+      .card {
+        max-width: 100%;
+      }
+
+      .quick-actions .btn {
+        width: 100%;
+      }
     }
 
     @media (max-width: 460px) {
-      .stats-bar { width: 100%; }
-      .stat-item { flex: 1; }
+      .header-right {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .stats-bar {
+        width: 100%;
+      }
+
+      .stat-item {
+        flex: 1;
+      }
+    }
+
+    /* SCROLLBAR */
+    .dropdown-menu::-webkit-scrollbar,
+    .table-container::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-track,
+    .table-container::-webkit-scrollbar-track {
+      background: var(--card-bg-hover);
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb,
+    .table-container::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: var(--border);
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb:hover,
+    .table-container::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-light);
     }
   </style>
 </head>
@@ -665,102 +942,245 @@
     </div>
 
     <div class="header-right">
-      <div class="stats-bar">
+      <div class="stats-bar" aria-label="Ringkasan produk">
         <div class="stat-item">
           <div class="stat-value" id="totalCount">0</div>
           <div class="stat-label">Total</div>
         </div>
+
         <div class="stat-item">
           <div class="stat-value" id="continueCount">0</div>
           <div class="stat-label">Lanjut</div>
         </div>
+
         <div class="stat-item">
           <div class="stat-value" id="discontinueCount">0</div>
           <div class="stat-label">Stop</div>
         </div>
       </div>
 
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ubah mode terang atau gelap">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ubah mode terang atau gelap" aria-pressed="false" title="Ubah mode terang atau gelap">
         <span class="theme-toggle-slider" id="themeIcon">☀️</span>
       </button>
     </div>
   </header>
 
-  <section class="toolbar">
-    <div class="search-wrapper">
-      <input
-        id="search"
-        type="search"
-        placeholder="Cari kode, nama barang, pemasok, asal, status, atau catatan..."
-        autocomplete="off"
-      />
+  <!-- TAMPILAN AWAL -->
+  <section id="landingView">
+    <div class="landing">
+      <article class="dashboard-card total">
+        <h3>Total Produk</h3>
+        <p>Seluruh produk yang terdaftar pada data.</p>
+        <div class="dashboard-number" id="landingTotal">0</div>
+      </article>
+
+      <article class="dashboard-card continue">
+        <h3>Lanjut Produksi</h3>
+        <p>Produk dengan status masih berjalan.</p>
+        <div class="dashboard-number" id="landingContinue">0</div>
+      </article>
+
+      <article class="dashboard-card discontinue">
+        <h3>Dihentikan</h3>
+        <p>Produk dengan status berhenti atau discontinued.</p>
+        <div class="dashboard-number" id="landingDiscontinue">0</div>
+      </article>
     </div>
 
-    <div class="view-buttons">
-      <button id="btnTable" class="active" type="button">Tabel</button>
-      <button id="btnCard" type="button">Kartu</button>
+    <div class="quick-actions">
+      <button class="btn btn-primary" id="btnOpenDashboard" type="button">
+        📊 Buka Dashboard
+      </button>
+
+      <button class="btn" id="btnOpenTable" type="button">
+        📋 Buka Tabel Produk
+      </button>
+
+      <button class="btn" id="btnLandingExport" type="button">
+        ⬇️ Ekspor Excel
+      </button>
     </div>
-
-    <button class="btn btn-primary" id="btnExport" type="button">⬇️ Ekspor Excel</button>
   </section>
 
-  <section id="tableView" class="table-container">
-    <table id="dataTable">
-      <thead id="tableHead"></thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </section>
+  <!-- DASHBOARD -->
+  <main id="workspace" class="workspace">
+    <section class="search-bar">
+      <div class="search-top">
+        <div class="search-input-wrapper">
+          <div class="search-input">
+            <input id="search" type="search" placeholder="Cari kode, nama produk, pemasok, asal, atau catatan..." autocomplete="off" />
+          </div>
 
-  <section id="cardView" class="card-mode"></section>
+          <button class="btn-search" id="btnSearchAction" type="button">
+            Cari
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-box">
+          <label class="filter-label" for="supplierToggle">Pemasok</label>
+
+          <button class="dropdown-toggle" id="supplierToggle" type="button" aria-haspopup="true" aria-expanded="false">
+            <span id="supplierText">Semua Pemasok</span>
+            <span class="dropdown-arrow">▼</span>
+          </button>
+
+          <div class="dropdown-menu" id="supplierMenu" role="menu"></div>
+        </div>
+
+        <div class="filter-box">
+          <label class="filter-label" for="originToggle">Asal</label>
+
+          <button class="dropdown-toggle" id="originToggle" type="button" aria-haspopup="true" aria-expanded="false">
+            <span id="originText">Semua Asal</span>
+            <span class="dropdown-arrow">▼</span>
+          </button>
+
+          <div class="dropdown-menu" id="originMenu" role="menu"></div>
+        </div>
+
+        <div class="filter-box">
+          <label class="filter-label" for="statusToggle">Status</label>
+
+          <button class="dropdown-toggle" id="statusToggle" type="button" aria-haspopup="true" aria-expanded="false">
+            <span id="statusText">Semua Status</span>
+            <span class="dropdown-arrow">▼</span>
+          </button>
+
+          <div class="dropdown-menu" id="statusMenu" role="menu">
+            <label class="dropdown-item select-all-item">
+              <input type="checkbox" id="statusSelectAll" />
+              <span>Pilih Semua</span>
+            </label>
+
+            <label class="dropdown-item">
+              <input type="checkbox" class="status-check" value="continue" />
+              <span>Lanjut Produksi</span>
+            </label>
+
+            <label class="dropdown-item">
+              <input type="checkbox" class="status-check" value="discontinue" />
+              <span>Dihentikan</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="action-bar">
+      <div class="view-buttons">
+        <button id="btnTable" class="active" type="button" aria-pressed="true">
+          Tabel
+        </button>
+
+        <button id="btnCard" type="button" aria-pressed="false">
+          Kartu
+        </button>
+      </div>
+
+      <button class="btn-export" id="btnExport" type="button">
+        Ekspor Excel
+      </button>
+    </section>
+
+    <section id="tableView" class="table-container">
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Kode Material</th>
+            <th>Nama Barang</th>
+            <th>Pemasok</th>
+            <th>Asal</th>
+            <th>Status</th>
+            <th>Catatan</th>
+          </tr>
+        </thead>
+
+        <tbody id="tableBody"></tbody>
+      </table>
+    </section>
+
+    <section id="cardView" class="card-mode"></section>
+  </main>
 
   <script>
-    const CSV_PATHS = [
-      "./data.csv",
-      "data.csv",
-      "./Data.csv",
-      "Data.csv",
-      "./DATA.csv",
-      "./data/data.csv",
-      "./assets/data.csv"
-    ];
-
-    const COLUMNS = [
-      { key: "code", label: "Kode Material" },
-      { key: "name", label: "Nama Barang" },
-      { key: "supplier", label: "Pemasok" },
-      { key: "origin", label: "Asal" },
-      { key: "status", label: "Status" },
-      { key: "note", label: "Catatan" }
-    ];
+    /* Path CSV sama seperti versi awal yang sudah berhasil menampilkan data */
+    const CSVPATH = "./data.csv";
 
     const allData = [];
-    const columnValues = {};
-    const columnSelections = {};
-    const columnSearches = {};
+    let suppliers = [];
+    let origins = [];
+
+    const selected = {
+      supplier: new Set(),
+      origin: new Set(),
+      status: new Set()
+    };
 
     const dom = {};
 
     function initDomCache() {
-      [
-        "search", "btnExport", "tableHead", "tableBody",
-        "tableView", "cardView", "btnTable", "btnCard",
-        "totalCount", "continueCount", "discontinueCount",
-        "themeToggle", "themeIcon"
-      ].forEach(id => dom[id] = document.getElementById(id));
+      dom.search = document.getElementById("search");
+      dom.btnSearch = document.getElementById("btnSearchAction");
+      dom.btnExport = document.getElementById("btnExport");
+      dom.btnLandingExport = document.getElementById("btnLandingExport");
+
+      dom.supplierMenu = document.getElementById("supplierMenu");
+      dom.originMenu = document.getElementById("originMenu");
+      dom.statusMenu = document.getElementById("statusMenu");
+
+      dom.supplierText = document.getElementById("supplierText");
+      dom.originText = document.getElementById("originText");
+      dom.statusText = document.getElementById("statusText");
+
+      dom.supplierToggle = document.getElementById("supplierToggle");
+      dom.originToggle = document.getElementById("originToggle");
+      dom.statusToggle = document.getElementById("statusToggle");
+
+      dom.tableBody = document.getElementById("tableBody");
+      dom.tableView = document.getElementById("tableView");
+      dom.cardView = document.getElementById("cardView");
+
+      dom.btnTable = document.getElementById("btnTable");
+      dom.btnCard = document.getElementById("btnCard");
+
+      dom.totalCount = document.getElementById("totalCount");
+      dom.continueCount = document.getElementById("continueCount");
+      dom.discontinueCount = document.getElementById("discontinueCount");
+
+      dom.landingTotal = document.getElementById("landingTotal");
+      dom.landingContinue = document.getElementById("landingContinue");
+      dom.landingDiscontinue = document.getElementById("landingDiscontinue");
+
+      dom.themeToggle = document.getElementById("themeToggle");
+      dom.themeIcon = document.getElementById("themeIcon");
+
+      dom.landingView = document.getElementById("landingView");
+      dom.workspace = document.getElementById("workspace");
+
+      dom.btnOpenDashboard = document.getElementById("btnOpenDashboard");
+      dom.btnOpenTable = document.getElementById("btnOpenTable");
     }
 
     function escapeHtml(value) {
-      const el = document.createElement("div");
-      el.textContent = String(value ?? "");
-      return el.innerHTML;
+      const element = document.createElement("div");
+      element.textContent = String(value ?? "");
+      return element.innerHTML;
     }
 
     function normalize(value) {
       return String(value ?? "").trim().toLowerCase();
     }
 
+    /*
+      Catatan penting:
+      "DISCONTINUE" mengandung teks "CONTINUE".
+      Maka status berhenti diperiksa lebih dahulu agar statistik benar.
+    */
     function isDiscontinued(status) {
       const s = normalize(status);
+
       return s.includes("discontinue") ||
              s.includes("dihentikan") ||
              s.includes("stop") ||
@@ -769,25 +1189,42 @@
 
     function isContinuing(status) {
       const s = normalize(status);
-      if (isDiscontinued(s)) return false;
+
+      if (isDiscontinued(s)) {
+        return false;
+      }
+
       return s.includes("continue") ||
-             s.includes("lanjut produksi") ||
+             s.includes("produksi") ||
              s.includes("lanjut");
     }
 
     function getStatusClass(status) {
-      if (isDiscontinued(status)) return "disc";
-      if (isContinuing(status)) return "cont";
+      if (isDiscontinued(status)) {
+        return "disc";
+      }
+
+      if (isContinuing(status)) {
+        return "cont";
+      }
+
       return "other";
     }
 
+    /*
+      Parser CSV.
+      Mendukung:
+      - koma dalam kolom jika dibungkus tanda kutip
+      - tanda kutip ganda
+      - line break di dalam kolom yang diapit tanda kutip
+    */
     function parseCSV(text) {
       const rows = [];
       let row = [];
       let field = "";
       let inQuotes = false;
 
-      const cleanText = text.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+      const cleanText = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
 
       for (let i = 0; i < cleanText.length; i++) {
         const char = cleanText[i];
@@ -800,6 +1237,7 @@
           } else {
             inQuotes = !inQuotes;
           }
+
           continue;
         }
 
@@ -811,7 +1249,11 @@
 
         if (char === "\n" && !inQuotes) {
           row.push(field.trim());
-          if (row.some(value => value !== "")) rows.push(row);
+
+          if (row.some(value => value !== "")) {
+            rows.push(row);
+          }
+
           row = [];
           field = "";
           continue;
@@ -821,7 +1263,10 @@
       }
 
       row.push(field.trim());
-      if (row.some(value => value !== "")) rows.push(row);
+
+      if (row.some(value => value !== "")) {
+        rows.push(row);
+      }
 
       return rows;
     }
@@ -834,100 +1279,732 @@
         return;
       }
 
+      const supplierSet = new Set();
+      const originSet = new Set();
+
       allData.length = 0;
 
-      COLUMNS.forEach(column => {
-        columnValues[column.key] = new Set();
-        columnSelections[column.key] = new Set();
-        columnSearches[column.key] = "";
-      });
-
+      /*
+        Script memakai urutan kolom:
+        Kode Material, Nama Barang, Pemasok, Asal, Status, Catatan
+      */
       for (let i = 1; i < rows.length; i++) {
-        const r = rows[i];
+        const rowData = rows[i];
+
         const record = {
-          code: (r[0] || "").trim(),
-          name: (r[1] || "").trim(),
-          supplier: (r[2] || "").trim(),
-          origin: (r[3] || "").trim(),
-          status: (r[4] || "").trim(),
-          note: (r[5] || "").trim()
+          code: (rowData[0] || "").trim(),
+          name: (rowData[1] || "").trim(),
+          supplier: (rowData[2] || "").trim(),
+          origin: (rowData[3] || "").trim(),
+          status: (rowData[4] || "").trim(),
+          note: (rowData[5] || "").trim()
         };
 
-        if (!Object.values(record).some(value => value !== "")) continue;
+        const hasContent = Object.values(record).some(value => value !== "");
+
+        if (!hasContent) {
+          continue;
+        }
 
         allData.push(record);
 
-        COLUMNS.forEach(column => {
-          const value = record[column.key];
-          if (value !== "") columnValues[column.key].add(value);
-        });
+        if (record.supplier) {
+          supplierSet.add(record.supplier);
+        }
+
+        if (record.origin) {
+          originSet.add(record.origin);
+        }
       }
 
-      if (!allData.length) {
+      if (allData.length === 0) {
         showEmptyState("Data produk tidak ditemukan dalam CSV.");
         return;
       }
 
-      renderTableHead();
+      suppliers = [...supplierSet].sort((a, b) => a.localeCompare(b));
+      origins = [...originSet].sort((a, b) => a.localeCompare(b));
+
+      renderSupplierMenu();
+      renderOriginMenu();
+      syncStatusSelectAll();
+
       applyFilters();
     }
 
-    function renderTableHead() {
+    function createMenuItem(labelText, className, value, id) {
+      const label = document.createElement("label");
+      label.className = className;
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+
+      if (value !== undefined) {
+        checkbox.value = value;
+      }
+
+      if (id) {
+        checkbox.id = id;
+      }
+
+      const text = document.createElement("span");
+      text.textContent = labelText;
+
+      label.append(checkbox, text);
+
+      return label;
+    }
+
+    function renderSupplierMenu() {
       const fragment = document.createDocumentFragment();
-      const tr = document.createElement("tr");
 
-      COLUMNS.forEach(column => {
-        const th = document.createElement("th");
-        th.style.position = "relative";
+      fragment.appendChild(
+        createMenuItem(
+          "Pilih Semua",
+          "dropdown-item select-all-item",
+          undefined,
+          "supplierSelectAll"
+        )
+      );
 
-        th.innerHTML = `
-          <div class="th-inner">
-            <span>${escapeHtml(column.label)}</span>
-            <button
-              class="column-filter-btn"
-              type="button"
-              data-column="${column.key}"
-              title="Filter ${escapeHtml(column.label)}"
-            >▾</button>
-          </div>
-          <div class="filter-popover" data-popover="${column.key}"></div>
+      suppliers.forEach(supplier => {
+        const item = createMenuItem(
+          supplier,
+          "dropdown-item supplier-item",
+          supplier
+        );
+
+        const checkbox = item.querySelector("input");
+        checkbox.classList.add("supplier-check");
+        checkbox.checked = selected.supplier.has(supplier);
+
+        fragment.appendChild(item);
+      });
+
+      dom.supplierMenu.replaceChildren(fragment);
+
+      syncSupplierSelectAll();
+    }
+
+    function renderOriginMenu() {
+      const fragment = document.createDocumentFragment();
+
+      fragment.appendChild(
+        createMenuItem(
+          "Pilih Semua",
+          "dropdown-item select-all-item",
+          undefined,
+          "originSelectAll"
+        )
+      );
+
+      origins.forEach(origin => {
+        const item = createMenuItem(
+          origin,
+          "dropdown-item origin-item",
+          origin
+        );
+
+        const checkbox = item.querySelector("input");
+        checkbox.classList.add("origin-check");
+        checkbox.checked = selected.origin.has(origin);
+
+        fragment.appendChild(item);
+      });
+
+      dom.originMenu.replaceChildren(fragment);
+
+      syncOriginSelectAll();
+    }
+
+    function syncSelectAll(menu, itemSelector, selectAllSelector) {
+      const itemCheckboxes = [...menu.querySelectorAll(itemSelector)];
+      const selectAll = menu.querySelector(selectAllSelector);
+
+      if (!selectAll) {
+        return;
+      }
+
+      const checkedCount = itemCheckboxes.filter(checkbox => checkbox.checked).length;
+
+      selectAll.checked =
+        itemCheckboxes.length > 0 &&
+        checkedCount === itemCheckboxes.length;
+
+      selectAll.indeterminate =
+        checkedCount > 0 &&
+        checkedCount < itemCheckboxes.length;
+    }
+
+    function syncSupplierSelectAll() {
+      syncSelectAll(
+        dom.supplierMenu,
+        ".supplier-check",
+        "#supplierSelectAll"
+      );
+    }
+
+    function syncOriginSelectAll() {
+      syncSelectAll(
+        dom.originMenu,
+        ".origin-check",
+        "#originSelectAll"
+      );
+    }
+
+    function syncStatusSelectAll() {
+      syncSelectAll(
+        dom.statusMenu,
+        ".status-check",
+        "#statusSelectAll"
+      );
+    }
+
+    function updateToggleText(type) {
+      const selectedSet = selected[type];
+      const target = dom[`${type}Text`];
+
+      const labels = {
+        supplier: "Semua Pemasok",
+        origin: "Semua Asal",
+        status: "Semua Status"
+      };
+
+      if (selectedSet.size === 0) {
+        target.textContent = labels[type];
+        return;
+      }
+
+      if (selectedSet.size === 1) {
+        if (type === "status") {
+          target.textContent = selectedSet.has("continue")
+            ? "Lanjut Produksi"
+            : "Dihentikan";
+        } else {
+          target.textContent = [...selectedSet][0];
+        }
+
+        return;
+      }
+
+      target.textContent = `${selectedSet.size} dipilih`;
+    }
+
+    function getFilteredData() {
+      const keyword = normalize(dom.search.value);
+
+      return allData.filter(item => {
+        const matchKeyword = !keyword || [
+          item.code,
+          item.name,
+          item.supplier,
+          item.origin,
+          item.status,
+          item.note
+        ].some(value => normalize(value).includes(keyword));
+
+        const matchSupplier =
+          selected.supplier.size === 0 ||
+          selected.supplier.has(item.supplier);
+
+        const matchOrigin =
+          selected.origin.size === 0 ||
+          selected.origin.has(item.origin);
+
+        let matchStatus = true;
+
+        if (selected.status.size > 0) {
+          const matchesContinue =
+            selected.status.has("continue") &&
+            isContinuing(item.status);
+
+          const matchesDiscontinue =
+            selected.status.has("discontinue") &&
+            isDiscontinued(item.status);
+
+          matchStatus = matchesContinue || matchesDiscontinue;
+        }
+
+        return matchKeyword && matchSupplier && matchOrigin && matchStatus;
+      });
+    }
+
+    function updateStats(filteredData) {
+      const total = filteredData.length;
+
+      const continueCount = filteredData.filter(item =>
+        isContinuing(item.status)
+      ).length;
+
+      const discontinueCount = filteredData.filter(item =>
+        isDiscontinued(item.status)
+      ).length;
+
+      dom.totalCount.textContent = total;
+      dom.continueCount.textContent = continueCount;
+      dom.discontinueCount.textContent = discontinueCount;
+
+      dom.landingTotal.textContent = allData.length;
+      dom.landingContinue.textContent = allData.filter(item =>
+        isContinuing(item.status)
+      ).length;
+
+      dom.landingDiscontinue.textContent = allData.filter(item =>
+        isDiscontinued(item.status)
+      ).length;
+    }
+
+    function renderTable(data) {
+      if (data.length === 0) {
+        dom.tableBody.innerHTML = "";
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      data.forEach(item => {
+        const row = document.createElement("tr");
+        const statusClass = getStatusClass(item.status);
+
+        row.innerHTML = `
+          <td>
+            <span class="material-code">${escapeHtml(item.code)}</span>
+          </td>
+          <td>${escapeHtml(item.name)}</td>
+          <td>${escapeHtml(item.supplier)}</td>
+          <td>${escapeHtml(item.origin)}</td>
+          <td>
+            <span class="status-badge status-${statusClass}">
+              ${escapeHtml(item.status || "-")}
+            </span>
+          </td>
+          <td>${escapeHtml(item.note || "-")}</td>
         `;
 
-        fragment.appendChild(th);
+        fragment.appendChild(row);
       });
 
-      dom.tableHead.replaceChildren(fragment);
+      dom.tableBody.replaceChildren(fragment);
+    }
 
-      dom.tableHead.querySelectorAll(".column-filter-btn").forEach(button => {
-        button.addEventListener("click", event => {
-          event.stopPropagation();
-          toggleColumnFilter(button.dataset.column, button);
+    function renderCards(data) {
+      if (data.length === 0) {
+        dom.cardView.innerHTML = "";
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      data.forEach(item => {
+        const statusClass = getStatusClass(item.status);
+
+        const card = document.createElement("article");
+        card.className = `card ${statusClass}`;
+
+        card.innerHTML = `
+          <div class="card-code">${escapeHtml(item.code)}</div>
+          <h3 class="card-name">${escapeHtml(item.name)}</h3>
+
+          <span class="status-badge status-${statusClass}">
+            ${escapeHtml(item.status || "-")}
+          </span>
+
+          <p>
+            <strong>Pemasok:</strong>
+            ${escapeHtml(item.supplier || "-")}
+          </p>
+
+          <p>
+            <strong>Asal:</strong>
+            ${escapeHtml(item.origin || "-")}
+          </p>
+
+          <p class="card-note">
+            ${escapeHtml(item.note || "Tidak ada catatan")}
+          </p>
+        `;
+
+        fragment.appendChild(card);
+      });
+
+      dom.cardView.replaceChildren(fragment);
+    }
+
+    function showEmptyState(message) {
+      dom.tableBody.innerHTML = `
+        <tr>
+          <td class="empty-cell" colspan="6">
+            <div class="empty-state">
+              <strong>${escapeHtml(message)}</strong>
+            </div>
+          </td>
+        </tr>
+      `;
+
+      dom.cardView.innerHTML = `
+        <div class="empty-state" style="width: 100%;">
+          <strong>${escapeHtml(message)}</strong>
+        </div>
+      `;
+
+      updateStats([]);
+    }
+
+    function showNoResult() {
+      dom.tableBody.innerHTML = `
+        <tr>
+          <td class="empty-cell" colspan="6">
+            <div class="empty-state">
+              <strong>Tidak ada hasil ditemukan.</strong>
+
+              <div style="margin-top: 6px;">
+                Ubah kata kunci atau pilihan filter Anda.
+              </div>
+            </div>
+          </td>
+        </tr>
+      `;
+
+      dom.cardView.innerHTML = `
+        <div class="empty-state" style="width: 100%;">
+          <strong>Tidak ada hasil ditemukan.</strong>
+
+          <div style="margin-top: 6px;">
+            Ubah kata kunci atau pilihan filter Anda.
+          </div>
+        </div>
+      `;
+    }
+
+    function applyFilters() {
+      const filteredData = getFilteredData();
+
+      updateStats(filteredData);
+
+      if (filteredData.length === 0) {
+        showNoResult();
+        return;
+      }
+
+      renderTable(filteredData);
+      renderCards(filteredData);
+    }
+
+    function closeAllDropdowns() {
+      document.querySelectorAll(".dropdown-menu").forEach(menu => {
+        menu.classList.remove("open");
+      });
+
+      document.querySelectorAll(".dropdown-toggle").forEach(toggle => {
+        toggle.classList.remove("active");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    function setupDropdown(toggle, menu) {
+      toggle.addEventListener("click", event => {
+        event.stopPropagation();
+
+        const isOpen = menu.classList.contains("open");
+
+        closeAllDropdowns();
+
+        if (!isOpen) {
+          menu.classList.add("open");
+          toggle.classList.add("active");
+          toggle.setAttribute("aria-expanded", "true");
+        }
+      });
+
+      menu.addEventListener("click", event => {
+        event.stopPropagation();
+      });
+    }
+
+    function handleSupplierFilter(event) {
+      const target = event.target;
+
+      if (target.id === "supplierSelectAll") {
+        const shouldCheckAll = target.checked;
+        const checkboxes = dom.supplierMenu.querySelectorAll(".supplier-check");
+
+        selected.supplier.clear();
+
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.supplier.add(checkbox.value);
+          }
+        });
+
+        syncSupplierSelectAll();
+        updateToggleText("supplier");
+        applyFilters();
+
+        return;
+      }
+
+      if (target.classList.contains("supplier-check")) {
+        if (target.checked) {
+          selected.supplier.add(target.value);
+        } else {
+          selected.supplier.delete(target.value);
+        }
+
+        syncSupplierSelectAll();
+        updateToggleText("supplier");
+        applyFilters();
+      }
+    }
+
+    function handleOriginFilter(event) {
+      const target = event.target;
+
+      if (target.id === "originSelectAll") {
+        const shouldCheckAll = target.checked;
+        const checkboxes = dom.originMenu.querySelectorAll(".origin-check");
+
+        selected.origin.clear();
+
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.origin.add(checkbox.value);
+          }
+        });
+
+        syncOriginSelectAll();
+        updateToggleText("origin");
+        applyFilters();
+
+        return;
+      }
+
+      if (target.classList.contains("origin-check")) {
+        if (target.checked) {
+          selected.origin.add(target.value);
+        } else {
+          selected.origin.delete(target.value);
+        }
+
+        syncOriginSelectAll();
+        updateToggleText("origin");
+        applyFilters();
+      }
+    }
+
+    function handleStatusFilter(event) {
+      const target = event.target;
+
+      if (target.id === "statusSelectAll") {
+        const shouldCheckAll = target.checked;
+        const checkboxes = dom.statusMenu.querySelectorAll(".status-check");
+
+        selected.status.clear();
+
+        checkboxes.forEach(checkbox => {
+          checkbox.checked = shouldCheckAll;
+
+          if (shouldCheckAll) {
+            selected.status.add(checkbox.value);
+          }
+        });
+
+        syncStatusSelectAll();
+        updateToggleText("status");
+        applyFilters();
+
+        return;
+      }
+
+      if (target.classList.contains("status-check")) {
+        if (target.checked) {
+          selected.status.add(target.value);
+        } else {
+          selected.status.delete(target.value);
+        }
+
+        syncStatusSelectAll();
+        updateToggleText("status");
+        applyFilters();
+      }
+    }
+
+    function setView(view) {
+      const tableMode = view === "table";
+
+      dom.tableView.style.display = tableMode ? "block" : "none";
+      dom.cardView.style.display = tableMode ? "none" : "flex";
+
+      dom.btnTable.classList.toggle("active", tableMode);
+      dom.btnCard.classList.toggle("active", !tableMode);
+
+      dom.btnTable.setAttribute("aria-pressed", String(tableMode));
+      dom.btnCard.setAttribute("aria-pressed", String(!tableMode));
+    }
+
+    /*
+      Halaman selalu mulai dalam Light Mode.
+      Tidak menggunakan localStorage atau pengaturan Dark Mode browser
+      saat halaman pertama kali dibuka.
+    */
+    function initTheme() {
+      const initialTheme = "light";
+
+      document.documentElement.setAttribute("data-theme", initialTheme);
+
+      updateThemeButton(initialTheme);
+    }
+
+    function updateThemeButton(theme) {
+      const isDark = theme === "dark";
+
+      dom.themeToggle.classList.toggle("active", isDark);
+      dom.themeToggle.setAttribute("aria-pressed", String(isDark));
+
+      dom.themeIcon.textContent = isDark ? "🌙" : "☀️";
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+      document.documentElement.setAttribute("data-theme", nextTheme);
+
+      updateThemeButton(nextTheme);
+    }
+
+    function showWorkspace() {
+      dom.landingView.classList.add("hidden");
+      dom.workspace.classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    function showLanding() {
+      dom.workspace.classList.remove("active");
+      dom.landingView.classList.remove("hidden");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    /* EXPORT EXCEL */
+    function autoFitColumns(rows) {
+      const widths = [];
+
+      rows.forEach(row => {
+        row.forEach((cell, colIndex) => {
+          const text = String(cell ?? "");
+          const length = Math.max(text.length, 10);
+
+          widths[colIndex] = Math.max(
+            widths[colIndex] || 10,
+            Math.min(length + 3, 60)
+          );
         });
       });
+
+      return widths.map(width => ({
+        wch: width
+      }));
     }
 
-    function toggleColumnFilter(columnKey, button) {
-      const popover = dom.tableHead.querySelector(`[data-popover="${columnKey}"]`);
-      const isOpen = popover.classList.contains("open");
+    function exportToExcel() {
+      const filteredData = getFilteredData();
 
-      closeAllColumnFilters();
+      if (filteredData.length === 0) {
+        alert("Tidak ada data untuk diekspor.");
+        return;
+      }
 
-      if (isOpen) return;
+      const headers = [
+        "Kode Material",
+        "Nama Barang",
+        "Pemasok",
+        "Asal",
+        "Status",
+        "Catatan"
+      ];
 
-      renderColumnFilter(columnKey, popover);
-      popover.classList.add("open");
-      button.classList.add("active");
-    }
+      const productRows = [
+        headers,
+        ...filteredData.map(item => [
+          item.code,
+          item.name,
+          item.supplier,
+          item.origin,
+          item.status,
+          item.note
+        ])
+      ];
 
-    function closeAllColumnFilters() {
-      dom.tableHead.querySelectorAll(".filter-popover").forEach(popover => {
-        popover.classList.remove("open");
-        popover.innerHTML = "";
-      });
+      const continueCount = filteredData.filter(item =>
+        isContinuing(item.status)
+      ).length;
 
-      dom.tableHead.querySelectorAll(".column-filter-btn").forEach(button => {
-        button.classList.remove("active");
-      });
-    }
+      const discontinueCount = filteredData.filter(item =>
+        isDiscontinued(item.status)
+      ).length;
 
-    function renderColumnFilter(columnKey, popover)
+      const otherCount =
+        filteredData.length - continueCount - discontinueCount;
+
+      const summaryRows = [
+        ["Ringkasan Produk", ""],
+        ["Total Produk", filteredData.length],
+        ["Lanjut Produksi", continueCount],
+        ["Dihentikan", discontinueCount],
+        ["Status Lain", otherCount],
+        ["", ""],
+        ["Tanggal Ekspor", new Date().toLocaleString("id-ID")]
+      ];
+
+      const workbook = XLSX.utils.book_new();
+
+      const productSheet = XLSX.utils.aoa_to_sheet(productRows);
+      productSheet["!cols"] = autoFitColumns(productRows);
+
+      productSheet["!autofilter"] = {
+        ref: XLSX.utils.encode_range({
+          s: {
+            r: 0,
+            c: 0
+          },
+          e: {
+            r: productRows.length - 1,
+            c: headers.length - 1
+          }
+        })
+      };
+
+      productSheet["!freeze"] = {
+        xSplit: 0,
+        ySplit: 1
+      };
+
+      const summarySheet = XLSX.utils.aoa_to_sheet(summaryRows);
+      summarySheet["!cols"] = autoFitColumns(summaryRows);
+
+      XLSX.utils.book_append_sheet(workbook, productSheet, "Data Produk");
+      XLSX.utils.book_append_sheet(workbook, summarySheet, "Ringkasan");
+
+      const lastRow = productRows.length - 1;
+      const statusRange = `E2:E${lastRow + 1}`;
+
+      productSheet["!conditionalFormats"] = [
+        {
+          ref: statusRange,
+          rules: [{
+            type: "containsText",
+            operator: "containsText",
+            text: "DISCONTINUE",
+            style: {
+              fill: {
