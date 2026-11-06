@@ -10,23 +10,13 @@
   <style>
     :root {
       --primary: #4f6d7a;
-      --primary-dark: #3d5762;
       --primary-soft: #eef3f5;
+      --primary-dark: #3d5762;
 
-      --accent: #6d8ba0;
       --accent-gradient: linear-gradient(135deg, #5b7c8a, #43606c);
 
-      --blue: #5b7c9a;
-      --teal: #4f8a80;
-      --rose: #b06a76;
-      --amber: #b08a52;
-
-      --bg: #f6f8fa;
-      --bg-gradient:
-        radial-gradient(circle at 12% 10%, rgba(91, 124, 154, .10), transparent 34%),
-        radial-gradient(circle at 88% 8%, rgba(79, 138, 128, .10), transparent 32%),
-        radial-gradient(circle at 70% 95%, rgba(176, 106, 118, .07), transparent 30%),
-        linear-gradient(180deg, #f9fbfc 0%, #f1f5f8 100%);
+      --bg: #f7f9fa;
+      --bg-gradient: linear-gradient(180deg, #f9fbfc 0%, #f2f6f8 100%);
 
       --card-bg: #ffffff;
       --card-bg-hover: #f7fafb;
@@ -36,10 +26,10 @@
       --text-muted: #8b9aa2;
 
       --shadow-sm: 0 1px 3px rgba(47, 62, 70, .06);
-      --shadow-md: 0 8px 22px rgba(47, 62, 70, .08);
-      --shadow-lg: 0 18px 38px rgba(47, 62, 70, .12);
+      --shadow-md: 0 6px 18px rgba(47, 62, 70, .07);
+      --shadow-lg: 0 14px 30px rgba(47, 62, 70, .10);
 
-      --radius: 16px;
+      --radius: 14px;
       --radius-sm: 10px;
 
       --status-disc-bg: #fdf2f3;
@@ -57,23 +47,13 @@
 
     [data-theme="dark"] {
       --primary: #8fb0bd;
-      --primary-dark: #a8c5d0;
       --primary-soft: rgba(143, 176, 189, .12);
+      --primary-dark: #a8c5d0;
 
-      --accent: #7fa3b5;
       --accent-gradient: linear-gradient(135deg, #4a6472, #33474f);
 
-      --blue: #7ea3c4;
-      --teal: #6fb3a6;
-      --rose: #d18b98;
-      --amber: #d1a86b;
-
       --bg: #101820;
-      --bg-gradient:
-        radial-gradient(circle at 12% 10%, rgba(126, 163, 196, .14), transparent 34%),
-        radial-gradient(circle at 88% 8%, rgba(111, 179, 166, .12), transparent 32%),
-        radial-gradient(circle at 70% 95%, rgba(209, 139, 152, .08), transparent 30%),
-        linear-gradient(180deg, #101820 0%, #151f27 100%);
+      --bg-gradient: linear-gradient(180deg, #101820 0%, #151f27 100%);
 
       --card-bg: #17222b;
       --card-bg-hover: #1d2b36;
@@ -83,8 +63,8 @@
       --text-muted: #8496a0;
 
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, .30);
-      --shadow-md: 0 8px 22px rgba(0, 0, 0, .32);
-      --shadow-lg: 0 18px 38px rgba(0, 0, 0, .42);
+      --shadow-md: 0 6px 18px rgba(0, 0, 0, .32);
+      --shadow-lg: 0 14px 30px rgba(0, 0, 0, .40);
 
       --status-disc-bg: rgba(214, 116, 130, .12);
       --status-disc-text: #e8b3ba;
@@ -109,7 +89,6 @@
       margin: 0 auto;
       padding: 20px;
       background: var(--bg-gradient);
-      background-attachment: fixed;
       color: var(--text);
       font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
       font-size: 14px;
@@ -122,14 +101,12 @@
 
     /* HEADER HALAMAN */
     .header-section {
-      position: relative;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      padding: 22px;
+      padding: 20px 22px;
       margin-bottom: 18px;
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -137,31 +114,12 @@
       box-shadow: var(--shadow-md);
     }
 
-    .header-section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 92% 20%, rgba(91, 124, 154, .12), transparent 30%),
-        radial-gradient(circle at 78% 90%, rgba(79, 138, 128, .10), transparent 28%);
-      pointer-events: none;
-    }
-
-    .header-title,
-    .header-right {
-      position: relative;
-      z-index: 1;
-    }
-
     .header-title h1 {
       margin: 0 0 4px;
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 850;
+      font-size: clamp(22px, 3vw, 27px);
+      font-weight: 800;
       letter-spacing: -.02em;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--primary-dark);
     }
 
     .header-title p {
@@ -178,7 +136,6 @@
       gap: 10px;
     }
 
-    /* STAT CARDS */
     .stats-bar {
       display: flex;
       align-items: center;
@@ -187,40 +144,18 @@
     }
 
     .stat-item {
-      position: relative;
-      overflow: hidden;
-      min-width: 92px;
-      padding: 10px 14px;
+      min-width: 82px;
+      padding: 9px 13px;
       text-align: center;
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 12px;
       background: var(--card-bg-hover);
-      box-shadow: var(--shadow-sm);
-      transition: transform .2s ease, box-shadow .2s ease;
     }
-
-    .stat-item:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .stat-item::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-    }
-
-    .stat-item.total::before { background: var(--blue); }
-    .stat-item.continue::before { background: var(--teal); }
-    .stat-item.discontinue::before { background: var(--rose); }
 
     .stat-value {
       color: var(--text);
-      font-size: 19px;
-      font-weight: 850;
+      font-size: 18px;
+      font-weight: 800;
       line-height: 1.15;
     }
 
@@ -228,7 +163,7 @@
       margin-top: 2px;
       color: var(--text-muted);
       font-size: 10px;
-      font-weight: 800;
+      font-weight: 750;
       white-space: nowrap;
     }
 
@@ -284,7 +219,7 @@
 
     .search-wrapper input {
       width: 100%;
-      height: 46px;
+      height: 45px;
       padding: 10px 16px;
       color: var(--text);
       border: 1px solid var(--border);
@@ -297,7 +232,7 @@
 
     .search-wrapper input:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px var(--primary-soft);
+      box-shadow: 0 0 0 3px var(--primary-soft);
     }
 
     .btn {
@@ -305,14 +240,14 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 46px;
+      min-height: 45px;
       padding: 0 20px;
       border: 1px solid var(--border);
       border-radius: 12px;
       background: var(--card-bg);
       color: var(--text);
       font-size: 13px;
-      font-weight: 750;
+      font-weight: 700;
       transition: all .2s ease;
     }
 
@@ -327,31 +262,21 @@
       color: #fff !important;
       border-color: transparent;
       background: var(--accent-gradient);
-      box-shadow: 0 8px 18px rgba(67, 96, 108, .20);
     }
 
-    .btn-primary:hover {
-      filter: brightness(1.06);
-      box-shadow: 0 12px 24px rgba(67, 96, 108, .24);
-    }
+    .btn-primary:hover { filter: brightness(1.05); }
 
     .view-buttons { display: flex; gap: 8px; }
 
     .view-buttons button {
-      min-height: 46px;
+      min-height: 45px;
       padding: 0 18px;
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: 12px;
       background: var(--card-bg);
       font-size: 13px;
-      font-weight: 750;
-      transition: all .2s ease;
-    }
-
-    .view-buttons button:hover {
-      border-color: var(--primary);
-      background: var(--card-bg-hover);
+      font-weight: 700;
     }
 
     .view-buttons button.active {
@@ -473,16 +398,13 @@
 
     .status-badge {
       display: inline-block;
-      padding: 5px 11px;
+      padding: 5px 10px;
       border: 1px solid;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: 850;
+      font-weight: 800;
       white-space: nowrap;
-      transition: transform .18s ease;
     }
-
-    .status-badge:hover { transform: translateY(-1px); }
 
     .status-disc {
       color: var(--status-disc-text);
@@ -626,7 +548,6 @@
 
     .card {
       position: relative;
-      overflow: hidden;
       flex: 1 1 300px;
       min-width: 280px;
       max-width: calc(33.333% - 10px);
@@ -648,27 +569,27 @@
       top: 0;
       bottom: 0;
       left: 0;
-      width: 5px;
-      border-radius: 5px 0 0 5px;
+      width: 4px;
+      border-radius: 4px 0 0 4px;
       content: "";
     }
 
-    .card.disc::before { background: var(--rose); }
-    .card.cont::before { background: var(--teal); }
-    .card.other::before { background: var(--amber); }
+    .card.disc::before { background: #c98a93; }
+    .card.cont::before { background: #7fa892; }
+    .card.other::before { background: #c7ab74; }
 
     .card-code {
       margin-bottom: 4px;
       color: var(--text-muted);
       font-size: 11px;
-      font-weight: 850;
+      font-weight: 800;
       letter-spacing: .04em;
     }
 
     .card-name {
       margin: 0 0 10px;
       font-size: 14.5px;
-      font-weight: 850;
+      font-weight: 800;
       word-break: break-word;
     }
 
@@ -717,15 +638,15 @@
 
     <div class="header-right">
       <div class="stats-bar">
-        <div class="stat-item total">
+        <div class="stat-item">
           <div class="stat-value" id="totalCount">0</div>
           <div class="stat-label">Total</div>
         </div>
-        <div class="stat-item continue">
+        <div class="stat-item">
           <div class="stat-value" id="continueCount">0</div>
           <div class="stat-label">Lanjut</div>
         </div>
-        <div class="stat-item discontinue">
+        <div class="stat-item">
           <div class="stat-value" id="discontinueCount">0</div>
           <div class="stat-label">Stop</div>
         </div>
@@ -765,7 +686,16 @@
   <section id="cardView" class="card-mode"></section>
 
   <script>
-    const CSVPATH = "./data.csv";
+    /* Script akan mencoba beberapa lokasi file CSV */
+    const CSV_PATHS = [
+      "./data.csv",
+      "data.csv",
+      "./Data.csv",
+      "Data.csv",
+      "./DATA.csv",
+      "./data/data.csv",
+      "./assets/data.csv"
+    ];
 
     const COLUMNS = [
       { key: "code", label: "Kode Material" },
@@ -830,7 +760,7 @@
       let field = "";
       let inQuotes = false;
 
-      const cleanText = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+      const cleanText = text.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
 
       for (let i = 0; i < cleanText.length; i++) {
         const char = cleanText[i];
@@ -1367,39 +1297,56 @@
         </tr>
       `;
 
-      try {
-        const response = await fetch(CSVPATH, { cache: "no-store" });
+      let lastError = "";
 
-        if (!response.ok) {
-          throw new Error(`CSV tidak ditemukan. HTTP ${response.status}`);
+      for (const path of CSV_PATHS) {
+        try {
+          const response = await fetch(path, { cache: "no-store" });
+
+          if (!response.ok) {
+            lastError = `${path} — HTTP ${response.status}`;
+            continue;
+          }
+
+          let text = await response.text();
+
+          text = text.replace(/^\uFEFF/, "").trim();
+
+          if (!text) {
+            lastError = `${path} — file kosong`;
+            continue;
+          }
+
+          loadDataFromCSV(text);
+          console.info("CSV berhasil dimuat dari:", path);
+          return;
+
+        } catch (error) {
+          lastError = `${path} — ${error.message}`;
+          console.warn("Gagal memuat:", lastError);
         }
-
-        const text = await response.text();
-
-        if (!text || !text.trim()) {
-          throw new Error("Isi file data.csv kosong.");
-        }
-
-        loadDataFromCSV(text);
-      } catch (error) {
-        console.error("Gagal memuat CSV:", error);
-
-        dom.tableBody.innerHTML = `
-          <tr>
-            <td class="empty-cell" colspan="6">
-              <div class="error-state">
-                <strong>Gagal memuat data.csv</strong>
-                <div style="margin-top:7px;font-size:12px">
-                  Pastikan file bernama <strong>data.csv</strong> berada di folder yang sama dengan <strong>index.html</strong>.
-                </div>
-                <div style="margin-top:5px;font-size:11px;opacity:.8">
-                  ${escapeHtml(error.message)}
-                </div>
-              </div>
-            </td>
-          </tr>
-        `;
       }
+
+      console.error("Semua lokasi CSV gagal dimuat:", lastError);
+
+      dom.tableBody.innerHTML = `
+        <tr>
+          <td class="empty-cell" colspan="6">
+            <div class="error-state">
+              <strong>Data CSV tidak dapat dimuat.</strong>
+              <div style="margin-top:8px;font-size:12px">
+                Pastikan file CSV sudah di-upload ke repository GitHub dan berada di folder yang sama dengan <strong>index.html</strong>.
+              </div>
+              <div style="margin-top:6px;font-size:11px;opacity:.85">
+                Nama yang dicoba: data.csv, Data.csv, DATA.csv, data/data.csv, assets/data.csv
+              </div>
+              <div style="margin-top:6px;font-size:11px;opacity:.75">
+                Detail: ${escapeHtml(lastError)}
+              </div>
+            </div>
+          </td>
+        </tr>
+      `;
     }
 
     function debounce(callback, delay = 120) {
@@ -1416,4 +1363,25 @@
 
       document.addEventListener("click", closeAllColumnFilters);
 
-      const searchDebounced =
+      const searchDebounced = debounce(applyFilters, 120);
+      dom.search.addEventListener("input", searchDebounced);
+
+      dom.search.addEventListener("keydown", event => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          applyFilters();
+        }
+      });
+
+      dom.btnExport.addEventListener("click", exportToExcel);
+
+      dom.btnTable.addEventListener("click", () => setView("table"));
+      dom.btnCard.addEventListener("click", () => setView("card"));
+
+      dom.themeToggle.addEventListener("click", toggleTheme);
+
+      loadData();
+    });
+  </script>
+</body>
+</html>
