@@ -15,6 +15,16 @@
 
       --accent-gradient: linear-gradient(135deg, #5b7c8a, #43606c);
 
+      /* Warna judul halaman */
+      --page-header-bg: linear-gradient(120deg, #4f6d7a, #6b8f9c 55%, #7fa3ad);
+      --page-header-text: #ffffff;
+      --page-header-subtext: rgba(255, 255, 255, .82);
+
+      /* Warna header tabel */
+      --table-header-bg: #dcebe9;
+      --table-header-text: #2f4f4f;
+      --table-header-border: #c3d8d5;
+
       --bg: #f7f9fa;
       --bg-gradient: linear-gradient(180deg, #f9fbfc 0%, #f2f6f8 100%);
 
@@ -51,6 +61,14 @@
       --primary-dark: #a8c5d0;
 
       --accent-gradient: linear-gradient(135deg, #4a6472, #33474f);
+
+      --page-header-bg: linear-gradient(120deg, #22303a, #2c414b 55%, #35505a);
+      --page-header-text: #eaf3f5;
+      --page-header-subtext: rgba(234, 243, 245, .78);
+
+      --table-header-bg: #243c3c;
+      --table-header-text: #d8ece9;
+      --table-header-border: #34504e;
 
       --bg: #101820;
       --bg-gradient: linear-gradient(180deg, #101820 0%, #151f27 100%);
@@ -99,37 +117,57 @@
     button, input { font: inherit; }
     button { cursor: pointer; }
 
-    /* HEADER HALAMAN */
+    /* HEADER HALAMAN — JUDUL BERWARNA */
     .header-section {
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 16px;
-      padding: 20px 22px;
+      padding: 22px;
       margin-bottom: 18px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      color: var(--page-header-text);
+      background: var(--page-header-bg);
       border-radius: var(--radius);
       box-shadow: var(--shadow-md);
     }
 
+    .header-section::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -90px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .header-title {
+      position: relative;
+      z-index: 1;
+    }
+
     .header-title h1 {
-      margin: 0 0 4px;
-      font-size: clamp(22px, 3vw, 27px);
-      font-weight: 800;
+      margin: 0 0 5px;
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 900;
       letter-spacing: -.02em;
-      color: var(--primary-dark);
+      color: var(--page-header-text);
     }
 
     .header-title p {
       margin: 0;
-      color: var(--text-muted);
+      color: var(--page-header-subtext);
       font-size: 12px;
       font-weight: 650;
     }
 
     .header-right {
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -147,21 +185,21 @@
       min-width: 82px;
       padding: 9px 13px;
       text-align: center;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, .25);
       border-radius: 12px;
-      background: var(--card-bg-hover);
+      background: rgba(255, 255, 255, .12);
+      backdrop-filter: blur(8px);
     }
 
     .stat-value {
-      color: var(--text);
       font-size: 18px;
-      font-weight: 800;
+      font-weight: 850;
       line-height: 1.15;
     }
 
     .stat-label {
       margin-top: 2px;
-      color: var(--text-muted);
+      color: var(--page-header-subtext);
       font-size: 10px;
       font-weight: 750;
       white-space: nowrap;
@@ -172,15 +210,15 @@
       width: 62px;
       height: 31px;
       padding: 0;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, .35);
       border-radius: 999px;
-      background: var(--card-bg-hover);
+      background: rgba(255, 255, 255, .15);
       transition: all .25s ease;
     }
 
     .theme-toggle.active {
-      border-color: var(--primary);
-      background: var(--primary-soft);
+      border-color: transparent;
+      background: rgba(255, 255, 255, .88);
     }
 
     .theme-toggle-slider {
@@ -196,8 +234,6 @@
       box-shadow: var(--shadow-sm);
       transition: transform .28s cubic-bezier(.34, 1.56, .64, 1);
     }
-
-    [data-theme="dark"] .theme-toggle-slider { background: #22303a; }
 
     .theme-toggle.active .theme-toggle-slider { transform: translateX(31px); }
 
@@ -303,25 +339,19 @@
       background: var(--card-bg);
     }
 
-    /* HEADER TABEL — SATU WARNA SOFT */
+    /* HEADER TABEL — BERWARNA SOFT */
     th {
       position: sticky;
       top: 0;
       z-index: 20;
       padding: 0;
-      color: #334752;
-      background: #e9eef2;
-      border-bottom: 1px solid #d8e2e7;
+      color: var(--table-header-text);
+      background: var(--table-header-bg);
+      border-bottom: 1px solid var(--table-header-border);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 850;
       text-align: left;
       white-space: nowrap;
-    }
-
-    [data-theme="dark"] th {
-      color: #dbe6ea;
-      background: #243440;
-      border-bottom: 1px solid #31424d;
     }
 
     th .th-inner {
@@ -337,43 +367,41 @@
       place-items: center;
       width: 27px;
       height: 27px;
-      color: #5d6f78;
-      border: 1px solid #d8e2e7;
+      color: var(--table-header-text);
+      border: 1px solid rgba(47, 79, 79, .22);
       border-radius: 7px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, .55);
       font-size: 12px;
       transition: all .18s ease;
     }
 
     [data-theme="dark"] .column-filter-btn {
-      color: #b3c2ca;
-      border-color: #31424d;
-      background: #17222b;
+      color: var(--table-header-text);
+      border-color: rgba(216, 236, 233, .22);
+      background: rgba(255, 255, 255, .08);
     }
 
     .column-filter-btn:hover,
     .column-filter-btn.active {
-      color: #3d5762;
-      border-color: #4f6d7a;
-      background: #eef3f5;
+      color: #ffffff;
+      border-color: transparent;
+      background: #4f6d7a;
     }
 
     [data-theme="dark"] .column-filter-btn:hover,
     [data-theme="dark"] .column-filter-btn.active {
-      color: #a8c5d0;
-      border-color: #8fb0bd;
-      background: rgba(143, 176, 189, .12);
+      color: #101820;
+      background: #8fb0bd;
     }
 
     .column-filter-btn.has-filter {
       color: #ffffff;
-      border-color: #4f6d7a;
+      border-color: transparent;
       background: #4f6d7a;
     }
 
     [data-theme="dark"] .column-filter-btn.has-filter {
       color: #101820;
-      border-color: #8fb0bd;
       background: #8fb0bd;
     }
 
@@ -686,7 +714,6 @@
   <section id="cardView" class="card-mode"></section>
 
   <script>
-    /* Script akan mencoba beberapa lokasi file CSV */
     const CSV_PATHS = [
       "./data.csv",
       "data.csv",
@@ -903,485 +930,4 @@
       });
     }
 
-    function renderColumnFilter(columnKey, popover) {
-      const searchTerm = normalize(columnSearches[columnKey]);
-      const values = [...columnValues[columnKey]]
-        .sort((a, b) => a.localeCompare(b))
-        .filter(value => !searchTerm || normalize(value).includes(searchTerm));
-
-      const selectedSet = columnSelections[columnKey];
-
-      popover.innerHTML = `
-        <input
-          class="filter-search"
-          type="search"
-          placeholder="Cari nilai..."
-          value="${escapeHtml(columnSearches[columnKey])}"
-        />
-        <div class="filter-options">
-          ${
-            values.length
-              ? values.map(value => `
-                  <label class="filter-option">
-                    <input
-                      type="checkbox"
-                      value="${escapeHtml(value)}"
-                      ${selectedSet.has(value) ? "checked" : ""}
-                    />
-                    <span>${escapeHtml(value || "(Kosong)")}</span>
-                  </label>
-                `).join("")
-              : `<div class="filter-option"><span>Tidak ada nilai.</span></div>`
-          }
-        </div>
-        <div class="filter-actions">
-          <button type="button" class="clear">Bersihkan</button>
-          <button type="button" class="apply">Terapkan</button>
-        </div>
-      `;
-
-      const searchInput = popover.querySelector(".filter-search");
-      const optionsBox = popover.querySelector(".filter-options");
-
-      searchInput.addEventListener("input", () => {
-        columnSearches[columnKey] = searchInput.value;
-        renderColumnFilter(columnKey, popover);
-        popover.classList.add("open");
-
-        const newSearchInput = popover.querySelector(".filter-search");
-        newSearchInput.focus();
-        newSearchInput.setSelectionRange(
-          newSearchInput.value.length,
-          newSearchInput.value.length
-        );
-      });
-
-      optionsBox.addEventListener("change", event => {
-        const checkbox = event.target;
-
-        if (checkbox.type !== "checkbox") return;
-
-        checkbox.checked
-          ? selectedSet.add(checkbox.value)
-          : selectedSet.delete(checkbox.value);
-      });
-
-      popover.querySelector(".clear").addEventListener("click", () => {
-        selectedSet.clear();
-        columnSearches[columnKey] = "";
-        renderColumnFilter(columnKey, popover);
-        popover.classList.add("open");
-        updateFilterButtonState(columnKey);
-        applyFilters();
-      });
-
-      popover.querySelector(".apply").addEventListener("click", () => {
-        updateFilterButtonState(columnKey);
-        closeAllColumnFilters();
-        applyFilters();
-      });
-
-      popover.addEventListener("click", event => event.stopPropagation());
-    }
-
-    function updateFilterButtonState(columnKey) {
-      const button = dom.tableHead.querySelector(`[data-column="${columnKey}"]`);
-      button.classList.toggle("has-filter", columnSelections[columnKey].size > 0);
-    }
-
-    function getFilteredData() {
-      const keyword = normalize(dom.search.value);
-
-      return allData.filter(item => {
-        const matchKeyword = !keyword || COLUMNS.some(column =>
-          normalize(item[column.key]).includes(keyword)
-        );
-
-        const matchColumns = COLUMNS.every(column => {
-          const selectedSet = columnSelections[column.key];
-          if (selectedSet.size === 0) return true;
-          return selectedSet.has(item[column.key]);
-        });
-
-        return matchKeyword && matchColumns;
-      });
-    }
-
-    function updateStats(filteredData) {
-      dom.totalCount.textContent = filteredData.length;
-      dom.continueCount.textContent = filteredData.filter(item => isContinuing(item.status)).length;
-      dom.discontinueCount.textContent = filteredData.filter(item => isDiscontinued(item.status)).length;
-    }
-
-    function renderTable(data) {
-      if (!data.length) {
-        dom.tableBody.innerHTML = "";
-        return;
-      }
-
-      const fragment = document.createDocumentFragment();
-
-      data.forEach(item => {
-        const row = document.createElement("tr");
-        const statusClass = getStatusClass(item.status);
-
-        row.innerHTML = `
-          <td><span class="material-code">${escapeHtml(item.code)}</span></td>
-          <td>${escapeHtml(item.name)}</td>
-          <td>${escapeHtml(item.supplier)}</td>
-          <td>${escapeHtml(item.origin)}</td>
-          <td>
-            <span class="status-badge status-${statusClass}">
-              ${escapeHtml(item.status || "-")}
-            </span>
-          </td>
-          <td>${escapeHtml(item.note || "-")}</td>
-        `;
-
-        fragment.appendChild(row);
-      });
-
-      dom.tableBody.replaceChildren(fragment);
-    }
-
-    function renderCards(data) {
-      if (!data.length) {
-        dom.cardView.innerHTML = "";
-        return;
-      }
-
-      const fragment = document.createDocumentFragment();
-
-      data.forEach(item => {
-        const statusClass = getStatusClass(item.status);
-        const card = document.createElement("article");
-        card.className = `card ${statusClass}`;
-
-        card.innerHTML = `
-          <div class="card-code">${escapeHtml(item.code)}</div>
-          <h3 class="card-name">${escapeHtml(item.name)}</h3>
-          <span class="status-badge status-${statusClass}">
-            ${escapeHtml(item.status || "-")}
-          </span>
-          <p><strong>Pemasok:</strong> ${escapeHtml(item.supplier || "-")}</p>
-          <p><strong>Asal:</strong> ${escapeHtml(item.origin || "-")}</p>
-          <p class="card-note">${escapeHtml(item.note || "Tidak ada catatan")}</p>
-        `;
-
-        fragment.appendChild(card);
-      });
-
-      dom.cardView.replaceChildren(fragment);
-    }
-
-    function showEmptyState(message) {
-      dom.tableBody.innerHTML = `
-        <tr>
-          <td class="empty-cell" colspan="6">
-            <div class="empty-state"><strong>${escapeHtml(message)}</strong></div>
-          </td>
-        </tr>
-      `;
-
-      dom.cardView.innerHTML = `
-        <div class="empty-state" style="width:100%">
-          <strong>${escapeHtml(message)}</strong>
-        </div>
-      `;
-
-      updateStats([]);
-    }
-
-    function showNoResult() {
-      dom.tableBody.innerHTML = `
-        <tr>
-          <td class="empty-cell" colspan="6">
-            <div class="empty-state">
-              <strong>Tidak ada hasil ditemukan.</strong>
-              <div style="margin-top:6px">Ubah kata kunci atau filter kolom.</div>
-            </div>
-          </td>
-        </tr>
-      `;
-
-      dom.cardView.innerHTML = `
-        <div class="empty-state" style="width:100%">
-          <strong>Tidak ada hasil ditemukan.</strong>
-          <div style="margin-top:6px">Ubah kata kunci atau filter kolom.</div>
-        </div>
-      `;
-    }
-
-    function applyFilters() {
-      const filteredData = getFilteredData();
-      updateStats(filteredData);
-
-      if (!filteredData.length) {
-        showNoResult();
-        return;
-      }
-
-      renderTable(filteredData);
-      renderCards(filteredData);
-    }
-
-    function setView(view) {
-      const tableMode = view === "table";
-
-      dom.tableView.style.display = tableMode ? "block" : "none";
-      dom.cardView.classList.toggle("active", !tableMode);
-
-      dom.btnTable.classList.toggle("active", tableMode);
-      dom.btnCard.classList.toggle("active", !tableMode);
-    }
-
-    function initTheme() {
-      document.documentElement.setAttribute("data-theme", "light");
-      updateThemeButton("light");
-    }
-
-    function updateThemeButton(theme) {
-      const isDark = theme === "dark";
-      dom.themeToggle.classList.toggle("active", isDark);
-      dom.themeToggle.setAttribute("aria-pressed", String(isDark));
-      dom.themeIcon.textContent = isDark ? "🌙" : "☀️";
-    }
-
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute("data-theme");
-      const nextTheme = currentTheme === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", nextTheme);
-      updateThemeButton(nextTheme);
-    }
-
-    /* EXPORT EXCEL */
-    function autoFitColumns(rows) {
-      const widths = [];
-
-      rows.forEach(row => {
-        row.forEach((cell, colIndex) => {
-          const length = Math.max(String(cell ?? "").length, 10);
-          widths[colIndex] = Math.max(widths[colIndex] || 10, Math.min(length + 3, 60));
-        });
-      });
-
-      return widths.map(width => ({ wch: width }));
-    }
-
-    function exportToExcel() {
-      const filteredData = getFilteredData();
-
-      if (!filteredData.length) {
-        alert("Tidak ada data untuk diekspor.");
-        return;
-      }
-
-      const headers = COLUMNS.map(column => column.label);
-
-      const productRows = [
-        headers,
-        ...filteredData.map(item => COLUMNS.map(column => item[column.key]))
-      ];
-
-      const continueCount = filteredData.filter(item => isContinuing(item.status)).length;
-      const discontinueCount = filteredData.filter(item => isDiscontinued(item.status)).length;
-      const otherCount = filteredData.length - continueCount - discontinueCount;
-
-      const summaryRows = [
-        ["Ringkasan Produk", ""],
-        ["Total Produk", filteredData.length],
-        ["Lanjut Produksi", continueCount],
-        ["Dihentikan", discontinueCount],
-        ["Status Lain", otherCount],
-        ["", ""],
-        ["Tanggal Ekspor", new Date().toLocaleString("id-ID")]
-      ];
-
-      const workbook = XLSX.utils.book_new();
-
-      const productSheet = XLSX.utils.aoa_to_sheet(productRows);
-      productSheet["!cols"] = autoFitColumns(productRows);
-      productSheet["!autofilter"] = {
-        ref: XLSX.utils.encode_range({
-          s: { r: 0, c: 0 },
-          e: { r: productRows.length - 1, c: headers.length - 1 }
-        })
-      };
-      productSheet["!freeze"] = { xSplit: 0, ySplit: 1 };
-
-      const summarySheet = XLSX.utils.aoa_to_sheet(summaryRows);
-      summarySheet["!cols"] = autoFitColumns(summaryRows);
-
-      XLSX.utils.book_append_sheet(workbook, productSheet, "Data Produk");
-      XLSX.utils.book_append_sheet(workbook, summarySheet, "Ringkasan");
-
-      const lastRow = productRows.length - 1;
-      const statusRange = `E2:E${lastRow + 1}`;
-
-      productSheet["!conditionalFormats"] = [
-        {
-          ref: statusRange,
-          rules: [{
-            type: "containsText",
-            operator: "containsText",
-            text: "DISCONTINUE",
-            style: {
-              fill: { fgColor: { rgb: "FDECEEF0" } },
-              font: { color: { rgb: "A5545F" }, bold: true }
-            }
-          }]
-        },
-        {
-          ref: statusRange,
-          rules: [{
-            type: "containsText",
-            operator: "containsText",
-            text: "DIHENTIKAN",
-            style: {
-              fill: { fgColor: { rgb: "FDECEEF0" } },
-              font: { color: { rgb: "A5545F" }, bold: true }
-            }
-          }]
-        },
-        {
-          ref: statusRange,
-          rules: [{
-            type: "containsText",
-            operator: "containsText",
-            text: "STOP",
-            style: {
-              fill: { fgColor: { rgb: "FBF6EC" } },
-              font: { color: { rgb: "8A7040" }, bold: true }
-            }
-          }]
-        },
-        {
-          ref: statusRange,
-          rules: [{
-            type: "containsText",
-            operator: "containsText",
-            text: "CONTINUE",
-            style: {
-              fill: { fgColor: { rgb: "EFF7F2" } },
-              font: { color: { rgb: "4B7A63" }, bold: true }
-            }
-          }]
-        },
-        {
-          ref: statusRange,
-          rules: [{
-            type: "containsText",
-            operator: "containsText",
-            text: "LANJUT",
-            style: {
-              fill: { fgColor: { rgb: "EFF7F2" } },
-              font: { color: { rgb: "4B7A63" }, bold: true }
-            }
-          }]
-        }
-      ];
-
-      const today = new Date().toISOString().slice(0, 10);
-      XLSX.writeFile(workbook, `Advance-Digitals-Product-${today}.xlsx`);
-    }
-
-    async function loadData() {
-      dom.tableBody.innerHTML = `
-        <tr>
-          <td class="empty-cell" colspan="6">
-            <div class="loading">
-              <div class="loading-spinner"></div>
-              <div>Memuat data...</div>
-            </div>
-          </td>
-        </tr>
-      `;
-
-      let lastError = "";
-
-      for (const path of CSV_PATHS) {
-        try {
-          const response = await fetch(path, { cache: "no-store" });
-
-          if (!response.ok) {
-            lastError = `${path} — HTTP ${response.status}`;
-            continue;
-          }
-
-          let text = await response.text();
-
-          text = text.replace(/^\uFEFF/, "").trim();
-
-          if (!text) {
-            lastError = `${path} — file kosong`;
-            continue;
-          }
-
-          loadDataFromCSV(text);
-          console.info("CSV berhasil dimuat dari:", path);
-          return;
-
-        } catch (error) {
-          lastError = `${path} — ${error.message}`;
-          console.warn("Gagal memuat:", lastError);
-        }
-      }
-
-      console.error("Semua lokasi CSV gagal dimuat:", lastError);
-
-      dom.tableBody.innerHTML = `
-        <tr>
-          <td class="empty-cell" colspan="6">
-            <div class="error-state">
-              <strong>Data CSV tidak dapat dimuat.</strong>
-              <div style="margin-top:8px;font-size:12px">
-                Pastikan file CSV sudah di-upload ke repository GitHub dan berada di folder yang sama dengan <strong>index.html</strong>.
-              </div>
-              <div style="margin-top:6px;font-size:11px;opacity:.85">
-                Nama yang dicoba: data.csv, Data.csv, DATA.csv, data/data.csv, assets/data.csv
-              </div>
-              <div style="margin-top:6px;font-size:11px;opacity:.75">
-                Detail: ${escapeHtml(lastError)}
-              </div>
-            </div>
-          </td>
-        </tr>
-      `;
-    }
-
-    function debounce(callback, delay = 120) {
-      let timer;
-      return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => callback(...args), delay);
-      };
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      initDomCache();
-      initTheme();
-
-      document.addEventListener("click", closeAllColumnFilters);
-
-      const searchDebounced = debounce(applyFilters, 120);
-      dom.search.addEventListener("input", searchDebounced);
-
-      dom.search.addEventListener("keydown", event => {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          applyFilters();
-        }
-      });
-
-      dom.btnExport.addEventListener("click", exportToExcel);
-
-      dom.btnTable.addEventListener("click", () => setView("table"));
-      dom.btnCard.addEventListener("click", () => setView("card"));
-
-      dom.themeToggle.addEventListener("click", toggleTheme);
-
-      loadData();
-    });
-  </script>
-</body>
-</html>
+    function renderColumnFilter(columnKey, popover)
